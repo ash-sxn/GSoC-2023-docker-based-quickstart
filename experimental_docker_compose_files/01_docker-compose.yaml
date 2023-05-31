@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  jenkins_controller: 
+    image: jenkins/jenkins:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    
+  jenkins_agent:
+    image: jenkins/ssh-agent:latest
+    ports:
+      - "22:22"
+
+volumes:
+  jenkins_home: 

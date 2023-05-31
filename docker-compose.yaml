@@ -1,0 +1,44 @@
+#this is the one I created for proposal which mimics the step from docker section of the jenkins docker page
+version: '3'
+services:
+  jenkins-docker: # Creating a container by following step 3 of the website
+    image: docker:dind
+    container_name: jenkins-docker
+    ports:
+      - 2376:2376
+    privileged: true
+    networks:
+      jenkins:
+        aliases:
+          - docker
+    environment:
+      - DOCKER_TLS_CERTDIR=/certs
+    volumes:
+      - jenkins-docker-certs:/certs/client
+      - jenkins-data:/var/jenkins_home
+    command: --storage-driver=overlay2
+    #restart: always  #read on the internet that this will substitute  --rm command in 2nd step of 3rd section but didn't work on my testing
+  jenkins-blueocean: # Creating a container by following step 5 of the website
+    build: . #with docker file given on website
+    restart: on-failure
+    container_name: jenkins-blueocean
+    networks: 
+      - jenkins
+    environment:
+      - DOCKER_HOST=tcp://docker:2376
+      - DOCKER_CERT_PATH=/certs/client
+      - DOCKER_TLS_VERIFY=1
+    ports:
+      - 8080:8080
+     #- 50000:50000 # it's for communication of multi container system 
+    volumes:
+      - jenkins-data:/var/jenkins_home
+      - jenkins-docker-certs:/certs/client:ro
+    
+
+networks:
+  jenkins: # Creating a bridge network named jenkins as stated in the step 2 of the website
+    driver: bridge
+volumes:
+  jenkins-docker-certs:
+  jenkins-data:
