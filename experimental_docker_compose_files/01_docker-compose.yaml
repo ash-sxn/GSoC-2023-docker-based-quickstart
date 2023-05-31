@@ -2,15 +2,22 @@ version: '3.8'
 services:
   jenkins_controller: 
     image: jenkins/jenkins:latest
+    privileged: true
+    user: root
     ports:
       - "8080:8080"
+      - "50000:50000"
     volumes:
       - jenkins_home:/var/jenkins_home
     
   jenkins_agent:
     image: jenkins/ssh-agent:latest
-    ports:
+    privileged: true
+    user: root
+    expose:
       - "22:22"
+    environment:
+      - JENKINS_AGENT_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC9rRCHTAxaT83SkJTZOHrPAxARbpVHBRI+jhP8dF8EmxTF4t5wWmkw8f8wDPkc39UQVOt7EbfZm45WyEIGe/Yc8H5zuSqSccSx79xwK15DOCfGTexSa+tg6PXgbdheb8M8XzS3BLxgFKywNI5w7ngh2OWjwz4INVpBAxZhOkvLMT25HvTaNqxL2rIzCcYvWvlczfOrjw1nC+KpC5A+PA1R0lXO7yVJK9mYzqzoZvDGa9LffAspdRjN1XEgDqYb0nFRakaXEpESq4LjdCjIphByxi1YZsyBvKyv5wMM4ea5+tqehCKoKcNAqaZ8i133uXuv7IX2iXSZ68mOyvQDndrWlE31rmxNj6ZsW9bwF29E2oU00q8uu0bpdr7Vfp7R9ZaZj1WlesslKUH6Mqsa53JQqJ4V4N8/Z4xmJEQiuwuDRguVXwJAscFI2ZdNUBgRb3ktZg5zI33mte0WL3Frxzx03FDCnpwJC9K7zx7tvtkugtRrz0FUJr60J/vOcjTbc/M= jh@jh-Modern-14-B5M
 
-volumes:
+volumes: 
   jenkins_home: 
