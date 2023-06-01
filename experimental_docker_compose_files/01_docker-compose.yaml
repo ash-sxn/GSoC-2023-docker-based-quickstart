@@ -12,20 +12,21 @@ services:
       - ./01_casc.d:/var/jenkins_home/casc.d/:ro
       - ./plugins.txt:/usr/share/jenkins/plugins.txt
       - ./01_secrets/id_jenkins.pem:/run/secrets/SSH_AGENT_KEY:ro
+      - ./01_custom-entrypoint.sh:/usr/local/bin/custom-entrypoint.sh
     environment:
       - JENKINS_EXT_URL=http://localhost:8080
       - CASC_JENKINS_CONFIG=/var/jenkins_home/casc.d/
       - org.jenkinsci.plugins.durabletask.BourneShellScript.LAUNCH_DIAGNOSTICS=true
       - PUBLIC_IP
-    entrypoint: /bin/sh -c "/usr/bin/tini -- /usr/local/bin/jenkins.sh && /bin/jenkins-plugin-cli --plugin-file=/usr/share/jenkins/plugins.txt"
+    entrypoint: /usr/local/bin/custom-entrypoint.sh
+    #    /bin/sh -c "/usr/bin/tini -- /usr/local/bin/jenkins.sh && /bin/jenkins-plugin-cli --plugin-file=/usr/share/jenkins/plugins.txt"
     #  command:
-  #    - "/usr/bin/tini -- /usr/local/bin/jenkins.sh"
+    #    - "/usr/bin/tini -- /usr/local/bin/jenkins.sh"
     healthcheck:
-      test: "jenkins-plugin-cli --plugin-file=/usr/share/jenkins/plugins.txt"
-      interval: 5s
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/login" ]
+      interval: 30s
       timeout: 10s
-      start_period: 10s
-      retries: 10
+      retries: 5
   jenkins-agent:
     image: jenkins/ssh-agent:latest
     restart: unless-stopped
