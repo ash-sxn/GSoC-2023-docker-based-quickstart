@@ -1,0 +1,15 @@
+jenkins:
+  nodes:
+    - permanent:
+        labelString: "docker linux"
+        launcher:
+          ssh:
+            credentialsId: "jenkins-agent-ssh-key"
+            host: "jenkins-agent"
+            port: 22
+            sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+        name: "jenkins-agent"
+        nodeDescription: "SSH agent used to execute builds"
+        numExecutors: 4
+        remoteFS: "/home/jenkins"
+        retentionStrategy: "always"

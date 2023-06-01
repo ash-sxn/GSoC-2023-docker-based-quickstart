@@ -1,0 +1,18 @@
+jenkins:
+  securityRealm:
+    local:
+# No link to sign up
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: "butler"
+  authorizationStrategy: loggedInUsersCanDoAnything
+  globalNodeProperties:
+    - envVars:
+        env:
+          - key: "PUBLIC_IP"
+            value: "${PUBLIC_IP}"
+  numExecutors: 0
+unclassified:
+  location:
+    url: "${JENKINS_EXT_URL}"
