@@ -16,6 +16,8 @@ services:
       - JENKINS_EXT_URL=http://localhost:8080
       - CASC_JENKINS_CONFIG=/var/jenkins_home/casc.d/
       - org.jenkinsci.plugins.durabletask.BourneShellScript.LAUNCH_DIAGNOSTICS=true
+    command:
+      - sh -c "/usr/local/bin/jenkins.sh && jenkins-plugin-cli --plugin-file=/usr/share/jenkins/plugins.txt"
     healthcheck:
       test: "jenkins-plugin-cli --plugin-file=/usr/share/jenkins/plugins.txt"
       interval: 5s
