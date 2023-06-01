@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   jenkins_controller: 
-    image: jenkins/jenkins:latest
+    image: jenkins/jenkins:lts
     container_name: jenkins
     privileged: true
     user: root
