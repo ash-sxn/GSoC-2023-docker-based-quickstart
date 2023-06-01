@@ -1,0 +1,5 @@
+* created a simple docker file with a controller and a agent on github repo 
+
+* got an error while setting up an agent as node for controller and spend a long time trying to fix it, got a suggestion to use different key types from Bervianto, will try it tommorow
+
+
