@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   jenkins_controller: 
-    image: jenkins/jenkins:lts
+    image: jenkins/jenkins:2.401.1-lts
     container_name: jenkins
     privileged: true
     user: root
@@ -13,7 +13,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     
   jenkins_agent:
-    image: jenkins/ssh-agent:latest
+    image: jenkins/ssh-agent:5.3.0-jdk11
     container_name: agent
     privileged: true
     user: root
