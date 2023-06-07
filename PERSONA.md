@@ -1,9 +1,18 @@
 # Persona
 
-## First persona 
-This person may have little to no knowledge about Docker Compose files or how they work. They may not be interested in learning about the technical details and just want to use Jenkins without having to worry about the setup process. They may not know much about Jenkins right now, but they want to experience what it is, how it works, looks and feels. They may be looking for a quick and easy way to get started with Jenkins without having to spend a lot of time on setup and configuration. 
-For this person the the fully automated docker compose files and scripts are needed like you created in PR which works by only one command or maybe git clone(like in kubernetes part [here](https://www.jenkins.io/doc/book/installing/kubernetes/#jenkins-kubernetes-manifest-files)) from some repo before running docker compose up 
+## First Persona
 
-## Second Persona 
-This person has a understanding of Docker and is interested in using Docker Compose to customise their Jenkins setup. They may want to learn more about how Docker and Jenkins work together and are willing to spend time learning about the technical details. They may be interested in optimising their workflow and making the most of the tools available. They may want to have more control over their setup and are willing to spend time customising it to meet their needs. and they want to know what exactly is running on their system before pressing enter
-This is the person whom the simple docker compose files are aimed towards, to make it easy to understand how docker compose works with Jenkins   
+This persona may have little or no knowledge about Docker Compose files or how they function.
+They may not be interested in delving into the technical intricacies and simply want to use Jenkins without worrying about the setup process.
+Although they may not have much familiarity with Jenkins at the moment, they are eager to explore its functionality, appearance, and user experience.
+Their goal is to quickly and effortlessly start using Jenkins without investing significant time in setup and configuration.
+To cater to this persona, fully automated `docker-compose` files and scripts are required, allowing them to set up Jenkins with a single command or by cloning a repository (similar to the Kubernetes part mentioned [here](https://www.jenkins.io/doc/book/installing/kubernetes/#jenkins-kubernetes-manifest-files)) before running `docker compose up`.
+
+## Second Persona
+
+This persona possesses a solid understanding of Docker and is keen on utilizing Docker Compose to customize their Jenkins setup.
+They want to deepen their knowledge of how Docker and Jenkins integrate and are willing to invest time in understanding the technical aspects.
+Their objective is to optimize their workflow and leverage the available tools to their fullest potential.
+They desire greater control over their setup and are prepared to spend time tailoring it to align with their requirements.
+This persona wants to have a clear understanding of the components running on their system before executing any commands.
+The simple `docker-compose` files cater to their needs by providing transparency and facilitating their comprehension of how `docker compose` interacts with Jenkins.
