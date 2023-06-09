@@ -2,7 +2,6 @@ version: '3.8'
 services:
   jenkins_controller: 
     image: jenkins/jenkins:2.401.1-lts
-    container_name: jenkins
     privileged: true
     user: root
     ports:
@@ -14,7 +13,6 @@ services:
     
   jenkins_agent:
     image: jenkins/ssh-agent:5.3.0-jdk11
-    container_name: agent
     privileged: true
     user: root
     expose:
