@@ -17,8 +17,6 @@ services:
     container_name: agent
     privileged: true
     user: root
-    expose:
-      - 22
     environment:
       - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINVxUeiHKOsQBml4gDe4cAd8KGK4TZzYJGmqPDZgI6aE jh@jh-Modern-14-B5M
 volumes: 
