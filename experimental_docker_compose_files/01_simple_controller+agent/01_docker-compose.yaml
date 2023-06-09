@@ -3,20 +3,14 @@ services:
   jenkins_controller: 
     image: jenkins/jenkins:2.401.1-lts
     container_name: jenkins
-    privileged: true
-    user: root
     ports:
       - "8080:8080"
-      - "50000:50000"
     volumes:
       - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
     
   jenkins_agent:
     image: jenkins/ssh-agent:5.3.0-jdk11
     container_name: agent
-    privileged: true
-    user: root
     expose:
       - 22
     environment:
