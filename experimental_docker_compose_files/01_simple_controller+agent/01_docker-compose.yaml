@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   jenkins_controller: 
     image: jenkins/jenkins:2.401.1-lts
