@@ -23,4 +23,4 @@ Now for the next task is to incorporate the feedback given by the mentors on PR 
     - [ ] I have a feeling that adding small note (aka readme.me) in each experiment would help people like me a lot. You could start by saying what demo does (or supposed to do), how to start it, how to tear it down.
 - [x] Last suggestion for today is from Bervianto to use pinned version of each plugin in plugin.txt file. Bruno also agrees and says then we can use Dependabot later on.
 
-Okay, I've done everything from Bervianto's suggestions and now I read Jmm's suggestion again and got what he meant by first suggestion. I'll make PR for that tomorrow.
+Okay, I've done everything from Bervianto's suggestions and now that I read Jmm's suggestion again and got what he meant by first suggestion. I'll make PR for that tomorrow.
