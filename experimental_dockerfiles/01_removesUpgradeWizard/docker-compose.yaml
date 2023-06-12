@@ -1,0 +1,15 @@
+services:
+  jenkins_controller: 
+    image: ash191245141/jencon:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - ./ssh_agent_key:/run/secrets/SSH_AGENT_KEY:ro
+    
+  jenkins_agent:
+    image: jenkins/ssh-agent:5.3.0-jdk11
+    environment:
+      - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINVxUeiHKOsQBml4gDe4cAd8KGK4TZzYJGmqPDZgI6aE jh@jh-Modern-14-B5M
+volumes: 
+  jenkins_home:
