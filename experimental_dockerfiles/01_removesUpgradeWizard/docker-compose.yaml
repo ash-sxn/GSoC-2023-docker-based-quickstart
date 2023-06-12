@@ -5,7 +5,7 @@ services:
       - "8080:8080"
     volumes:
       - jenkins_home:/var/jenkins_home
-      - ./ssh_agent_key:/run/secrets/SSH_AGENT_KEY:ro
+      - ./jenkins_agent_ed:/run/secrets/SSH_AGENT_KEY:ro
     
   jenkins_agent:
     image: jenkins/ssh-agent:5.3.0-jdk11
