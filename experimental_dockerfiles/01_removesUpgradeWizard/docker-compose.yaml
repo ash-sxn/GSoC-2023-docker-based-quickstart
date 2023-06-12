@@ -1,6 +1,6 @@
 services:
   jenkins_controller: 
-    image: ash191245141/jencon:latest
+    build: .
     ports:
       - "8080:8080"
     volumes:
