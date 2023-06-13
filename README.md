@@ -16,9 +16,9 @@
 * Gitpod supports many IDEs, such as VScode, IntelliJ, and many more.  
 
  ### How to setup the repo in Gitpod?
-* For starting your gitpod workspace you can use `gitpod.io/#` as prefix on any github, gitlab or bitbucket repo URL
+* For starting your gitpod workspace you can use `gitpod.io/#` as a prefix on any GitHub, gitlab, or bitbucket repo URL
 * For our repo you can get the gitpod workspace from [here](https://gitpod.io/#https://github.com/ash-sxn/GSoC-2023-docker-based-quickstart)  
-* But If you do plan to use gitpod in futre It's recommended to install gitpod extension which will create a launch with gitpod button on every github repo you visit, It can be found [here](https://chrome.google.com/webstore/detail/gitpod-online-ide/dodmmooeoklaejobgleioelladacbeki) for chromium and [here](https://addons.mozilla.org/firefox/addon/gitpod/) for firefox 
+* But If you do plan to use gitpod in the future, it's recommended to install the gitpod extension which will create a launch with gitpod button on every GitHub repo you visit, It can be found [here](https://chrome.google.com/webstore/detail/gitpod-online-ide/dodmmooeoklaejobgleioelladacbeki) for Chromium and [here](https://addons.mozilla.org/firefox/addon/gitpod/) for Firefox.
 ### Steps to run examples from the repo
 * For the most example there will be a `docker-compose.yaml` present in the directory associated with the example.
 * Only commnad need is `docker compose up -d` ( -d is not nessacary but frees up the terminal ) 
