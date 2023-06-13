@@ -20,6 +20,8 @@
 * For our repo you can get the gitpod workspace from [here](https://gitpod.io/#https://github.com/ash-sxn/GSoC-2023-docker-based-quickstart)  
 * But If you do plan to use gitpod in the future, it's recommended to install the gitpod extension which will create a launch with gitpod button on every GitHub repo you visit, It can be found [here](https://chrome.google.com/webstore/detail/gitpod-online-ide/dodmmooeoklaejobgleioelladacbeki) for Chromium and [here](https://addons.mozilla.org/firefox/addon/gitpod/) for Firefox.
 ### Steps to run examples from the repo
+* The first step is to get into the `experimental_docker_compose_files` directory by running `cd experimental_docker_compose_files`.
+* Then change the directory to the example you want to run. For example, for `01_simple_controller+agent`, run `cd 01_simple_controller+agent`
 * For most of the examples there will be a `docker-compose.yaml` present in the directory associated with the example.
 * Only command needed is `docker compose up -d --build` ( -d is not necessary but frees up the terminal ) 
 * Please make sure that  you are in the correct directory and that there is a `docker-compose.yaml` file present there
