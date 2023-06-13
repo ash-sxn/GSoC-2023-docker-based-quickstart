@@ -20,9 +20,9 @@
 * For our repo you can get the gitpod workspace from [here](https://gitpod.io/#https://github.com/ash-sxn/GSoC-2023-docker-based-quickstart)  
 * But If you do plan to use gitpod in the future, it's recommended to install the gitpod extension which will create a launch with gitpod button on every GitHub repo you visit, It can be found [here](https://chrome.google.com/webstore/detail/gitpod-online-ide/dodmmooeoklaejobgleioelladacbeki) for Chromium and [here](https://addons.mozilla.org/firefox/addon/gitpod/) for Firefox.
 ### Steps to run examples from the repo
-* For the most example there will be a `docker-compose.yaml` present in the directory associated with the example.
-* Only commnad need is `docker compose up -d` ( -d is not nessacary but frees up the terminal ) 
-* Please make sure that  you are in the correct directory and there is a `docker-compose.yaml` file present there
+* For most of the examples there will be a `docker-compose.yaml` present in the directory associated with the example.
+* Only command needed is `docker compose up -d --build` ( -d is not necessary but frees up the terminal ) 
+* Please make sure that  you are in the correct directory and that there is a `docker-compose.yaml` file present there
 ### How to Verify Jenkins was Installed 
 * You can check status of the container with `docker ps` command 
 * If containner are running sucessfully you should see a pop-up titled `A service is available on port 8080`, If it doen't come up, you can see running service from `PORTS` section right of the terminal 
