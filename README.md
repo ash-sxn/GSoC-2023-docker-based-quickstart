@@ -23,6 +23,6 @@
 * For most of the examples there will be a `docker-compose.yaml` present in the directory associated with the example.
 * Only command needed is `docker compose up -d --build` ( -d is not necessary but frees up the terminal ) 
 * Please make sure that  you are in the correct directory and that there is a `docker-compose.yaml` file present there
-### How to Verify Jenkins was Installed 
-* You can check status of the container with `docker ps` command 
-* If containner are running sucessfully you should see a pop-up titled `A service is available on port 8080`, If it doen't come up, you can see running service from `PORTS` section right of the terminal 
+### How to Verify Jenkins was installed 
+* You can check the status of the container with the `docker ps` command 
+* If containers are running successfully you should see a pop-up titled `A service is available on port 8080`, If it doesn't come up, you can see the running service from the `PORTS` section on the right part of the terminal 
