@@ -13,7 +13,7 @@
 
 ## How to Run with Gitpod  
 * Gitpod is a cloud development environment for teams to efficiently and securely develop software.
-* Gitpod support many IDEs to choose from such as VScode, IntelliJ and many more.  
+* Gitpod supports many IDEs, such as VScode, IntelliJ, and many more.  
 
  ### How to setup the repo in Gitpod?
 * For starting your gitpod workspace you can use `gitpod.io/#` as prefix on any github, gitlab or bitbucket repo URL
