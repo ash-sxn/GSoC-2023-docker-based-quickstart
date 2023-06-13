@@ -9,7 +9,7 @@ For Today’s Tasks, there are:
 
 - [x] Complete the Persona PR. Bruno also mentioned it on GitHub today.
 - [x] Create a separate README for each example.
-- [ ] Work on the Job part of the Jenkins setup.
+- [x] Work on the Job part of the Jenkins setup.
 - [x] Create special sub-directories Dockerfile as suggested by Jmm.
 - [x] Store security-related stuff (e.g., the secret key) in its dedicated directory as suggested by Jmm.
 
