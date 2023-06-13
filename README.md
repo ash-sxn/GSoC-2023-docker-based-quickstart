@@ -1,6 +1,6 @@
 # Docker-based Jenkins quick start examples
 
-* This is a experiment repository for GSoC 2023 docker based jenkins quick start examples project 
+* This is an experiment repository for the GSoC 2023 docker-based Jenkins quick start examples project 
 
 ## Proposal
 
