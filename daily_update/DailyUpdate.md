@@ -1,4 +1,55 @@
 # Daily Update
+### Date: 13/06/2023 TUESDAY
+
+I got a message from Bervianto that said to correct some typos and explain the setup in more detail, to make it easy for new people to the project to understand. Bruno did suggest the typos from the PR, from which I created the commits. But I created them separately, which I should have done in one single commit as Kris said to me before (remember not to do this again in the future).
+
+I did make some more commits explaining the setup of Gitpod too and made a commit.
+
+For Today’s Tasks, there are:
+
+- [x] Complete the Persona PR. Bruno also mentioned it on GitHub today.
+- [x] Create a separate README for each example.
+- [ ] Work on the Job part of the Jenkins setup.
+- [x] Create special sub-directories Dockerfile as suggested by Jmm.
+- [x] Store security-related stuff (e.g., the secret key) in its dedicated directory as suggested by Jmm.
+
+First thing is to complete the Persona PR. I have added points in the Persona README to make things clear and also added a table as Bervianto suggested and committed to the PR with name ‘addingPointsAndTable’.
+
+I also faced some issues while pushing things from Git from my terminal because I forgot to pull before adding a new commit, and I did make some changes to the file from GitHub itself. So, I had to use `git reset --soft HEAD~` command to solve the problem, which is a nice learning (try to remember that for future and not to add things directly from GitHub, and if you do, do `git pull` first).
+
+Now for creating separate READMEs for each example. I created separate READMEs for every example, first for 02 and added it in the #14 PR since it was not merged yet. And created a separate branch named ‘SeperateREADME’ for creating files for 00 and 01 examples, created the README.md files, and opened the PR. Okay, so that task is done.
+
+For the next task, that is to create special subdirectories and store security-related stuff in secrets as suggested by Jmm. Instead of creating separate PRs for 1st and 2nd points of Jmm’s suggestion, I've added it in adding Dockerfile PR. Before I thought this was bigger but they were really short work, that’s why.
+ 
+I did work on the Job part too I created a simple job named hello copied it from the controller container to my local machine with command `cp <containerId>:/file/path/within/container /host/path/target`  and it did work. But when I tried to place it inside the new image with docker image with `COPY` command and ran the container it gave this error before even starting the instance 
+
+`jenkins.model.InvalidBuildsDir: ${ITEM_ROOTDIR}/builds does not exist and probably cannot be created
+	at jenkins.model.Jenkins.checkRawBuildsDir(Jenkins.java:3403)
+	at jenkins.model.Jenkins.loadConfig(Jenkins.java:3324)
+Caused: java.io.IOException
+	at jenkins.model.Jenkins.loadConfig(Jenkins.java:3328)
+	at jenkins.model.Jenkins$12.run(Jenkins.java:3423)
+	at org.jvnet.hudson.reactor.TaskGraphBuilder$TaskImpl.run(TaskGraphBuilder.java:177)
+	at org.jvnet.hudson.reactor.Reactor.runTask(Reactor.java:305)
+	at jenkins.model.Jenkins$5.runTask(Jenkins.java:1164)
+	at org.jvnet.hudson.reactor.Reactor$2.run(Reactor.java:221)
+	at org.jvnet.hudson.reactor.Reactor$Node.run(Reactor.java:120)
+	at jenkins.security.ImpersonatingExecutorService$1.run(ImpersonatingExecutorService.java:68)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused: org.jvnet.hudson.reactor.ReactorException
+	at org.jvnet.hudson.reactor.Reactor.execute(Reactor.java:290)
+	at jenkins.InitReactorRunner.run(InitReactorRunner.java:49)
+	at jenkins.model.Jenkins.executeReactor(Jenkins.java:1199)
+	at jenkins.model.Jenkins.<init>(Jenkins.java:987)
+	at hudson.model.Hudson.<init>(Hudson.java:86)
+	at hudson.model.Hudson.<init>(Hudson.java:82)
+	at hudson.WebAppMain$3.run(WebAppMain.java:247)
+Caused: hudson.util.HudsonFailedToLoad
+	at hudson.WebAppMain$3.run(WebAppMain.java:264)`
+
+I'll look why did this error happen tomorrow and work more on the job part and work on the feedback from mentors from the submitted PRs
 
 ### DATE: 12/06/2023 MONDAY
 
