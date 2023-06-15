@@ -1,0 +1,39 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@1308.v58d48a_763b_31">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@2.2141.v5402e818a_779"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@2.2141.v5402e818a_779">
+      <jobProperties/>
+      <triggers/>
+      <parameters/>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description>hello &#xd;
+this is for the first sample job which first creates a file hello.txt with &apos;hello word!&apos; inside it and then cat this file</description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@3691.v28b_14c465a_b_b_">
+    <script>pipeline {
+  agent any
+  stages {
+
+    stage(&apos;First&apos;) {
+      steps {
+        sh &apos;echo Hello World! &gt; hello.txt&apos;
+      }
+    }
+    
+    stage(&apos;Second&apos;) {
+      steps {
+        sh &apos;cat hello.txt&apos;
+      }
+    }
+
+  }
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
