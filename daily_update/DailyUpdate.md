@@ -1,4 +1,22 @@
 # Daily Update
+### Date: 14/06/2023 WEDNESDAY
+
+I’ve tried to transfer the jobs directory with Docker Compose instead of using the COPY command within the Dockerfile, and it worked fine without any errors. I used the the volume section of the docker compose file to do that.
+
+Now I am testing if the error was happening because I was using the Jenkins user, so now I have changed the Jenkins user to root and am again doing it with the COPY command from the Dockerfile.
+
+It worked!  
+With the root user, so it was a permission issue, I guess. So, I guess I’ll ask my mentor if this job is fine and make a PR for it tomorrow.
+
+Bruno suggested adding the credentials part of the 02 example to the README file, that is `admin:admin` for this example, and also for a one-to-one private meeting which we’ll have tomorrow.
+
+- [x] The Persona PR #2 is merged.
+- [x] The Gitpod Docs PR #15 is also merged.
+
+Didn’t do much work today, will compensate for this tomorrow.
+
+
+
 ### Date: 13/06/2023 TUESDAY
 
 I got a message from Bervianto that said to correct some typos and explain the setup in more detail, to make it easy for new people to the project to understand. Bruno did suggest the typos from the PR, from which I created the commits. But I created them separately, which I should have done in one single commit as Kris said to me before (remember not to do this again in the future).
