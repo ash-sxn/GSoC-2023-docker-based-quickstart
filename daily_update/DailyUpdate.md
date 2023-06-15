@@ -8,7 +8,7 @@ Now I am testing if the error was happening because I was using the Jenkins user
 It worked!  
 With the root user, so it was a permission issue, I guess. So, I guess I’ll ask my mentor if this job is fine and make a PR for it tomorrow.
 
-Bruno suggested adding the credentials part of the 02 example to the README file, that is `admin:admin` for this example, and also for a one-to-one private meeting which we’ll have tomorrow.
+Bruno suggested adding the credentials part of the 02 example to the README file, that is `admin`,`admin` for this example, and also for a one-to-one private meeting which we’ll have tomorrow.
 
 - [x] The Persona PR #2 is merged.
 - [x] The Gitpod Docs PR #15 is also merged.
@@ -93,3 +93,23 @@ Now for the next task is to incorporate the feedback given by the mentors on PR 
 - [x] Last suggestion for today is from Bervianto to use pinned version of each plugin in plugin.txt file. Bruno also agrees and says then we can use Dependabot later on.
 
 Okay, I've done everything from Bervianto's suggestions and now that I read Jmm's suggestion again and got what he meant by first suggestion. I'll make PR for that tomorrow.
+
+### Adding the previous daily update from before 12th 
+### 06/06/23
+* changed docker images tags from latest and lts to pinned version in docker compose file
+### 05/06/23
+* attended weekly project meeting 
+### 02/06/23
+* attended Docs Office hours, got mark's, Kris's and Meg's view on the future of the project
+### 01/06/23
+* attended weekly GSoC office hour 
+### 29/05/23
+* attended  weekly office hours today
+* Refreshed the docker and docker compose concept 
+* Read jenkins documentation 
+* Created a simple docker compose file but it's not ready yet, will upload it tomorrow 
+### 31/05/23
+* created a simple docker file with a controller and a agent on github repo 
+* got an error while setting up an agent as node for controller and spend a long time trying to fix it, got a suggestion to use different key types from Bervianto, will try it tommorow
+
+

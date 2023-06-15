@@ -1,1 +1,0 @@
-* changed docker images tags from latest and lts to pinned version in docker compose file
