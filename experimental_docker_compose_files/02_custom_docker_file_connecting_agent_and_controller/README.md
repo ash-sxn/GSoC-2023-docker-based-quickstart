@@ -11,4 +11,4 @@ This example builds a custom docker image to skip the upgrade wizard, installs d
 ### Steps to run the example 
 * Make sure you are in the `02_custom_docker_file_connecting_agent_and_controller` directory by using the command `pwd`. 
 * Then use the command `docker compose up -d --build` to run the example.
-* You can log in using the username `admin` and password `admin`.
+* You can log in using the `admin` username and the `admin` password.
