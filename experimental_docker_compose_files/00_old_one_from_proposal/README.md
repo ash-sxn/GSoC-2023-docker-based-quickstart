@@ -6,3 +6,6 @@
 ### How to run 
 * Make sure you are in the `00_old_one_from_proposal` directory by using the command `pwd`. 
 * Then use the command `docker compose up -d` to run the example.
+### Clean Up Instructions 
+* To clean, run `docker compose down`. This will remove the container and network.
+* To remove the named volumes, run `docker volume rm 00_old_one_from_proposal_jenkins-docker-certs 00_old_one_from_proposal_jenkins-data` 

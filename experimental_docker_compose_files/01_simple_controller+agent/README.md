@@ -6,3 +6,6 @@
 ### How to run 
 * Make sure you are in the `01_simple_controller+agent` directory by using the command `pwd`. 
 * Then use the command `docker compose up -d` to run the example.
+### Clean Up Instructions 
+* To clean, run `docker compose down`. This will remove the containers and network.
+* To remove the named volume, run `docker volume rm 01_simple_controlleragent_jenkins_home` 
