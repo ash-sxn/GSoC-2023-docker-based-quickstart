@@ -4,6 +4,8 @@
 Task List: 
 - [ ] Propose a set of other examples to implement (Issue #20).(From yesterday's tasklist)
 - [ ] Work on PR #24 from mentor’s feedback (get PR #24 merged).(From yesterday's tasklist)
+- [ ] Remove + from the 01 examples name
+- [ ] Read this [article](https://www.jenkins.io/blog/2022/05/27/docker-image-new-lifecycle/) 
 ### Date: 15/06/2023 THURSDAY
 Okay, I slept a little too early yesterday and scheduled the doddle requested by bruno for the wrong time. I’ve messaged bruno that I am sorry and created the correct doodle, hopefully we should be able to have our one on one meeting today
 On SeperateReadme PR, Jmm suggested to rename docker compose files from 00_docker-compose.yaml and 01_docker-compose.yaml to just docker-compose file, so we won’t need to use -f option in the command and it’s also not mentioned in the docs I provided in the PR. So the first task is to rename these files to docker-compose.yaml. Ok I’ve renamed the files and committed the changes with the conventional commit approach as bruno mentioned to use that in a issue he opened i.e. issue #17. Bruno also opened an issue #21 regarded this which I have linked to the PR and should auto close once the PR is merged 
@@ -71,11 +73,13 @@ Now I have opened PR #24 Feature/adding job which closes issue #18. So, I am tic
 
 
 Okay, now the only thing to work on is thinking of examples to implement until mentors give suggestions on job PR #24.
-Bruno suggested to remove the build directory from the PR because it's not nessasry and I have deleted it 
+Bruno suggested to remove the build directory from the PR because it's not necessary and I have deleted it 
 
 PR #23 that was for the cleanup doc for 02 example has been merged 
 
-Jmm has suggested to add some waits(calculation to increase time to finish) so that user is able to see the process when it's happening in the UI, since He/She doesn't know where to look being new users 
+Jmm has suggested to add some waits(calculation to increase time to finish) so that user is able to see the process when it's happening in the UI,
+since He/She doesn't know where to look being new users, I'll work on it tomorrow 
+Bruno also suggested to read this [article](https://www.jenkins.io/blog/2022/05/27/docker-image-new-lifecycle/) under the issue #25 and to remove the + from the name of the example since it's not compatible with all file system, on which I'll work tomorrow as well 
 
 
 For today’s work include:
