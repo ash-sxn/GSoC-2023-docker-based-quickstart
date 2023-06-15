@@ -1,4 +1,103 @@
 # Daily Update
+
+### Date: 16/06/2023 FRIDAY
+Task List: 
+- [ ] Propose a set of other examples to implement (Issue #20).(From yesterday's tasklist)
+- [ ] Work on PR #24 from mentor’s feedback (get PR #24 merged).(From yesterday's tasklist)
+### Date: 15/06/2023 THURSDAY
+Okay, I slept a little too early yesterday and scheduled the doddle requested by bruno for the wrong time. I’ve messaged bruno that I am sorry and created the correct doodle, hopefully we should be able to have our one on one meeting today
+On SeperateReadme PR, Jmm suggested to rename docker compose files from 00_docker-compose.yaml and 01_docker-compose.yaml to just docker-compose file, so we won’t need to use -f option in the command and it’s also not mentioned in the docs I provided in the PR. So the first task is to rename these files to docker-compose.yaml. Ok I’ve renamed the files and committed the changes with the conventional commit approach as bruno mentioned to use that in a issue he opened i.e. issue #17. Bruno also opened an issue #21 regarded this which I have linked to the PR and should auto close once the PR is merged 
+On Dockerfile PR #14 now named “feature(example): Now builds a Docker image thanks to a local Dockerfile” by bruno (I should remember to name my PRs like this in future) and I am thinking to add a things to remember section in this daily update so that, I can read the important stuff easily, now other task is to add the credentials to the docs. OK I’ve added the credentials to the docs and made the commit with conventional commit approach, Jmm also mentioned to add the clean up instruction in the README files, since named volumes don’t go away with just docker compose down, which I forget to read and before and submitted PR for re-review(Remember to not do it agan) 
+Bruno also opened some other issues:
+First is to use the Conventional commit approach #17 I’ll paste the message from bruno here to remember is for future 
+“The "Conventional Commits" approach suggests using specific prefixes in commit messages to convey the nature of the changes made. Here are the common prefixes used:
+feat: Used for new features or enhancements.
+fix: Used for bug fixes.
+chore: Used for maintenance tasks, build processes or other non-user-facing changes.
+docs: Used for documentation-related changes.
+style: Used for code style changes (e.g., formatting, indentation).
+refactor: Used for code refactoring, without adding new features or fixing bugs.
+test: Used for adding or modifying tests.
+perf: Used for performance-related improvements.
+build: Used for changes related to the build system or external dependencies.
+ci: Used for changes to the continuous integration (CI) configuration or scripts.
+Using these prefixes helps provide a clear and standardized way to categorize and understand the purpose of each commit.
+It improves the readability and maintainability of commit history, making it easier for others (including your future self) to comprehend the changes made in the codebase. It's important to note that while the Conventional Commits approach is widely used and considered good practice, it's not mandatory. The key is to write descriptive and meaningful commit messages that accurately convey the purpose and impact of each commit.”
+
+I asked Bruno for a convention in naming branches, and he replied with this:
+
+Copy
+When it comes to naming branches, there are a few conventions and best practices that can help make your branch names more descriptive and organized. It greatly varies depending on the project, and I’m not sure it’s clearly defined for the Jenkins project. Anyway, here are some common guidelines:
+
+Use descriptive names: Choose branch names that clearly describe the purpose or goal of the branch. A well-named branch makes it easier for others (including your future self) to understand its purpose.
+Use hyphens or underscores: Separate words in the branch name using hyphens (“-”) or underscores (“_”) to improve readability. For example, feature/new-feature or bugfix/issue-123.
+Prefix with a category: Consider prefixing your branch names with a category or type to indicate the nature of the changes. Some commonly used prefixes include:
+feature/: Used for new feature development.
+bugfix/: Used for bug fixes.
+hotfix/: Used for critical bug fixes in production.
+refactor/: Used for refactoring code without adding new features or fixing bugs.
+chore/: Used for maintenance tasks or non-user-facing changes.
+docs/: Used for documentation-related changes.
+test/: Used for adding or modifying tests.
+Include a reference ID (optional): As we’re using GitHub’s issues, you may consider including an issue number in the branch name to associate it with a specific task or issue. For example, feature/issue-123.
+Keep it concise: Aim for concise branch names that convey the necessary information without being too lengthy. Long branch names can be cumbersome to work with.
+Here’s an example that combines these conventions:
+
+feature/add-login-functionality
+bugfix/fix-navigation-bug
+refactor/restructure-database-schema
+chore/update-dependencies
+docs/update-readme
+test/add-unit-tests
+Remember, these conventions are not strict rules but rather guidelines to help maintain consistency and clarity within this project. I even can’t promise I will follow these rules every time.
+
+
+The second issue is to create a working “One Job” example which Bruno opened in #18, which I’ll add to today’s work list.
+
+The third issue Bruno opened is to get rid of the subdirectories for the daily journal, this is Issue #19. Which I’ll add to today’s work list too. For this, Bruno also said to copy all the content from old files to DailyUpdate.md file then get rid of the subdirectories. For this, I’ll create a new branch DailyUpdate in which I’ll do all the updates from now on and also delete the subdirectories because I was just pushing to the main branch until now to update the DailyUpdate.md file. Okay, I’ve created the branch and opened a PR linking the issue and deleted the subdirectories and updated DailyUpdate.md with their content.
+
+The last issue created by Bruno is Issue #20. In which he suggests thinking about some examples I would like to see, especially considering newcomers to Jenkins. He also gave some suggestions:
+
+- Demonstrating the use of LDAP to store credentials
+- Illustrating the use of PostgreSQL to store credentials
+- Exploring the use of Docker in Docker or Docker on Docker to build Docker images
+- Showcasing the utilization of DinD or DonD to execute pipelines with existing Docker images
+
+He suggests thinking of examples in order that increase in complexity while still being accessible and approachable for newcomers.
+For the Job part, I have created a new branch to work on named `feature/adding-job` (following convention). I pasted all the hello example I tested before in the 02 example and committed the changes to the branch, and when I ran it on Gitpod, it again gave me the error from before. The only change I made was adding `USER JENKINS` at the end of the Dockerfile, so that must be the reason that’s causing the error. From which I concluded that the Jenkins user does not have write permission for the jobs folder anymore. Therefore, the solution must be to give it permissions with the root user, so I added `RUN chown -R jenkins:jenkins /var/jenkins_home/jobs` under root user and it worked!
+
+
+Now I have opened PR #24 Feature/adding job which closes issue #18. So, I am ticking issue #18 task and adding a new one which tells to work on PR #24 by the feedback provided by mentors, basically getting PR #24 merged.
+
+
+Okay, now the only thing to work on is thinking of examples to implement until mentors give suggestions on job PR #24.
+Bruno suggested to remove the build directory from the PR because it's not nessasry and I have deleted it 
+
+PR #23 that was for the cleanup doc for 02 example has been merged 
+
+Jmm has suggested to add some waits(calculation to increase time to finish) so that user is able to see the process when it's happening in the UI, since He/She doesn't know where to look being new users 
+
+
+For today’s work include:
+
+
+- [x] Complete the SeperateReadme PR, rename to `docker-compose.yaml`, solves Issue #21.
+- [x] Added credentials to PR #14 and apologized for delay.
+- [x] Add clean-up instructions in README files of examples. PR #24 and PR #16
+- [x] Create a working "one job" example (Issue #18).
+- [x] Get rid of subdirectories from daily journal (Issue #19).
+- [ ] Propose a set of other examples to implement (Issue #20).(I'll add this for next day's task list )
+- [ ] Work on PR #24 from mentor’s feedback (get PR #24 merged).(I'll add this for next day's task list)
+
+
+Things to remember:
+
+
+- Name your PRs like PR #14 as Bruno did so it’s easy for others to understand.
+- Make your commits in the conventional commit approach so that it’s easy for others to understand like mentioned by Bruno in Issue #17.
+- Make sure to name your branch according to convention.
+- Not to submit PR for re-review before checking if there are multiple suggested changes.
+
 ### Date: 14/06/2023 WEDNESDAY
 
 I’ve tried to transfer the jobs directory with Docker Compose instead of using the COPY command within the Dockerfile, and it worked fine without any errors. I used the the volume section of the docker compose file to do that.
