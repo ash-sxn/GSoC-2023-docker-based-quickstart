@@ -12,3 +12,20 @@ This example builds a custom docker image to skip the upgrade wizard, installs d
 * Make sure you are in the `02_custom_docker_file_connecting_agent_and_controller` directory by using the command `pwd`. 
 * Then use the command `docker compose up -d --build` to run the example.
 * You can log in using the `admin` username and the `admin` password.
+
+### Clean Up Instructions 
+
+* To stop and clean up a working Docker Compose setup, you can use the following command:
+`docker compose down` 
+
+This command stops the containers defined in your Docker Compose file and removes them along with any networks, volumes, and other resources created by the Compose setup.
+It effectively cleans up the resources associated with your Docker Compose environment.
+
+By default, `docker compose down` removes the stopped containers and networks, but it preserves named volumes.
+If you also want to remove the named volumes, you can use the `--volumes` flag:
+`docker compose down --volumes` 
+
+This ensures that all resources, including volumes, are removed.
+
+Note that the `docker compose down` command should be executed from the same directory where your `docker-compose.yml` file is located.
+* To remove the named volume, run `docker volume rm 02_custom_docker_file_connecting_agent_and_controller_jenkins_home` 
