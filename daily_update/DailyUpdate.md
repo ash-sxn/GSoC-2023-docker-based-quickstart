@@ -1,5 +1,36 @@
 # Daily Update
 
+### Date: 19/06/2023 MONDAY
+
+As Jmm recommended adding some time for the job to complete for the user to see the progress, I thought maybe adding the sleep command for about 3-4 seconds before the actual command will let the user view it and won’t consume any extra resources either. I’ve asked Jmm on GitHub, let’s see what his reply is.
+
+For Issue #25, I’ve created a separate branch named `bugfix/controller-restart` and created a PR with suitable changes that restarts the controller after restart or failure. I’ve added `restart: on-failure` to the Docker Compose file in the 02 example and also renamed the `+` in the 01 example to `plus` as Bruno mentioned in our one-to-one meeting.
+
+Now, the two things remaining to work on right now are Issue #20 and doing something about the draft PR #27 created by Bruno.
+
+Bervianto suggested adding the restart on failure option to the 01 example as well in Issue #25, and I added it.
+
+Attended the weekly office hours with Bruno, Jmm, and Bervianto. Details of which can be found [here](https://docs.google.com/document/d/1yij9OvM2_92My3vqjn6u8ABHjXcyy0a7O6oM30b6ctM/edit#).
+
+I have new tasks which we have discussed during office hours which I am adding to the the Tasklist will help me complete all the tast from the meeting notes 
+
+Task List:
+
+- [ ] Propose a set of other examples to implement (Issue #20) (from previous task list).
+- [ ] Work on PR #24 from mentor’s feedback (get PR #24 merged) (from previous task list).
+- [ ] Complete PR #29 (Issue #25 - Restart on failure).
+- [ ] Create an “epic” that lists all issues related to existing examples we should try to replicate.
+- [ ] should create one issue per documentation part we’re trying to replicate.
+- [ ] should focus on demo I’ll do on 6th of July, mostly about first persona.
+- [ ] Create a document to prepare layout for presentation and share it with mentors so we can brainstorm asynchronously (think bullet points).
+- [ ] Have a look as shm_size 
+
+### Date: 18/06/2023 SUNDAY
+Weekend
+### Date: 17/06/2023 SATURDAY
+Weekend
+### Date: 16/06/2023 FRIDAY
+Was travelling 
 ### Date: 16/06/2023 FRIDAY
 Task List: 
 - [ ] Propose a set of other examples to implement (Issue #20).(From yesterday's tasklist)
