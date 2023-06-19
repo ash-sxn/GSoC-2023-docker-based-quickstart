@@ -20,13 +20,13 @@ this is for the first sample job which first creates a file hello.txt with &apos
 
     stage(&apos;First&apos;) {
       steps {
-        sh &apos;echo Hello World! &gt; hello.txt&apos;
+        sh &apos;sleep 4; echo Hello World! &gt; hello.txt&apos;
       }
     }
     
     stage(&apos;Second&apos;) {
       steps {
-        sh &apos;cat hello.txt&apos;
+        sh &apos;sleep 3; cat hello.txt&apos;
       }
     }
 
