@@ -32,3 +32,7 @@ credentials:
               privateKey: "${SSH_AGENT_KEY}"
           scope: SYSTEM
           username: "jenkins"
+unclassified:
+  location:
+    adminAddress: "address not configured yet <nobody@nowhere>"
+    url: "http://02_custom_docker_file_connecting_agent_and_controller-jenkins_controller:8080/jenkins/"
