@@ -1,6 +1,7 @@
 services:
   jenkins_controller: 
     image: jenkins/jenkins:2.401.1-lts
+    restart: on-failure
     ports:
       - "8080:8080"
     volumes:
