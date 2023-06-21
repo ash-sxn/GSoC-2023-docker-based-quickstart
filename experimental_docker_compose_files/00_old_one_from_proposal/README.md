@@ -6,7 +6,7 @@
 ### How to run 
 * Make sure you are in the `00_old_one_from_proposal` directory by using the command `pwd`. 
 * Then use the command `docker compose up -d` to run the example.
-* after the containers are succefully running (check with `docker ps`). You can access the controller on [`http://localhost:8080`](http://localhost:8080)
+* after the containers are successfully running (check with `docker compose ps`). You can access the controller on [`http://localhost:8080`](http://localhost:8080)
 ### Clean Up Instructions 
 * To clean, run `docker compose down`. This will remove the container and network.
 * To remove the named volumes, run `docker volume rm 00_old_one_from_proposal_jenkins-docker-certs 00_old_one_from_proposal_jenkins-data` 

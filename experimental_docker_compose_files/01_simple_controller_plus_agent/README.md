@@ -6,7 +6,7 @@
 ### How to run 
 * Make sure you are in the `01_simple_controller_plus_agent` directory by using the command `pwd`. 
 * Then use the command `docker compose up -d --build` to run the example.
-* after the containers are succefully running (check with `docker ps`). You can access the controller on [`http://localhost:8080`](http://localhost:8080)
+* after the containers are successfully running (check with `docker compose ps`). You can access the controller on [`http://localhost:8080`](http://localhost:8080)
 ### Clean Up Instructions 
 
 * To stop and clean up a working Docker Compose setup, you can use the following command:
