@@ -22,4 +22,4 @@ If you also want to remove the named volumes, you can use the `--volumes` flag:
 This ensures that all resources, including volumes, are removed.
 
 Note that the `docker compose down` command should be executed from the same directory where your `docker-compose.yml` file is located.
-* To remove the named volume, run `docker volume rm 01_simple_controlleragent_jenkins_home` 
+* To remove the named volume, run `docker volume rm 01_simple_controller_plus_agent_jenkins_home` 
