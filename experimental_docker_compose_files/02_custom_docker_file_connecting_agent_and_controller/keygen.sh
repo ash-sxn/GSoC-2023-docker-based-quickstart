@@ -1,4 +1,6 @@
 #!/bin/bash
+# Add secrets directory
+mkdir secrets
 # Removing existing keys
 rm -f secrets/jenkins_agent_ed secrets/jenkins_agent_ed.pub
 # Generate new ed25519 SSH key pair
