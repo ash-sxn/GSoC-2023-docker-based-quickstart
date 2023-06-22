@@ -1,5 +1,78 @@
 # Daily Update
 
+### Date: 21/06/2023 WEDNESDAY
+
+Okay, I’ve created the Issues for all four of the documentation to discuss how we’ll do that part, and I am feeling quite hot here. Watched previous year’s midterm presentations, Dheeraj was in that too!
+
+Okay, I was working on the ssh keygen issue #32 for some time now and have created PR #42 for it with `feature/new_key_gen` name. I did face some issues making it work with Gitpod since I’ve created it locally first, and I’ve found that GitHub deletes empty directories in it by default for some reason?
+
+Anyway, let’s wait for mentor feedback on #42. Meanwhile, I’ll work on the next issue which is the URL one.
+
+As Jmm suggested on PR #36 messages, I tried to run this on my local machine with just localhost in the URL but it was giving me a reverse proxy error which it didn’t give before (though it did show that error on Gitpod before too). So, I’ve tried to run the configuration wizard and it does solve the warning problem on Gitpod but reverse proxy still persists on Gitpod. On the other hand, my local machine is taking forever to build the Docker image now after I’ve added the configuration wizard to the image for some reason (it’s 850 seconds now). Since it was taking so long, I’ve canceled it and am using a Docker build command now.
+
+Okay, something is wrong. When I run it with `RUN echo "2.0" > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state`, it runs just fine in like 10 seconds. But when I run it without it, it just never finishes. It won’t run even if I change the name of the file a bit. Okay, I’ve asked about this on GitHub now.
+
+Task List:
+
+- [ ] Complete PR #36 empty_url.
+- [ ] Work on PR #24 from mentor’s feedback (get PR #24 merged) (from previous task list).
+- [ ] Propose a set of other examples to implement (Issue #20) (from previous task list).
+- [ ] Create an “epic” that lists all issues related to existing examples we should try to replicate.
+- [ ] Should focus on demo I’ll do on 6th of July, mostly about first persona.
+- [ ] Create a document to prepare layout for presentation and share it with mentors so we can brainstorm asynchronously (think bullet points).
+- [x] Work on Issue #32 ssh keygen.
+- [x] Complete PR #29 (Issue #25 - Restart on failure).
+- [x] Should create one issue per documentation part we’re trying to replicate.
+
+### Date: 20/06/2023 TUESDAY
+
+Okay, a lot of work to do today, since yesterday was not so productive. I have a lot of things on my task list from yesterday, and for today, I have three new issues.
+
+The first one is created by Bruno, issue #31, in which he says that `jenkins.yaml` (JCasC file) should be copied to `/usr/share/jenkins/ref` instead of `/var/jenkins_home`. But I read on the JCasC docs that the default location is `$JENKINS_HOME/jenkins.yaml`, so I’ve asked Bruno about the issue on GitHub. So this is the first today’s issue on the task list.
+
+Jmm also opened some issues today. The first of which is Issue #32, in which he suggests adding a mechanism to generate new ssh keys at installation before the `docker-compose up` command.
+
+The second is Issue #33, which says to explain how to connect to the UI.
+
+The third is Issue #34, which says to remove the configuration warning hostname.
+
+Okay, I’ve created PR #35 which solves issue #31 created by Bruno and asked the question about why it’s working without env variable CASC even without default value i.e., `/usr/share/jenkins/ref/`.
+
+Now, since there are a lot of things left to do and I don’t feel I’ve worked enough today (slept in the afternoon too), I’ve decided to work late today.
+
+I’ve spent a long time looking into Issue #34, in which I first tried `http://localhost:8080` as the Jenkins URL but it didn’t work as Jenkins said “Please set a valid hostname, instead of localhost”. By searching on the internet, I came around `JenkinsLocationConfiguration.xml` file but didn’t completely understand how it works. Do I put controller container name?
+
+I set it in the UI and then saw it on the JCasC in that instance and it shows it like this:
+
+```
+unclassified: gitHubPluginConfig: hookUrl: “http://02_custom_docker_file_connecting_agent_and_controller-jenkins_controller:8080/jenkins/github-webhook/” location: adminAddress: “address not configured yet nobody@nowhere” url: “http://02_custom_docker_file_connecting_agent_and_controller-jenkins_controller:8080/jenkins/”
+```
+
+Regarding this, I’ve asked Jmm what should I put in the URL and created PR #36. So, I am crossing issue and making a new one as completing PR and waiting for mentors' response on this topic.
+
+Now I am working on Issue #33, in which I am creating a new branch `docs/explain_ui`.
+
+Okay, I’ve created PR #37 for the issue pinging mentors.
+
+Task List:
+
+- [ ] Work on Issue #32 ssh keygen.
+- [x] Work on Issue #33 explain how to connect to UI.
+- [x] Work on Issue #34 remove configuration warning.
+- [ ] Complete PR #36 empty_url.
+- [x] Jenkins.yaml should be copied in `/usr/share/jenkins/ref/` issue #31 (by Bruno).
+- [ ] Propose a set of other examples to implement (Issue #20) (from previous task list).
+- [ ] Work on PR #24 from mentor’s feedback (get PR #24 merged) (from previous task list).
+- [ ] Complete PR #29 (Issue #25 - Restart on failure).
+- [ ] Create an “epic” that lists all issues related to existing examples we should try to replicate.
+- [ ] Should create one issue per documentation part we’re trying to replicate.
+- [ ] Should focus on demo I’ll do on 6th of July, mostly about first persona.
+- [ ] Create a document to prepare layout for presentation and share it with mentors so we can brainstorm asynchronously (think bullet points).
+
+Things to remember:
+
+The `/usr/share/jenkins/ref` directory serves as the base directory from which Jenkins copies everything to other locations. It is considered the official source of truth. Interestingly, it is often referenced in official documentation without explicitly explaining its significance.
+
 ### Date: 19/06/2023 MONDAY
 
 As Jmm recommended adding some time for the job to complete for the user to see the progress, I thought maybe adding the sleep command for about 3-4 seconds before the actual command will let the user view it and won’t consume any extra resources either. I’ve asked Jmm on GitHub, let’s see what his reply is.
