@@ -10,7 +10,7 @@
     </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
   </actions>
   <description>hello &#xd;
-this is for the first sample job which first creates a file hello.txt with &apos;hello word!&apos; inside it and then cat this file</description>
+A simple pipeline based job. It creates a hello.txt  file with &apos;hello word!&apos; inside it and then displays the file.</description>
   <keepDependencies>false</keepDependencies>
   <properties/>
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@3691.v28b_14c465a_b_b_">
