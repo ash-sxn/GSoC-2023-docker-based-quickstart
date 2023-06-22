@@ -12,6 +12,5 @@ pubkey=$(cat secrets/jenkins_agent_ed.pub)
 
 # Update docker-compose file with new public key
 sed -i "s|JENKINS_AGENT_SSH_PUBKEY=.*|JENKINS_AGENT_SSH_PUBKEY=$pubkey|" docker-compose.yaml
-ls
 # Running docker-compose file 
 docker compose up -d 
