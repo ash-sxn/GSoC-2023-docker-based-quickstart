@@ -1,3 +1,3 @@
 tasks:
   - before: sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 && sudo chmod +x /usr/local/bin/yq
-  - before: ./experimental_docker_compose_files/02_custom_docker_file_connecting_agent_and_controller/gitpodURL.sh
+  - before: sudo ./experimental_docker_compose_files/02_custom_docker_file_connecting_agent_and_controller/gitpodURL.sh
