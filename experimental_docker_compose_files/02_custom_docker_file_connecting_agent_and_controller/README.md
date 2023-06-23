@@ -13,6 +13,7 @@ This example builds a custom docker image to skip the upgrade wizard, installs d
 * Make sure you are in the `02_custom_docker_file_connecting_agent_and_controller` directory by using the command `pwd`. 
 * Run the script with `./keygen.sh` command to generate ssh keys 
 * Then use the command `docker compose up -d --build` to run the example.
+* after the containers are successfully running (check with `docker compose ps`). You can access the controller on [`http://localhost:8080`](http://localhost:8080)
 * You can log in using the `admin` username and the `admin` password.
 
 ### Clean Up Instructions 
