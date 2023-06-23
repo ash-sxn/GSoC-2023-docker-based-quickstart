@@ -1,9 +1,11 @@
 #!/bin/bash
 
 MAVEN_REPO="jenkins-docs/simple-java-maven-app"
+# Extract the repository name from MAVEN_REPO
+REPO_NAME=${MAVEN_REPO##*/}
 
 # Create a directory on the host machine to store the cloned repository
-CLONE_DIR=$(pwd)/cloned-repo
+CLONE_DIR=$(pwd)/$REPO_NAME
 
 # Prompt for GitHub credentials
 read -p "Enter your GitHub username: " GITHUB_USERNAME
