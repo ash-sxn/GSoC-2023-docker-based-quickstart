@@ -1,5 +1,34 @@
 # Daily Update
 
+### Date: 22/06/2023 THURSDAY
+
+Okay, I think I’ve wrapped my head around PR #27 and Bervianto’s experiments and how the plugin installation manager tool works with this command Bruno gave: `jenkins-plugin-cli --plugin-file /usr/share/jenkins/plugins.txt --no-download --available-updates --output txt` 
+But I am still not sure how to implement it. For this, I’ve asked mentors on GitHub issue #27.
+
+For PR #24, Jmm suggested changing the title of the job to `(simple) demo job`, so I’ve done that and made the commit. He also suggested starting the sample pipeline every two minutes, and he also provided the `config.xml` file for it, from which I’ve learned about [cron](https://www.jenkins.io/doc/book/pipeline/syntax/#cron-syntax), and I’ve created a commit with the necessary changes.
+
+And Bruno explained with a new issue how we’ll deal with the update problem with the plugin installation manager tool and created issue #45. And another one in which he says to shift the keygen to the Dockerfile too, in which I have a doubt about how I’ll transfer the public key from the build process to the Docker Compose file, which I’ll ask mentors after running some tests and examples later.
+
+Another thing is to add new issues to the task list.
+
+Attended one-to-one meeting with Bruno and Jmm, and they suggested during the meeting that I note the time I am working at too so make myself more productive.
+
+From tommorow the daily update file will be uploded at the night(IST) when my work is done and not at any random time. And time stamps will also be recorded at what time what I am working on to increase productivity and accountibility. 
+Also I'll be working on a fixed schedule from tommorow to avoid working late at night and keep the DailyUpdate.md updated before the day ends
+
+Task List:
+
+- [x] Watch Previous Year's midterm presentation for learning how to present 
+- [x] Work on PR #24 from mentor’s feedback (get PR #24 merged)
+- [x] Work on draft PR #27.
+- [x] One to One Meet
+- [ ] Complete PR #36 empty_url.
+- [ ] Propose a set of other examples to implement (Issue #20)
+- [ ] Create an “epic” that lists all issues related to existing examples we should try to replicate.
+- [ ] Should focus on demo I’ll do on 6th of July, mostly about first persona.
+- [ ] Create a document to prepare layout for presentation and share it with mentors so we can brainstorm asynchronously (think bullet points).
+
+
 ### Date: 21/06/2023 WEDNESDAY
 
 Okay, I’ve created the Issues for all four of the documentation to discuss how we’ll do that part, and I am feeling quite hot here. Watched previous year’s midterm presentations, Dheeraj was in that too!
