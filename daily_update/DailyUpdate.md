@@ -1,5 +1,79 @@
 # Daily Update
 
+### Date: 24/06/2023 SATURDAY
+
+Time: 6:55
+
+Okay, let’s see what happened yesterday after I left and other important things.
+
+UI docs PR #37 got merged, that checks one box out of the task list.
+
+New-keygen PR #42 also got merged, but two new issues are created from it: issue #47 and #48.
+
+emptyURL PR #36 also got merged, but issue #50 is created from it.
+
+I also got a mail from Alyssa with an invite to add slides to the deck for the midterm presentation.
+
+Jmm suggested pausing issue #38 multi-branch tutorial because of its heavy reliance on Blue Ocean and working on Maven Tutorial Issue #39 first, that adds one thing to the task list.
+
+Jmm also shared some important tips:
+
+- Create a summary of the tutorial's steps. Each step is described as a single sentence (if needed with the source line number to find full details).
+- Evaluate what is the tooling required to perform the step.
+- Is the action useful for the first user's experience?
+    - YES => Can it be done with the current quickstart setup? Otherwise, add the required pre-requisite.
+    - NO => Must be part of the quickstart automated configuration.
+- Write the target/ideal flow of user interactions to perform the tutorial (aim to validate that nothing was forgotten and that it is usable).
+- List the tooling and setup automation items required to perform the ideal tutorial flow.
+- Pro tip: make sure that you run the tutorial's steps to have a full and practical understanding of each one. You can use your latest experimental configuration.
+
+Jmm opened issue #42 in which he says that Compose file can’t be started before keygen.sh (but I think I solved this issue yesterday with using long-form volume section, I’ll check it again. Okay, I checked it’s working fine both locally and on Gitpod, but I did encounter yq permission error with gitpodURL.sh again (should add that to task list). I’ve replied to Jmm on GitHub regarding this).
+
+Another Issue #48 opened by Jmm which says `When key generation script is executed, Compose file and keys are seen as git changes (dirty git worktree)`. I don’t know much about dirty git worktree, so I’ll learn about this too and add this to task list.
+
+Another is Issue #49 which says to create `jenkins_quickstart_up.sh` and `jenkins_quickstart_down.sh` as previously stated by Jmm.
+
+Another is Issue #50 with same issue about gitpodURL.sh I discussed above.
+
+Another is Issue #51 which says to `move out of experiment directories`.
+
+Last thing is draft PR #52 created by Bruno in which Bruno created a script for first part of Maven tutorial and helps with second step too (I’ll be working on this firstly today. Jmm also said this on Gitter “work on my proposal in Maven tutorial issue (list required items to be implemented). And create many issues (one per item to be done)”).
+
+It’s 8:31 right now. I’ll be taking a break now.
+
+Time: 17:08
+
+Creating a Summary of Maven Tutorial step (reading Maven tutorial in detail):
+
+- Fork and clone sample repository.
+- Add final deliver stage to your Pipeline. Bruno already created script regarding this in draft PR #52. I am testing it right now on my local setup with new and old example.
+- Create your Pipeline project in Jenkins.
+- Create your initial Pipeline as a Jenkinsfile.
+- Add test stage to your Pipeline.
+- Add final deliver stage to your Pipeline.
+
+Oh, and I didn’t use GitHub CLI before so might as well learn that now.
+
+Okay, I saw a video about it and know basics now (it’s pretty cool), will try to use it in future and learn more about it. And also watched Git for Professionals video shared by Bruno too.
+
+Didn’t do much work today. Will compensate for it tomorrow.
+
+Task List:
+
+- [ ] Work on dPR #52 Maven Tutorial.
+- [ ] Resolve Issue #39 Maven Tutorial.
+- [ ] Learn about dirty git worktree and resolve Issue #48.
+- [ ] Resolve Issue #49 Jenkins startup and teardown scripts.
+- [ ] Resolve yq permission error Issue #50.
+- [ ] Resolves Issue #51 move out experiment.
+- [ ] Propose set of other examples to implement (Issue #20) (from previous task list).
+- [ ] Create an “epic” that lists all issues related to existing examples we should try to replicate.
+- [ ] should focus on demo I’ll do on 6th of July, mostly about first persona.
+- [ ] Create a document to prepare layout for presentation and share it with mentors so we can brainstorm asynchronously (think bullet points)
+- [x] Complete PR#37 docs of UI
+- [x] Complete PR#36 empty_url
+
+
 ### Date: 23/06/2023 FRIDAY
 
 Time: 6:26
