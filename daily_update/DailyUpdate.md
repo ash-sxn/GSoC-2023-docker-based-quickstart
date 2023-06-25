@@ -1,5 +1,46 @@
 # Daily Update
 
+### Date: 25/06/2023 SUNDAY
+
+Time: 7:17
+
+Okay, Bruno created another draft PR named Maven Second Step #53. I do think Bruno is doing too much of the work on this. I’ll complete the tutorial today.
+
+- Fork and clone the sample repository.
+    - Useful for user’s first experience? Not so much. I tested Bruno’s script and was getting a failed with error:
+        ```
+        #7 0.969 error validating token: HTTP 401: Bad credentials (https://api.github.com/)
+        #7 0.969 Try authenticating with: gh auth login
+        ```
+        But it works fine with personal access token with `repo` and `read:org` permissions.
+- Create your Pipeline project in Jenkins.
+    - Useful for user’s first experience? YES, and can be done with current setup with Bruno’s script.
+- Create your initial Pipeline as a Jenkinsfile.
+    - Useful for user’s first experience? YES, but uses Docker in Docker right now which can be solved by using a custom agent image that already has `mvn` installed on it. And Bruno also shared things related to this in dPR #53. I am making custom image and testing with it right now. And since the solution of importing the simple-java-maven-app to the controller as the repo URL, but since we are building everything on the agent instead, we also need the files in it in the agent. We can use real link of users repo so that agent can take files from forked repo of user and user can push changes to repo while building Jenkinsfile step by step (since we are already making user commit changes one more step is needed `git push origin master`) then agent will be able to get pom files and Jenkinsfile.
+    - I am testing it right now.
+- Add test stage to your Pipeline.
+    - Useful for user’s first experience? Yes, 	this will be similar to the above step user will edit Jenkinsfile with Test stage and push the changes and then build with 3 steps
+- Add final deliver stage to your Pipeline.
+    - Useful for user’s first experience? Yes, the Same process can be repeated from above
+
+Okay, I’ve tested it. Everything is working nicely. I am taking a break right now. Will test all other tutorials too afterward.
+
+Time: 18:09
+
+Trying things with current examples in Node.js and Python example.
+
+Getting errors in both of them, especially Python example because it uses Docker a lot more than other examples.
+
+Not able to connect to localhost:3000 in Node.js example.
+
+For Python part, getting errors in deliver section of Jenkinsfile while running it on agent because it uses Docker to do most.
+
+Will solve this tomorrow.
+
+For things to do first thing tomorrow is to complete Maven tutorial and work on js tutorial should not be that hard and solve below issue with current example.
+
+I do realize that I didn’t maintain that good of notes today with timestamps and time management was not that good today, got distracted a lot.
+
 ### Date: 24/06/2023 SATURDAY
 
 Time: 6:55
