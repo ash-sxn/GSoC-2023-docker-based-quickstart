@@ -117,110 +117,27 @@ Task List:
 
 ### Date: 23/06/2023 FRIDAY
 
-Time: 6:26
+Start: 6:30, End: 20:25
+Hours worked: 12:45
 
-Okay, the first thing is to upload the daily update of the last day.
-
-Okay, merged the PR for the daily update of 22, but time is 6:52, so I spent about 20 minutes editing, making branch PR, and merging the PR of the daily update. That was more than expected. I should be able to do that quickly in the future.
-
-Time: 6:55: Bathroom Break
-
-Time: 7:06
-
-Okay, I am back. Now, the first thing to do is read all the feedback from mentors in PRs. Right now, there are 3 open PRs: sshkeygen #42, UIdocs #37, and bug:emptyUrl #36. And firstly, I’ll be looking at sshkeygen #42 PR. Okay, there’s been a lot of things happening on #42 PR. I kinda feel bad I didn’t reply to them immediately. Jmm also suggested that we can create another script that calls `quickstart_up.sh` and `jenkins_quickstart_down.sh`. The first one does all the work to start the quickstart, including sshkeygen and `docker-compose up`, and the down cleans up the setup completely, which is a nice idea. But I do want the user to use the `docker-compose up` command at least. Jmm also mentioned `fail fast` bash error flashing which I don’t know about. So I’ll be searching it on Google now. By the way, it’s 7:25 right now.
-
-Okay, I read about it and learned about `set -x` (verbose mode helps in debugging), `set -e` (error mode if a command returns non-zero script will also return non-zero and exit at that point and not run any further), `set -u` (gives unbound variable errors), `set -o pipefail` (if a pipeline fails, it’ll not run script any further). Okay, so this was a good thing to learn first thing in the morning. Should go to things to remember section and also all of them can be used with `set -euxo pipefail`. Okay, it’s 7:50 right now. This took 25 mins.
-
-Jmm also gave another suggestion to have a setting in Compose file that will fail `docker-compose up` if setup script has not been run before first execution. Jmm also tested `docker-compose up` without initializing (running keygen.sh) and controller doesn’t start, which could be a good thing. And to make demo “hurry proof” he suggests implementing `jenkins_quickstart_up.sh` and `jenkins_quickstart_down.sh`. He also got key overwrite (y/n)? question which I also encountered and solved by adding `rm -f secrets/jenkins_agent_ed secrets/jenkins_agent_ed.pub` step in script.
-
-Jmm also encountered an error with script while running it on macOS as I read before sed command works differently on Mac and Ubuntu machines especially `-i` option we are using needs to be `-i “ ”` in macOS. Now that I think about it, I should have mentioned it in PR that I have read about them being different so that Jmm wouldn’t have to spend his time on thing I already spent time on (adding to things to remember section).
-
-Bruno also mentioned `/secrets/jenkins_agent_ed is a directory` error which I kept getting and included:
-``` 
-# Remove existing keys if they exist
-rm -fr secrets/jenkins_agent_ed rm -fr secrets/jenkins_agent_ed.pub
-```
-
-Especially for this case, this should solve this issue. I don’t get how they got error.
-
-Bruno also suggests including an if-else statement to make it work with both macOS and Ubuntu which I was also thinking of doing will implement these changes in file right now time is 8:23 so docs office hours are gonna start in 7 mins which I’ll be attending afterward I’ll implement all suggestions from above feedback.
-
-Time: 8:30 to 9:05: Attending Docs office hours - [meeting notes](https://docs.google.com/document/d/1ygRZnVtoIvuEKpwNeF_oVRVCV5NKcZD1_HMtWlUZguo/edit?pli=1#heading=h.rqkubzoda0km) (since my schedule needs to be set before 8:30 to attend this meeting from today I start working between 6:00-7:00)
-
-Time 9:06 : Breakfast break
-
-Time: 9:50
-
-Starting to work on #42 to implement mentors' feedback. I replicated the issue Jmm mentioned about `jenkins_agent_ed` is a directory. It’s happening when `docker-compose up` command is run before `./keygen.sh`.
-So, if there is no `secrets/jenkins_agent_ed` present, it automatically creates them itself and that too with root privileges. So, if afterward `./keygen.sh` is run, it can’t remove them unless `sudo` is used.
-
-I found out it can be solved by writing the Docker Compose file volume section in long format [here](https://github.com/docker/compose/issues/2781).
-
-If we use:
-```
-      - type: bind
-        source: ./secrets/jenkins_agent_ed
-        target: /run/secrets/SSH_AGENT_KEY
-        read_only: true
-
-```
-
-Instead of `- ./secrets/jenkins_agent_ed:/run/secrets/SSH_AGENT_KEY:ro`, 
-
-it returns this error when the key is missing:
-
-```
-Error response from daemon: invalid mount config for type “bind”: bind source path does not exist: /home/jh/GSoC/GSoC-2023-docker-based-quickstart/experimental_docker_compose_files/02_custom_docker_file_connecting_agent_and_controller/secrets/jenkins_agent_ed
-```
-
-Okay, I forgot to pull the changes from the keygen branch and now I am stuck in a merge conflict and tried to merge it and having a problem with its thinking a modified file as not modified so I am not able to add it with `git add` command. I am getting really confused with the whole merge conflict thing and created the commits directly from GitHub this time. And I solved the problem by doing a hard reset of the branch by these commands:
-```
-git fetch origin
-git reset --hard origin/my-branch 
-git checkout – .
-```
-
-Okay, I’ve wasted a lot of time with this merge conflict issue.
-
-Okay, I’ve updated the README file with ssh-key content and created a commit with it, but I think I took too much time while doing it and with `jenkins_agent_ed` is a directory issue too. It’s 12:28 right now. I guess keygen issue is mostly complete if I exclude `jenkins_quickstart_up&down.sh`, which I am not sure about. I think the user should do `docker-compose up` on their own even beginners so they understand how things work.
-
-Time: 12:35 - break
-
-Time: 13:00
-
-Okay, I am back.
-
-Now for UI docs PR #37.
-
-I spent some time figuring out if `.gitpod.yaml` file can work in subdirectories. Turns out there is an open [issue](https://github.com/gitpod-io/gitpod/issues/5521) in Gitpod right now. For UI doc for Gitpod, Bruno suggested also adding another script that collects URL from Gitpod and displays it on terminal and also updates `jenkins.yaml` configuration file with URL for working on Gitpod empty URL warning.
-
-On which I’ve asked them that I’ll add script to #36 PR to update URL on that but for UI docs it’s better to mention ports section that has address for UI and a popup also comes up that shows UI.
-
-I also watched yesterday’s office hours which I was not able to attend.
-
-Okay for PR #32 empty_url, Jmm says that Jenkins automatically adds URL it observes and which just needs to be saved. And I was thinking that this is already saved and is still not working. I’ve tested `http://127.0.0.1:8080/` on my local machine which does work to eliminate warning but for Gitpod when I used same i.e., (https://8080-ashsxn-gsoc2023dockerba-od66he6n77h.ws-us100.gitpod.io/), yellow URL warning is gone but [Reverse proxy](https://www.jenkins.io/doc/book/system-administration/reverse-proxy-configuration-troubleshooting/) issue is still there in Gitpod. Bruno already created a script that does most things for Gitpod (now I see what he meant during Office hour). First echoes `GITPOD_WORKSPACE_URL` and adds port number in front of it then replaces URL in `jenkins.yaml` so that it works with Gitpod.
-
-Bruno also mentioned that there might be another key with starting URL character so this approach will not work since it looks from URL key in file for that he used yq (YAML processor) which I don’t know much about so I’ll be learning about that now.
-
-Okay, I get what yq and jq are and how to use them.
-
-Since this is happening, I am thinking might as well create a `.gitpod.yaml` file in the main directory that launches the latest example we are working on (02 currently) with all things like new ssh key, URL changing, and `docker-compose up` too.
-
-I did test with `.gitpod.yaml` file doing everything from ssh-keygen, URL update, and `docker-compose up`.
-
-I’ll create a new issue after URL PR is merged on this. I’ve committed changes to the emptyurl PR, but the script works. But when I try to run the script from `.gitpod.yml` (+point: it doesn’t work with `.yaml`, just with `.yml` for some reason), it gives this error:
-
-```
-./experimental_docker_compose_files/02_custom_docker_file_connecting_agent_and_controller/gitpodURL.sh: line 13: /experimental_docker_compose_files/02_custom_docker_file_connecting_agent_and_controller/dockerfiles/jenkins.yaml.tmp: No such file or directory
-```
-
-But it works fine if I run it from the root directory of Gitpod directly by terminal. It works fine without any errors.
-
-I used an absolute path instead of `$GITPOD_REPO_ROOT` variable, and it solved that issue (guess this variable is created after before command is run), but it’s still saying permission denied.
-
-Okay, I’ve tried many things, but it’s not working, and it’s annoying that I have to restart Gitpod every time to see if it’s working or not.
-
-I did notice that I didn’t clearly note time in the second half of the day which should not happen tomorrow. Right now, time is 20:25, and I am going to eat food now.
+- 6:30 - 7:00 (30') 
+   - daily log PR merge and Git conflicts
+- 7:00 - 7:30 (30') 
+   - review mentor's comments on the 3 ongoing PRs
+- 7:30 - 8:30 (60')
+   - learn about bash error flags
+   - learn about SED on Mac and workout a solution
+- 8:30 - 9:00 (30')
+   - attend Doc Office Hour
+- 9:50 - 12:35 (2:45)
+   - solve issue on PR 42 (failures when compose is run before the initialisation script)
+   - (git) sort out merge conflict !!
+- 13:00 - 20:30 (?) (7:30)
+   - work to fix issues on PR #37
+   - work to fix issues on PR #36
+   - listen to office hours recording
+   - PR fixing
+   - note keeping
 
 Task List:
 
