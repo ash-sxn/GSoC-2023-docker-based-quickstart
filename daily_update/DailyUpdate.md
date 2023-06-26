@@ -1,4 +1,40 @@
 # Daily Update
+### Date: 26/06/2023 MONDAY
+
+# Daily Log - 26/06/2023
+
+**Start Time:** 6:35 AM  
+**End Time:** 22:30 PM  
+**Hours Worked:** 8h40m
+
+## Summary:
+
+- **6:35 AM - 7:45 AM (1 hours and 10 minutes)**
+  - Worked on Maven tutorial
+  - Custom agent Dockerfile with help with Bruno's version
+  - Created feature/maven_tutorial branch
+
+- **9:49 AM - 10:44 AM (55 minutes)**
+  - Created an updated Readme file for the 03_maven_tutorial directory
+
+- **11:00 AM - 11:36 AM (36 minutes)**
+  - Investigated and resolved permission error with yq command in Gitpod environment
+
+- **13:11 PM - 13:21 PM (10 minutes)**
+  - Created and pushed PR#54 from the branch bug/gitpod_url
+
+- **13:30 PM - 15:15 PM (1 hour and 45 minutes)**
+  - Attended the weekly meeting and discussed key points
+
+- **17:02 PM - 19:18 PM (2 hours and 16 minutes)**
+  - Worked on creating the `jenkins_init` and `jenkins_teardown` scripts
+  - Added initial draft of the scripts and planned further improvements
+  - Took a break for dinner
+
+- **20:18 PM - 22:05 PM (1 hour and 47 minutes)**
+  - Continued working on the scripts, implementing functions
+
+
 
 ### Date: 25/06/2023 SUNDAY
 
