@@ -1,4 +1,7 @@
+# List the start up tasks. Learn more: https://www.gitpod.io/docs/configure/workspaces/tasks
 tasks:
-  - init: whoami && sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 && sudo chmod a+x /usr/local/bin/yq
-  - init : whoami && sudo chmod a+w  ./experimental_docker_compose_files/02_custom_docker_file_connecting_agent_and_controller/dockerfiles
-  - init : whoami && yq && sh ./experimental_docker_compose_files/02_custom_docker_file_connecting_agent_and_controller/gitpodURL.sh
+  - name: Script Task
+    before: wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 && sudo chmod a+x /usr/local/bin/yq
+    init: echo 'init script' && chmod a+w  ./experimental_docker_compose_files/02_custom_docker_file_connecting_agent_and_controller/dockerfiles # runs during prebuild => https://www.gitpod.io/docs/configure/projects/prebuilds
+    command: echo 'start script' && sh ./experimental_docker_compose_files/02_custom_docker_file_connecting_agent_and_controller/gitpodURL.sh
+# Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
