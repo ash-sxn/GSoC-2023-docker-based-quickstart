@@ -29,7 +29,7 @@ services:
       - DOCKER_CERT_PATH=/certs/client
       - DOCKER_TLS_VERIFY=1
     ports:
-      - 8080:8080
+      - 8090:8080
      #- 50000:50000 # it's for communication of multi container system 
     volumes:
       - jenkins-data:/var/jenkins_home
