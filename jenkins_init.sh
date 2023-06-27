@@ -34,10 +34,46 @@ check_gitpod() {
 check_docker_compose() {
     if ! command -v docker &> /dev/null
     then
-        echo "Docker Engine is not installed. Please install it before using Docker Compose."
-        exit 1
-    fi
+      echo "Docker is not installed. Installing it now."
+      if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+            # Install Docker manually on Linux
+            # Download the Docker binary
+            curl -SL https://download.docker.com/linux/static/stable/x86_64/docker.tgz -o docker.tgz
 
+            # Extract the binary
+            tar xzvf docker.tgz
+
+            # Move the binary to the /usr/bin directory
+            sudo mv docker/* /usr/bin/
+
+            # Clean up
+            rm -r docker docker.tgz
+        elif [[ "$OSTYPE" == "darwin"* ]]; then
+            # Install Docker Desktop on macOS
+            if [[ "$(uname -m)" == "arm64" ]]; then
+                # Download the Docker Desktop disk image for M1 Macs
+                curl -SL https://desktop.docker.com/mac/stable/arm64/Docker.dmg -o Docker.dmg
+            else
+                # Download the Docker Desktop disk image for Intel-based Macs
+                curl -SL https://desktop.docker.com/mac/stable/amd64/Docker.dmg -o Docker.dmg
+            fi
+
+            # Mount the disk image
+            hdiutil attach Docker.dmg
+
+            # Run the installer script
+            /Volumes/Docker/Docker.app/Contents/MacOS/install
+
+            # Unmount the disk image
+            hdiutil detach /Volumes/Docker
+
+            # Clean up
+            rm Docker.dmg
+        else
+            echo "Couldn't Install docker, please install it manually and try again"
+            exit 1
+        fi
+    fi
     if ! docker compose version &> /dev/null
     then
         if ! command -v docker-compose &> /dev/null
