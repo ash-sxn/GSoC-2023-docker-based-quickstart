@@ -71,7 +71,12 @@ check_docker_compose() {
     fi
     echo $DOCKER_COMPOSE
 }
-
+# Function to generate ssh keys 
+generate_ssh_keys() {
+  local tutorial_path=$1
+  echo "generating new ssh keys"
+  sh $tutorial_path/keygen.sh $tutorial_path
+}
 # Function to start a tutorial based on the provided path
 start_tutorial() {
   local tutorial_path=$1
@@ -88,12 +93,14 @@ if [[ "$TUTORIAL" == "$VAR1" ]]; then
 elif [[ "$TUTORIAL" == "$VAR2" ]]; then
   start_tutorial "$VAR2L"
 elif [[ "$TUTORIAL" == "$VAR3" ]]; then
+  generate_ssh_keys "$VAR3L"
   start_tutorial "$VAR3L"
 elif [[ "$TUTORIAL" == "$VAR4" ]]; then
   start_tutorial "$VAR4L"
 else
   # If no valid argument was passed, run the default tutorial
   echo "No valid argument was selected. Running the default tutorial"
+  generate_ssh_keys "$VARDL"
   start_tutorial "$VARDL"
 fi
 
