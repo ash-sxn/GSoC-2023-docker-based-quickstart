@@ -87,7 +87,6 @@ start_tutorial() {
 
 
 check_docker_compose
-check_gitpod
 # Determine the tutorial to start based on the provided argument
 if [[ "$TUTORIAL" == "$VAR0" ]]; then
   start_tutorial "$VAR0"
@@ -97,11 +96,9 @@ elif [[ "$TUTORIAL" == "$VAR2" ]]; then
   check_gitpod "$VAR2L"
   start_tutorial "$VAR2L"
 elif [[ "$TUTORIAL" == "$VAR3" ]]; then
-  check_gitpod "$VAR3L"
   start_tutorial "$VAR3L"
 else
   # If no valid argument was passed, run the default tutorial
   echo "No valid argument was selected, running the default tutorial"
-  check_gitpod "$VARDL"
   start_tutorial "$VARDL"
 fi
