@@ -19,6 +19,7 @@ VAR1L="./experimental_docker_compose_files/01_simple_controller_plus_agent"
 VAR2L="./experimental_docker_compose_files/02_custom_docker_file_connecting_agent_and_controller"
 VAR3L="./experimental_docker_compose_files/03_maven_tutorial"
 DOCKER_COMPOSE="docker compose"
+DOCKER_VERSION="24.0.2"
 # Function to start a tutorial based on the provided path
 
 check_gitpod() {
@@ -38,7 +39,7 @@ check_docker_compose() {
       if [[ "$OSTYPE" == "linux-gnu"* ]]; then
             # Install Docker manually on Linux
             # Download the Docker binary
-            curl -SL https://download.docker.com/linux/static/stable/x86_64/docker.tgz -o docker.tgz
+            curl -SL https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_VERSION.tgz  -o docker.tgz
 
             # Extract the binary
             tar xzvf docker.tgz
