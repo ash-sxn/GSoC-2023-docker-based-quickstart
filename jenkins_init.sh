@@ -58,18 +58,17 @@ check_docker_compose() {
     then
         if ! command -v docker-compose &> /dev/null
         then
-            if ! sudo -n true 2>/dev/null; then
+            if [[ $(id -u) -ne 0 ]]; then
                 echo "Please run the script as root or with sudo privileges to install Docker Compose or install it manually"
                 exit 1
             fi
             echo "Installing Docker Compose"
             # Steps to install Docker Compose
             if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-                sudo apt-get update
-                sudo apt-get install ca-certificates curl gnupg
-                sudo install -m 0755 -d /etc/apt/keyrings
-                curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-                sudo chmod a+r /etc/apt/keyrings/docker.gpg
+                sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compos
+                sudo chmod +x /usr/local/bin/docker-compose
+                sudo usermod -aG docker $USER
+                docker-compose --version
             elif [[ "$OSTYPE" == "darwin"* ]]; then
                 # Install Docker Compose on macOS without Docker Desktop
                 # Install the right docker-compose binary for your chipset from the releases page
