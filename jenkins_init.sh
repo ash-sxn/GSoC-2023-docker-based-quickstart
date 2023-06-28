@@ -70,13 +70,8 @@ check_docker_compose() {
                 sudo usermod -aG docker $USER
                 docker-compose --version
             elif [[ "$OSTYPE" == "darwin"* ]]; then
-                # Install Docker Compose on macOS without Docker Desktop
-                # Install the right docker-compose binary for your chipset from the releases page
-                if [[ "$(uname -m)" == "arm64" ]]; then
-                    sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-darwin-arm64 -o /usr/local/bin/docker-compose
-                else
-                    sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-darwin-x86_64 -o /usr/local/bin/docker-compose
-                fi
+                # Installs both on intel and apple Silicon macs 
+                sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
                 sudo chmod +x /usr/local/bin/docker-compose
             else
                 echo "Couldn't install Docker Compose. Please install it manually and try again."
