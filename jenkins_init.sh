@@ -28,6 +28,17 @@ check_gitpod() {
         sh $tutorial_path/gitpodURL.sh
     fi
 }
+check_running_tutorials() {
+    # Check if there is a .tutorials_running.txt file, if there is then check if it's empty, if not stops the script
+    if [ ! -f ./.tutorials_running.txt ]; then
+        echo "Running First Tutorial"
+    else
+        if [ -s .tutorials_running.txt ]; then
+            echo "Another Tutorial is running, Please use ./jenkins_teardown.sh first"
+            exit 1
+        fi
+    fi 
+}
 check_wsl() {
     if [[ $(grep -i Microsoft /proc/version) ]]; then
         echo "Running on WSL"
@@ -106,6 +117,8 @@ start_tutorial() {
 check_wsl
 # Check Docker Compose installation
 check_docker_compose
+# if tutorials are already running 
+check_running_tutorials
 
 # Determine the tutorial to start based on the provided argument
 if [[ "$TUTORIAL" == "$VAR1" ]]; then
