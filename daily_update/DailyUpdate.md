@@ -1,7 +1,51 @@
 # Daily Update
-### Date: 26/06/2023 MONDAY
 
-# Daily Log - 26/06/2023
+### Date: 27/06/2023 TUESDAY
+
+**Start Time:** 6:36 AM  
+**End Time:** 23:01 PM  
+**Hours Worked:** 10 hours 45 mins
+
+## Summary:
+
+- **6:36 AM - 8:16 AM (1 hour and 40 minutes)**
+  - Found the Docker Compose official installation guide to implement in the scipt 
+  - Developed a working script
+  - test the init script on different setups using AWS cloud 
+
+- **9:12 AM - 10:19 AM (1 hours and 7 minutes)**
+  - Started testing the init script on Gitpod
+  - Encountered an error related to the `./gitpodURL.sh` file not found
+
+
+- **13:29 PM - 15:48 PM (2 hours and 19 minutes)**
+  - Resumed work on resolving the Gitpod error
+  - Decided that the Gitpod URL PR merge eliminates the need for the Gitpod-specific part
+  - Encountered an error while installing Docker in the AWS instance: `Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?`
+  - Skipped Docker installation due to multiple errors
+
+- **15:48 PM - 17:21 PM (1 hour and 33 minutes)**
+  - Improved on the teardown script, from brute force approach (docker compose down everything)
+  - Completed the teardown.sh script, tested and verified it on the local machine
+
+- **17:21 PM - 19:43 PM (2 hours and 22 minutes)**
+  - Added more comments to the teardown script before pushing to GitHub
+  - Fixed an error where the script was only removing one tutorial when multiple tutorials were started by adding a while loop
+  - Created a function for SSH key handling and resolved an issue with root directory files by using absolute paths
+
+- **19:43 PM - 20:00 PM (17 minutes)**
+  - Tested the changes on Gitpod, confirmed they work fine
+  - Created PR#60 for the changes
+  - Created a Gitpod proxy issue #61 for future reference
+
+- **20:30 PM - 21:30 PM (1 hour)**
+  - Attended GSoc Group Meet: Contributor Evaluations with GSoC admin
+
+- **22:34 PM - 23:01 PM (27 minutes)**
+  - Completed the README update and commited the changes
+
+
+### Date: 26/06/2023 MONDAY
 
 **Start Time:** 6:35 AM  
 **End Time:** 22:30 PM  
