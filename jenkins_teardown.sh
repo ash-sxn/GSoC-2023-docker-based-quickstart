@@ -25,7 +25,7 @@ stop_tutorial() {
   echo "Removing tutorial $tutorial_path"
   if ! docker compose version &> /dev/null
   then
-    docker compose -f "$tutorial_path/docker-compose.yaml" down --volumes
+    docker-compose -f "$tutorial_path/docker-compose.yaml" down --volumes
   else
     docker compose -f "$tutorial_path/docker-compose.yaml" down --volumes
   fi
