@@ -28,25 +28,48 @@ check_gitpod() {
         sh $tutorial_path/gitpodURL.sh
     fi
 }
+check_wsl() {
+    if [[ $(grep -i Microsoft /proc/version) ]]; then
+        echo "Running on WSL"
+        if ! command -v dos2unix &> /dev/null; then
+            if sudo -n true 2>/dev/null; then
+                echo "dos2unix not found, installing..."
+                sudo apt-get update && sudo apt-get install -y dos2unix
+            else
+                echo "dos2unix not found, please run the script as root or install dos2unix manually"
+                exit 1 
+            fi
+        else
+            echo "dos2unix is already installed"
+        fi
+    else
+        echo "Not running on WSL"
+    fi
+}
 
 # Function to check if Docker Compose is installed not checked on macOS yet
 check_docker_compose() {
     if ! command -v docker &> /dev/null
     then
-      echo "Docker is not installed. Please install Docker first and then run the script again."
+        echo "Docker is not installed. Please install Docker first and then run the script again."
+        exit 1
     fi
     if ! docker compose version &> /dev/null
     then
         if ! command -v docker-compose &> /dev/null
         then
+            if ! sudo -n true 2>/dev/null; then
+                echo "Please run the script as root or with sudo privileges to install Docker Compose or install it manually"
+                exit 1
+            fi
             echo "Installing Docker Compose"
             # Steps to install Docker Compose
             if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-                apt-get update
-                apt-get install ca-certificates curl gnupg
-                install -m 0755 -d /etc/apt/keyrings
+                sudo apt-get update
+                sudo apt-get install ca-certificates curl gnupg
+                sudo install -m 0755 -d /etc/apt/keyrings
                 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-                chmod a+r /etc/apt/keyrings/docker.gpg
+                sudo chmod a+r /etc/apt/keyrings/docker.gpg
             elif [[ "$OSTYPE" == "darwin"* ]]; then
                 # Install Docker Compose on macOS without Docker Desktop
                 # Install the right docker-compose binary for your chipset from the releases page
@@ -55,7 +78,7 @@ check_docker_compose() {
                 else
                     sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-darwin-x86_64 -o /usr/local/bin/docker-compose
                 fi
-                chmod +x /usr/local/bin/docker-compose
+                sudo chmod +x /usr/local/bin/docker-compose
             else
                 echo "Couldn't install Docker Compose. Please install it manually and try again."
                 exit 1
@@ -71,6 +94,7 @@ check_docker_compose() {
     fi
     echo $DOCKER_COMPOSE
 }
+
 # Function to generate ssh keys 
 generate_ssh_keys() {
   local tutorial_path=$1
@@ -84,6 +108,8 @@ start_tutorial() {
   $DOCKER_COMPOSE -f "$tutorial_path/docker-compose.yaml" up -d
 }
 
+# check wsl
+check_wsl
 # Check Docker Compose installation
 check_docker_compose
 

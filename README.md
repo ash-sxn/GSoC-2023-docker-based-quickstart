@@ -29,11 +29,11 @@ It can be found [here](https://chrome.google.com/webstore/detail/gitpod-online-i
       * 03_maven_tutorial (Not ready yet)
 * to run the different examples add these arguments to the ./jenkins_init.sh command
 
-    * `1` - 00_old_one_from_proposal => `sudo ./jenkins_init.sh 1`
-    * `2` - 01_simple_controller_plus_agent => `sudo ./jenkins_init.sh 2`
-    * `3` - 02_custom_docker_file_connecting_agent_and_controller => `sudo ./jenkins_init.sh 3`
-    * `4` - 03_maven_tutorial (doesn't work right now, still in devlopment ) => `sudo ./jenkins_init.sh 4`
-* If no argument is used i.e. `sudo ./jenkins_init.sh`, It runs the latest example present in the root directory docker-compose file
+    * `1` - 00_old_one_from_proposal => `./jenkins_init.sh 1`
+    * `2` - 01_simple_controller_plus_agent => `./jenkins_init.sh 2`
+    * `3` - 02_custom_docker_file_connecting_agent_and_controller => `./jenkins_init.sh 3`
+    * `4` - 03_maven_tutorial (doesn't work right now, still in devlopment ) => `./jenkins_init.sh 4`
+* If no argument is used i.e. `./jenkins_init.sh`, It runs the latest example present in the root directory docker-compose file
 
 ### How to Verify Jenkins installation
 * You can check the status of the container with the `docker ps` command or the `docker compose ps` one.
@@ -42,4 +42,4 @@ It can be found [here](https://chrome.google.com/webstore/detail/gitpod-online-i
 
 ### Clean Up Instructions
 * To stop and remove the running containers `jenkins_teardown.sh` script is used  
-* use `sudo ./jenkins_teardown.sh` command to stop and remove the running example 
+* use `./jenkins_teardown.sh` command to stop and remove the running example 
