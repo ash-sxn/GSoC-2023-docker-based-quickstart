@@ -1,31 +1,42 @@
+# Set the desired PyInstaller version as a build argument
+ARG PYINSTALLER_VERSION=5.13.0
+
+# Use the base image
 FROM jenkins/ssh-agent:5.5.0-jdk17 as ssh-agent
 
-# ca-certificates because curl will need it later on for the Maven installation
-RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl git
+# Set environment variables for PyPI URLs
+ENV PYPI_URL=https://pypi.python.org/
+ENV PYPI_INDEX_URL=https://pypi.python.org/simple
 
-# Now time to install Maven
-ARG MAVEN_VERSION=3.9.2
-# Add a checksum for the maven binary
-RUN curl -sS -L -O --output-dir /tmp/ --create-dirs  https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
-    && echo "$(sha512sum /tmp/apache-maven-${MAVEN_VERSION}-bin.tar.gz)" | sha512sum -c - \
-    && curl -sS -L -O --output-dir /tmp/ --create-dirs  https://downloads.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz.sha512 \
-    && echo "$(cat /tmp/apache-maven-${MAVEN_VERSION}-bin.tar.gz.sha512) /tmp/apache-maven-${MAVEN_VERSION}-bin.tar.gz" | sha512sum --check --status \
-    && tar xzf "/tmp/apache-maven-${MAVEN_VERSION}-bin.tar.gz" -C /opt/ \
-    && rm "/tmp/apache-maven-${MAVEN_VERSION}-bin.tar.gz" \
-    && ln -s /opt/apache-maven-${MAVEN_VERSION} /opt/maven \
-    && mkdir -p /etc/profile.d \
-    && echo "export JAVA_HOME=$JAVA_HOME \n \
-             export M2_HOME=/opt/maven \n \
-             export PATH=${M2_HOME}/bin:${PATH}" > /etc/profile.d/maven.sh
-ENV M2_HOME="/opt/maven"
-ENV PATH="${M2_HOME}/bin/:${PATH}"
+# Install necessary dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    binutils ca-certificates curl git python3 python3-pip python3-setuptools python3-wheel python3-dev wget
+
+# Create an alias for python3 as python
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
+# Install required Python packages
+RUN pip install docker-py feedparser nosexcover prometheus_client pycobertura pylint pytest pytest-cov requests setuptools sphinx
+
+# Install qcoverage tool
+RUN wget -qO /usr/local/bin/qcoverage  https://github.com/qnib/qcoverage/releases/download/v0.1/qcoverage_v0.1_Linux \
+    && chmod +x /usr/local/bin/qcoverage
+
+# Install pyenv
+RUN curl https://pyenv.run | bash
+
+# Install specific PyInstaller version
+RUN pip install pyinstaller
+
+# Add the Jenkins agent user to the environment
 RUN echo "PATH=${PATH}" >> /etc/environment
 
 # Install GitHub command line tool
 ENV GITHUB_TOKEN $GITHUB_TOKEN
-RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg && \
-    chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg && \
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null && \
-    apt update && apt install -y --no-install-recommends gh
+RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
+    && chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+    && apt update && apt install -y --no-install-recommends gh
 
+# Set ownership for Jenkins agent home directory
 RUN chown -R jenkins:jenkins "${JENKINS_AGENT_HOME}"

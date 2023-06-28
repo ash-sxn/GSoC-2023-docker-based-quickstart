@@ -4,7 +4,7 @@ FROM debian:bookworm-20230612 as cloning-stage
 # Set ARGs for the GitHub credentials and repository
 ARG GITHUB_USERNAME
 ARG GITHUB_PASSWORD
-ARG REPO_NAME=jenkins-docs/simple-java-maven-app
+ARG REPO_NAME=jenkins-docs/simple-python-pyinstaller-app
 
 # Install Git and gh
 RUN apt-get update && \
@@ -23,4 +23,4 @@ RUN cd /tmp && \
 
 
 FROM scratch AS export-stage
-COPY --from=cloning-stage /tmp/simple-java-maven-app /
+COPY --from=cloning-stage /tmp/simple-python-pyinstaller-app /

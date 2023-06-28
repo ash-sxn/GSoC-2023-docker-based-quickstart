@@ -17,7 +17,7 @@
       <configVersion>2</configVersion>
       <userRemoteConfigs>
         <hudson.plugins.git.UserRemoteConfig>
-          <url>https://github.com/$GITHUB_USERNAME/simple-python-pyinstaller-app.git</url>
+          <url>https://github.com/gounthar/simple-python-pyinstaller-app.git</url>
         </hudson.plugins.git.UserRemoteConfig>
       </userRemoteConfigs>
       <branches>

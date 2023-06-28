@@ -21,7 +21,7 @@ DOCKER_BUILD_ARGS="--build-arg GITHUB_USERNAME=$GITHUB_USERNAME --build-arg GITH
 docker build $DOCKER_BUILD_ARGS
 
 # Replace the $GITHUB_USERNAME variable in the XML file
-CONFIG_FILE="dockerfiles/jobs/simple-java-maven-app/config.xml"
+CONFIG_FILE="dockerfiles/jobs/simple-python-pyinstaller-app/config.xml"
 SED_EXPRESSION="s/\$GITHUB_USERNAME/$GITHUB_USERNAME/g"
 sed -i -e "$SED_EXPRESSION" $CONFIG_FILE
 
