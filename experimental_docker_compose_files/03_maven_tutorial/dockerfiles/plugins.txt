@@ -14,3 +14,4 @@ pipeline-stage-view:2.32
 git:5.1.0
 matrix-auth:3.1.8
 mailer:457.v3f72cb_e015e5
+pipeline-graph-view:191.vc6da_9d3eb_70a
