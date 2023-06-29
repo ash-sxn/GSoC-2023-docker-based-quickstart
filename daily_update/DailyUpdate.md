@@ -1,5 +1,63 @@
 # Daily Update
 
+### Date: 28/06/2023 WEDNESDAY
+
+**Start Time:** 8:35 AM  
+**End Time:** 23:56 PM  
+**Hours Worked:** 8 hours 57 mins
+
+**8:35 AM - 10:12 AM (1 hour and 37 minutes)**
+
+- Overslept a little today, so starting late.
+- Milestone 0 should mostly be completed now, but PR#60 is still open.
+- Bruno encountered an error running the script yesterday.
+- Found a similar Stackoverflow post related to the error.
+- Created a function to check if the script is running on WSL and installed dos2unix on it.
+- Added a check for sudo usage and provided a warning for root permission requirements.
+- Edited the Readme file to remove sudo references.
+- Committed the changes.
+
+**10:12 AM - 11:33 AM (1 hour and 21 minutes)**
+
+- Testing how things are working on the cloud for a fresh setup without Docker Compose.
+- Everything works fine on a fresh system, but if Docker or Docker Compose is not installed, appropriate messages are displayed.
+
+**11:33 AM - 12:01 PM (28 minutes)**
+
+- Got a permission denied error while connecting to the Docker daemon socket.
+- Solved it by running `sudo chmod 666 /var/run/docker.sock`.
+- ended up not adding it in the PR.
+
+**12:43 PM - 18:13 PM**
+
+- Took a break a break.
+
+**18:13 PM - 18:42 PM (29 minutes)**
+
+- Resumed work.
+- Two issues remaining in Milestone 0: #48 (dirty git work tree) and #55 (named volumes).
+
+**18:42 PM - 20:20 PM (1 hour and 38 minutes)**
+
+- Learned about .gitignore file.
+- Added .gitignore file in a separate branch.
+- Created PR#67 regarding restoring changes to docker-compose.yaml files instead of adding them to .gitignore.
+- This should complete Milestone 0 if the PR merges successfully.
+
+**20:20 PM - 21:02 PM (42 minutes)**
+
+- Looking into Milestone 1 now.
+- Created PR#68 that solves issue #62 by using `.tutorial_running.sh`.
+- Bruno had an idea to solve issue #62, asked about it in the PR.
+
+**21:02 PM - 23:44 PM (2 hours and 42 minutes)**
+
+- Last task in the Maven milestone is #39, which will be worked on.
+- Created PR#70 and verified it's working locally.
+- Haven't checked on Gitpod yet.
+- Also need to update the daily update.
+
+
 ### Date: 27/06/2023 TUESDAY
 
 **Start Time:** 6:36 AM  
