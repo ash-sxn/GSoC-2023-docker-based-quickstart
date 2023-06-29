@@ -1,4 +1,38 @@
 # Daily Update
+### Date: 29/06/2023 THURSDAY
+
+**Start Time:** 6:42  
+**End Time:** 23:56 PM  
+**Hours Worked:** 5h 30m
+
+**6:42 AM**(1h)
+
+- Reading feedback for PR#70 feature/maven tutorial.
+- Committed changes that include adding fork-and-clone.sh into the jenkins_init.sh file.
+- Added a prompt in jenkins_init.sh to ask if the repository should be forked and cloned.
+- Currently, the prompt is only displayed for the Maven tutorial.
+- Started working on midterm slides.
+
+**17:43 PM**(2h30m)
+
+-Completed Drafted midterm slides.
+
+**19:00 PM - 20:00 PM**(1 Hour)
+
+- One-to-one meeting.
+
+**20:30 PM - 21:00 PM**(30mins)
+
+- Office hours.
+
+**21:28 PM**(30 mins)
+
+- to make changes to fork-and-clone.sh.
+- Will revert the last commit and add "maven" as the name command for `./jenkins_init.`
+- Integrate feedback from mentors in the slides.
+
+
+Too less work today will compensate for this tomorrow.
 
 ### Date: 28/06/2023 WEDNESDAY
 
