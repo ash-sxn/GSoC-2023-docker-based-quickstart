@@ -32,3 +32,4 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 echo "SSH key pair generated and Docker Compose file updated successfully."
 
 # End of script
+

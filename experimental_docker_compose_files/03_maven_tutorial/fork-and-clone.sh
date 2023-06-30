@@ -22,3 +22,4 @@ docker build $DOCKER_BUILD_ARGS
 # Clean up the credentials
 unset GITHUB_USERNAME
 unset GITHUB_PASSWORD
+

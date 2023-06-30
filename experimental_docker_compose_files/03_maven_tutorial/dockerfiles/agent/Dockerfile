@@ -24,3 +24,4 @@ RUN echo "PATH=${PATH}" >> /etc/environment
 
 RUN chown -R jenkins:jenkins "${JENKINS_AGENT_HOME}"
 
+

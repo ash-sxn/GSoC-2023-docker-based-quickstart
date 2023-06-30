@@ -132,3 +132,4 @@ if [[ -z "$TUTORIAL" ]]; then
 else
   echo "$TUTORIAL" >> ./.tutorials_running.txt
 fi
+

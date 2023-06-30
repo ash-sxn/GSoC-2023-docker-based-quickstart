@@ -56,3 +56,4 @@ A simple pipeline based job. It creates a hello.txt file with &apos;hello word!&
   <triggers/>
   <disabled>false</disabled>
 </flow-definition>
+
