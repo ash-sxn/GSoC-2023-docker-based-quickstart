@@ -23,3 +23,4 @@ ENV PATH="${M2_HOME}/bin/:${PATH}"
 RUN echo "PATH=${PATH}" >> /etc/environment
 
 RUN chown -R jenkins:jenkins "${JENKINS_AGENT_HOME}"
+

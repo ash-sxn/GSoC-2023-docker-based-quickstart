@@ -24,3 +24,4 @@ RUN cd /tmp && \
 
 FROM scratch AS export-stage
 COPY --from=cloning-stage /tmp/simple-java-maven-app /
+
