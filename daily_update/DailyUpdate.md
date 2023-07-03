@@ -1,4 +1,44 @@
 # Daily Update
+
+### Date: 03/07/2023 MONDAY
+
+**Start Time:** 6:59  
+**End Time:** 12:00++  
+**Hours Worked:** 4h+ (Din't maintain the record very well today approx)
+
+**6:59 AM**
+
+- Three open issues in Milestone 01: #73, #74, #75.
+- Issue #73: Changing "4" to "maven" in the command.
+- Issue #74: Bruno suggests calling the script directly.
+- Issue #75: Bruno suggests getting rid of the experimental_docker_compose_files directory.
+- Planning to work on presentation slides after resolving these issues.
+- Identified a mistake related to a job called "simple-java-maven-app."
+- The mistake was caused by accidentally pushing the prebuild job without checking.
+
+**9:39 AM**
+
+- Continuing work.
+- Spent approximately 1.5 hours working until 13:30.
+- Attended a weekly meeting (approximately 45 minutes).
+- Took a nap.
+
+**17:40 PM**
+
+- Resuming work after the break.
+- Cleared remaining small issues in the Maven Milestone 01.
+- Reviewed presentation slides and identified content to eliminate.
+- Decided to remove endpoints in the "What's the problem?" part, steps in the "How are we solving this?" part, and add a Windows section in the "What's next?" part.
+- Realized the need to add more tutorials.
+
+**12:00++ PM**
+
+- done with the small issues in the maven milestone
+- Planned to implement changes in the slides.
+- Will ask mentors for feedback tomorrow after creating the recorded presentation
+
+
+
 ### Date: 29/06/2023 THURSDAY
 
 **Start Time:** 6:42  
