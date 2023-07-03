@@ -5,10 +5,10 @@ set -exo pipefail
 TUTORIAL=$1
 
 # Assign values 1-4 to variables VAR1-VAR4 can be changed in future to maven, nodejs, python
-VAR1=1
-VAR2=2
-VAR3=3
-VAR4=4
+VAR1=old
+VAR2=manual
+VAR3=new
+VAR4=maven
 
 # Assign file paths to variables VAR0-VAR3L
 VARDL="."

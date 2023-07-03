@@ -7,10 +7,10 @@ if [ ! -f ./.tutorials_running.txt ]; then
     exit 1
 fi
 # These could be changed in future with maven, nodejs and python
-VAR1=1
-VAR2=2
-VAR3=3
-VAR4=4
+VAR1=old
+VAR2=manual
+VAR3=new
+VAR4=maven
 
 # Assign file paths to variables VAR1-VAR3L and VARDL for defauld location
 VARDL="."
