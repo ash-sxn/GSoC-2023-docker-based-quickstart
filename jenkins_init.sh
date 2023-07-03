@@ -104,7 +104,7 @@ check_docker_compose() {
 generate_ssh_keys() {
   local tutorial_path=$1
   echo "generating new ssh keys"
-  bash $tutorial_path/keygen.sh $tutorial_path
+   ./$tutorial_path/keygen.sh $tutorial_path
 }
 # Function to start a tutorial based on the provided path
 start_tutorial() {
