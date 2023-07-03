@@ -12,10 +12,10 @@ VAR4=maven
 
 # Assign file paths to variables VAR0-VAR3L
 VARDL="."
-VAR1L="./experimental_docker_compose_files/00_old_one_from_proposal"
-VAR2L="./experimental_docker_compose_files/01_simple_controller_plus_agent"
-VAR3L="./experimental_docker_compose_files/02_custom_docker_file_connecting_agent_and_controller"
-VAR4L="./experimental_docker_compose_files/03_maven_tutorial"
+VAR1L="./00_old_one_from_proposal"
+VAR2L="./01_simple_controller_plus_agent"
+VAR3L="./02_custom_docker_file_connecting_agent_and_controller"
+VAR4L="./03_maven_tutorial"
 DOCKER_COMPOSE="docker compose"
 
 # Function to check if running in Gitpod and modify jenkins.yaml if needed
