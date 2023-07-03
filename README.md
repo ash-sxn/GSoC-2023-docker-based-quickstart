@@ -29,10 +29,10 @@ It can be found [here](https://chrome.google.com/webstore/detail/gitpod-online-i
       * 03_maven_tutorial (Not ready yet)
 * to run the different examples add these arguments to the ./jenkins_init.sh command
 
-    * `1` - 00_old_one_from_proposal => `./jenkins_init.sh 1`
-    * `2` - 01_simple_controller_plus_agent => `./jenkins_init.sh 2`
-    * `3` - 02_custom_docker_file_connecting_agent_and_controller => `./jenkins_init.sh 3`
-    * `4` - 03_maven_tutorial (doesn't work right now, still in devlopment ) => `./jenkins_init.sh 4`
+    * `old` - 00_old_one_from_proposal => `./jenkins_init.sh old`
+    * `manual` - 01_simple_controller_plus_agent => `./jenkins_init.sh manual`
+    * `new` - 02_custom_docker_file_connecting_agent_and_controller => `./jenkins_init.sh new`
+    * `maven` - 03_maven_tutorial (doesn't work right now, still in devlopment ) => `./jenkins_init.sh maven`
 * If no argument is used i.e. `./jenkins_init.sh`, It runs the latest example present in the root directory docker-compose file
 
 ### How to Verify Jenkins installation
