@@ -30,6 +30,8 @@ stop_tutorial() {
     docker compose -f "$tutorial_path/docker-compose.yaml" down --volumes
   fi
   head -n -1 .tutorials_running.txt > temp.txt ; mv temp.txt .tutorials_running.txt
+
+  git restore "$tutorial_path/docker-compose.yaml"
 }
 
 # Loop through the running tutorials and stop them

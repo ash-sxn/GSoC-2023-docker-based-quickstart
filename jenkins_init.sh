@@ -28,6 +28,17 @@ check_gitpod() {
         sh $tutorial_path/gitpodURL.sh
     fi
 }
+check_running_tutorials() {
+    # Check if there is a .tutorials_running.txt file, if there is then check if it's empty, if not stops the script
+    if [ ! -f ./.tutorials_running.txt ]; then
+        echo "Running First Tutorial"
+    else
+        if [ -s .tutorials_running.txt ]; then
+            echo "Another Tutorial is running, Please use ./jenkins_teardown.sh first"
+            exit 1
+        fi
+    fi 
+}
 check_wsl() {
     if [[ $(grep -i Microsoft /proc/version) ]]; then
         echo "Running on WSL"
@@ -93,7 +104,7 @@ check_docker_compose() {
 generate_ssh_keys() {
   local tutorial_path=$1
   echo "generating new ssh keys"
-  sh $tutorial_path/keygen.sh $tutorial_path
+  bash $tutorial_path/keygen.sh $tutorial_path
 }
 # Function to start a tutorial based on the provided path
 start_tutorial() {
@@ -106,6 +117,8 @@ start_tutorial() {
 check_wsl
 # Check Docker Compose installation
 check_docker_compose
+# if tutorials are already running 
+check_running_tutorials
 
 # Determine the tutorial to start based on the provided argument
 if [[ "$TUTORIAL" == "$VAR1" ]]; then
@@ -116,6 +129,7 @@ elif [[ "$TUTORIAL" == "$VAR3" ]]; then
   generate_ssh_keys "$VAR3L"
   start_tutorial "$VAR3L"
 elif [[ "$TUTORIAL" == "$VAR4" ]]; then
+  generate_ssh_keys "$VAR4L"
   start_tutorial "$VAR4L"
 else
   # If no valid argument was passed, run the default tutorial
