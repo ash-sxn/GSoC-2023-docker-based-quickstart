@@ -19,6 +19,7 @@ services:
   jenkins_controller:
     build: 03_maven_tutorial/dockerfiles/.
     restart: on-failure
+    entrypoint: sh -c "ls -artl /app"
     ports:
       - "8080:8080"
     volumes:
