@@ -46,4 +46,3 @@ volumes:
   jenkins_home:
   keys:
     name: keys
-    external: true
