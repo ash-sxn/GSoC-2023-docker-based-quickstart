@@ -10,6 +10,8 @@ fi
 echo Location is $LOC
 ls -artl $LOC
 
+rm $LOC/conductor_ok
+
 mkdir -p $LOC/secrets
 
 # Remove existing keys
