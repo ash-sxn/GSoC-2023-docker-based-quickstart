@@ -4,14 +4,11 @@ services:
     build: .
     stdin_open: true
     tty: true
-    entrypoint: sh -c "/usr/local/bin/keygen.sh /app"
+    entrypoint: sh -c "/usr/local/bin/keygen.sh /ssh-dir"
     volumes:
-#      - ./secrets:/app/secrets
-#      - jenkins_home:/var/jenkins_home
-      - keys:/app
-#      - ./secrets:/app/secrets
+      - agent-ssh-dir:/ssh-dir
     healthcheck:
-      test: [ "CMD-SHELL", "[ -f /app/secrets/conductor_ok ] || exit 1" ]
+      test: [ "CMD-SHELL", "[ -f /ssh-dir/conductor_ok ] || exit 1" ]
       interval: 5s
       timeout: 10s
       retries: 5
@@ -23,12 +20,12 @@ services:
       - "8080:8080"
     volumes:
       - jenkins_home:/var/jenkins_home
-      - keys:/app
+      - agent-ssh-dir:/app
     depends_on:
       sidekick_service:
         condition: service_completed_successfully
     healthcheck:
-      test: [ "CMD-SHELL", "[ -f /app/secrets/conductor_ok ] || exit 1" ]
+      test: [ "CMD-SHELL", "[ -f /app/conductor_ok ] || exit 1" ]
       interval: 5s
       timeout: 10s
       retries: 5
@@ -40,15 +37,14 @@ services:
       sidekick_service:
         condition: service_completed_successfully
     healthcheck:
-      test: [ "CMD-SHELL", "cp -vraxu /app/secrets/jenkins_agent_ed.pub /home/jenkins/.ssh/authorized_keys" ]
+      test: [ "CMD-SHELL", "[ -f /home/jenkins/.ssh/authorized_keys ] || exit 1" ]
       interval: 5s
       timeout: 10s
       retries: 5
     volumes:
-      - keys:/app
-#      - /app/secrets/jenkins_agent_ed.pub:/home/jenkins/.ssh/authorized_keys
+      - agent-ssh-dir:/home/jenkins/.ssh:ro
 
 volumes:
   jenkins_home:
-  keys:
-    name: keys
+  agent-ssh-dir:
+    name: agent-ssh-dir

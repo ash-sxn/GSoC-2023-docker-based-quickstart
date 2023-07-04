@@ -18,8 +18,10 @@ RUN curl -sS -L -O --output-dir /tmp/ --create-dirs  https://archive.apache.org/
     && echo "export JAVA_HOME=$JAVA_HOME \n \
              export M2_HOME=/opt/maven \n \
              export PATH=${M2_HOME}/bin:${PATH}" > /etc/profile.d/maven.sh
+
 ENV M2_HOME="/opt/maven"
 ENV PATH="${M2_HOME}/bin/:${PATH}"
+
 RUN echo "PATH=${PATH}" >> /etc/environment
 
 RUN chown -R jenkins:jenkins "${JENKINS_AGENT_HOME}"

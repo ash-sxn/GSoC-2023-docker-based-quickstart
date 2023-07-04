@@ -16,7 +16,7 @@ RUN apt update && apt install -y --no-install-recommends \
     wget \
     && rm -rf /var/lib/apt/lists/*
 
-RUN /usr/local/bin/keygen.sh /app
+RUN /usr/local/bin/keygen.sh /ssh-dir
 
 # FROM debian:bookworm AS export-stage
 # COPY --from=prepare-stage /app /app
@@ -26,4 +26,4 @@ RUN /usr/local/bin/keygen.sh /app
 
 # Specify the command to run when the container starts
 # CMD ["sh", "-c", "echo 'Export stage is ready'; tail -f /dev/null"]
-CMD ["sh", "-c", "echo 'Export stage is ready'; ls -l /app/"]
+CMD ["sh", "-c", "echo 'Export stage is ready'; ls -l /ssh-dir/"]
