@@ -26,6 +26,7 @@ pubkey=$(cat $LOC/jenkins_agent_ed.pub)
 
 echo The public key is $pubkey
 
+# Update the authorized_keys file with the public key
 echo "$pubkey" > $LOC/authorized_keys && chown 1000:1000 $LOC/authorized_keys
 
 # This file will be used by other containers to know we went up to the end of the key generation

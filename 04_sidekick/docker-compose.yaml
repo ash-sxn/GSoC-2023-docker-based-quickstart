@@ -4,11 +4,11 @@ services:
     build: .
     stdin_open: true
     tty: true
-    entrypoint: sh -c "/usr/local/bin/keygen.sh /ssh-dir"
+    entrypoint: sh -c "/usr/local/bin/keygen.sh /ssh-dir"  # Runs the keygen.sh script and specifies the output directory
     volumes:
-      - agent-ssh-dir:/ssh-dir
+      - agent-ssh-dir:/ssh-dir  # Mounts the agent-ssh-dir volume to the /ssh-dir path inside the container
     healthcheck:
-      test: [ "CMD-SHELL", "[ -f /ssh-dir/conductor_ok ] || exit 1" ]
+      test: [ "CMD-SHELL", "[ -f /ssh-dir/conductor_ok ] || exit 1" ]  # Checks if the conductor_ok file exists in the /ssh-dir path
       interval: 5s
       timeout: 10s
       retries: 5
@@ -19,13 +19,13 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - jenkins_home:/var/jenkins_home
-      - agent-ssh-dir:/app
+      - jenkins_home:/var/jenkins_home  # Mounts the jenkins_home volume to the /var/jenkins_home path inside the container
+      - agent-ssh-dir:/app  # Mounts the agent-ssh-dir volume to the /app path inside the container
     depends_on:
       sidekick_service:
-        condition: service_completed_successfully
+        condition: service_completed_successfully  # Depends on the successful completion of the sidekick_service
     healthcheck:
-      test: [ "CMD-SHELL", "[ -f /app/conductor_ok ] || exit 1" ]
+      test: [ "CMD-SHELL", "[ -f /app/conductor_ok ] || exit 1" ]  # Checks if the conductor_ok file exists in the /app path
       interval: 5s
       timeout: 10s
       retries: 5
@@ -35,16 +35,16 @@ services:
     container_name: desktop-jenkins_agent-1
     depends_on:
       sidekick_service:
-        condition: service_completed_successfully
+        condition: service_completed_successfully  # Depends on the successful completion of the sidekick_service
     healthcheck:
-      test: [ "CMD-SHELL", "[ -f /home/jenkins/.ssh/authorized_keys ] || exit 1" ]
+      test: [ "CMD-SHELL", "[ -f /home/jenkins/.ssh/authorized_keys ] || exit 1" ]  # Checks if the authorized_keys file exists in the /home/jenkins/.ssh path
       interval: 5s
       timeout: 10s
       retries: 5
     volumes:
-      - agent-ssh-dir:/home/jenkins/.ssh:ro
+      - agent-ssh-dir:/home/jenkins/.ssh:ro  # Mounts the agent-ssh-dir volume to the /home/jenkins/.ssh path inside the container as read-only
 
 volumes:
   jenkins_home:
   agent-ssh-dir:
-    name: agent-ssh-dir
+    name: agent-ssh-dir  # Creates a named volume called agent-ssh-dir
