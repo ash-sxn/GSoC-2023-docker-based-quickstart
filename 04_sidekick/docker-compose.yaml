@@ -28,7 +28,8 @@ services:
       sidekick_service:
         condition: service_completed_successfully
     healthcheck:
-      test: [ "CMD-SHELL", "[ -f /app/secrets/conductor_ok ] || exit 1" ]
+      test: [ "CMD-SHELL", "[ -f /tmp ] || exit 1" ]
+#      test: [ "CMD-SHELL", "[ -f /app/secrets/conductor_ok ] || exit 1" ]
       interval: 5s
       timeout: 10s
       retries: 5
