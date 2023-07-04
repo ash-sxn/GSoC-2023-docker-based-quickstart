@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set the path to the configuration file
-config_file="/workspace/GSoC-2023-docker-based-quickstart/experimental_docker_compose_files/02_custom_docker_file_connecting_agent_and_controller/dockerfiles/jenkins.yaml"
+config_file="/workspace/GSoC-2023-docker-based-quickstart/03_maven_tutorial/dockerfiles/jenkins.yaml"
 
 # Extract the hostname from the GITPOD_WORKSPACE_URL variable
 service_url=$(echo $GITPOD_WORKSPACE_URL | awk -F/ '{print $3}')
