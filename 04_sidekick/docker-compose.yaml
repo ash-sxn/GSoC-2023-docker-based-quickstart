@@ -4,7 +4,7 @@ services:
     build: .
     stdin_open: true
     tty: true
-    entrypoint: sh -c "/usr/local/bin/keygen.sh /app && tail -f /dev/null"
+    entrypoint: sh -c "/usr/local/bin/keygen.sh /app"
     volumes:
 #      - ./secrets:/app/secrets
 #      - jenkins_home:/var/jenkins_home
