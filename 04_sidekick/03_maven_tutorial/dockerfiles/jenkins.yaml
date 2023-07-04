@@ -29,7 +29,7 @@ credentials:
           description: "private ssh key for jenkins agent "
           privateKeySource:
             directEntry:
-              privateKey: ${readFile:/app/jenkins_agent_ed}
+              privateKey: ${readFile:/ssh-dir/jenkins_agent_ed}
           scope: SYSTEM
           username: "jenkins"
 unclassified:
