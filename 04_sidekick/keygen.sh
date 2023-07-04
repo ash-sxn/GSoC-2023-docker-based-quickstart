@@ -19,7 +19,7 @@ rm -fr $LOC/secrets/jenkins_agent_ed $LOC/secrets/jenkins_agent_ed.pub
 ssh-keygen -t ed25519 -f $LOC/secrets/jenkins_agent_ed -N ""
 
 # Set appropriate permissions for private key
-chmod 400 $LOC/secrets/jenkins_agent_ed
+chmod 444 $LOC/secrets/jenkins_agent_ed
 
 # Extract public key
 pubkey=$(cat $LOC/secrets/jenkins_agent_ed.pub)
