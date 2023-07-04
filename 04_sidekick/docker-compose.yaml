@@ -39,8 +39,12 @@ services:
     depends_on:
       sidekick_service:
         condition: service_completed_successfully
-    environment:
-      - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG9LRiCPGPZENqoUWN63yl3SyLTRaws3vJ7Ttdn32ubh jh@jh-Modern-14-B5M
+    volumes:
+      - keys:/app
+    env_file:
+        - app/secrets/jenkins_agent_ed.env
+#    environment:
+#      - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG9LRiCPGPZENqoUWN63yl3SyLTRaws3vJ7Ttdn32ubh jh@jh-Modern-14-B5M
 
 volumes:
   jenkins_home:

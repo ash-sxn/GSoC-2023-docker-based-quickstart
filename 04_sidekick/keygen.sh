@@ -24,6 +24,11 @@ chmod 444 $LOC/secrets/jenkins_agent_ed
 # Extract public key
 pubkey=$(cat $LOC/secrets/jenkins_agent_ed.pub)
 
+echo The public key is $pubkey
+
+# Creates the environment file that will be used by the Jenkins ssh agent
+echo "JENKINS_AGENT_SSH_PUBKEY=$pubkey" > app/secrets/jenkins_agent_ed.env
+
 # This file will be used by other containers to know we went up to the end of the key generation
 echo "OK" > $LOC/secrets/conductor_ok
 
