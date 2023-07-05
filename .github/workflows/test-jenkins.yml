@@ -17,7 +17,7 @@ jobs:
         uses: isbang/compose-action@v1.4.1
         with:
           compose-file: "./04_sidekick/docker-compose.yaml"
-          up-flags: "--build --remove-orphans --force-recreate -d"
+#          up-flags: "--build --remove-orphans --force-recreate -d"
 
 
       - name: Wait for services to be ready
