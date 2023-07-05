@@ -60,7 +60,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ./00_old_one_from_proposal
-          platforms: linux/amd64, linux/aarch64, linux/ppc64le, linux/s390x, linux/arm/v7
+          platforms: linux/amd64, linux/aarch64, linux/ppc64le, linux/s390x
           push: true
           tags: gounthar/jenkinsci-tutorials:bundled_instance_${{ steps.extract_branch.outputs.branch }}
       -
@@ -68,7 +68,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ./02_custom_docker_file_connecting_agent_and_controller/dockerfiles/Dockerfile
-          platforms: linux/amd64, linux/aarch64, linux/ppc64le, linux/s390x, linux/arm/v7
+          platforms: linux/amd64, linux/aarch64, linux/ppc64le, linux/s390x
           push: true
           tags: gounthar/jenkinsci-tutorials:simple_controller_${{ steps.extract_branch.outputs.branch }}
       -
@@ -76,7 +76,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ./03_maven_tutorial/dockerfiles/Dockerfile
-          platforms: linux/amd64, linux/aarch64, linux/ppc64le, linux/s390x, linux/arm/v7
+          platforms: linux/amd64, linux/aarch64, linux/ppc64le, linux/s390x
           push: true
           tags: gounthar/jenkinsci-tutorials:maven_controller_${{ steps.extract_branch.outputs.branch }}
       -
@@ -84,7 +84,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ./03_maven_tutorial/dockerfiles/agent/Dockerfile
-          platforms: linux/amd64, linux/aarch64, linux/ppc64le, linux/s390x, linux/arm/v7
+          platforms: linux/amd64, linux/aarch64, linux/ppc64le, linux/s390x
           push: true
           tags: gounthar/jenkinsci-tutorials:maven_agent_${{ steps.extract_branch.outputs.branch }}
 
