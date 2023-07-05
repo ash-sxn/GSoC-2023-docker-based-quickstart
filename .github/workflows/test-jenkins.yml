@@ -19,9 +19,12 @@ jobs:
 
       - name: Wait for services to be ready
         run: |
-          # Add a script here to wait for your services to be ready
-          # For example, you can use the `curl` command to check if the services are up and running
-          sleep 60 && curl http://localhost:8080  # Adjust the URL based on your specific test case
+          # The timeout command is used to set a maximum execution time of 60 seconds. The loop inside the bash -c
+          # command checks if the curl request succeeds (i.e., returns a non-empty response) using the exit code.
+          # If it fails, it sleeps for 1 second and repeats the curl request until it succeeds or the timeout is reached.
+          # If the curl request is successful within the timeout, the "Jenkins is running" message is displayed.
+          # Otherwise, if the timeout is reached, the script exits with an exit code of 1.
+          timeout 60 bash -c 'until curl -s http://localhost:8080 > /dev/null; do sleep 1; done' && echo "Jenkins is running" || exit 1
       - name: Run curl command to test the stack
         run: |
           curl http://localhost:8080  # Adjust the URL based on your specific test case
