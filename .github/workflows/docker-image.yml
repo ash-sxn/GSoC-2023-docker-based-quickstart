@@ -67,7 +67,7 @@ jobs:
         name: Build and push a simple jenkins controller
         uses: docker/build-push-action@v4
         with:
-          context: ./02_custom_docker_file_connecting_agent_and_controller/dockerfiles/Dockerfile
+          context: ./02_custom_docker_file_connecting_agent_and_controller/dockerfiles
           platforms: linux/amd64, linux/aarch64
           push: true
           tags: gounthar/jenkinsci-tutorials:simple_controller_${{ steps.extract_branch.outputs.branch }}
@@ -75,7 +75,7 @@ jobs:
         name: Build and push the jenkins controller for maven tutorial
         uses: docker/build-push-action@v4
         with:
-          context: ./03_maven_tutorial/dockerfiles/Dockerfile
+          context: ./03_maven_tutorial/dockerfiles
           platforms: linux/amd64, linux/aarch64
           push: true
           tags: gounthar/jenkinsci-tutorials:maven_controller_${{ steps.extract_branch.outputs.branch }}
@@ -83,7 +83,7 @@ jobs:
         name: Build and push the jenkins agent for maven tutorial
         uses: docker/build-push-action@v4
         with:
-          context: ./03_maven_tutorial/dockerfiles/agent/Dockerfile
+          context: ./03_maven_tutorial/dockerfiles/agent
           platforms: linux/amd64, linux/aarch64
           push: true
           tags: gounthar/jenkinsci-tutorials:maven_agent_${{ steps.extract_branch.outputs.branch }}
