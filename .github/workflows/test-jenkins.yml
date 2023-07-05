@@ -1,0 +1,34 @@
+name: Docker Compose Test
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Compose
+        uses: docker/setup-docker-compose@v1
+
+      - name: Build and start Docker Compose services
+        run: |
+          cd 04_sidekick && docker compose up --build --remove-orphans --force-recreate -d
+
+      - name: Wait for services to be ready
+        run: |
+          # Add a script here to wait for your services to be ready
+          # For example, you can use the `curl` command to check if the services are up and running
+          curl http://localhost:8080  # Adjust the URL based on your specific test case
+      - name: Run curl command to test the stack
+        run: |
+          curl http://localhost:8080  # Adjust the URL based on your specific test case
+
+      - name: Stop and remove Docker Compose services
+        run: |
+          docker-compose down -v
