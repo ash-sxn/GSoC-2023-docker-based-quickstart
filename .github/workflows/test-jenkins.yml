@@ -11,14 +11,15 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Set up Docker Compose
-        uses: docker/setup-docker-compose@v1
+      - name: Set up and start Docker Compose
+        uses: isbang/compose-action@v1.4.1
+        with:
+          compose-file: "./04_sidekick/docker-compose.yml"
+          down-flags: "--volumes"
+          up-flags: "--build --remove-orphans --force-recreate -d"
 
-      - name: Build and start Docker Compose services
-        run: |
-          cd 04_sidekick && docker compose up --build --remove-orphans --force-recreate -d
 
       - name: Wait for services to be ready
         run: |
@@ -30,5 +31,7 @@ jobs:
           curl http://localhost:8080  # Adjust the URL based on your specific test case
 
       - name: Stop and remove Docker Compose services
-        run: |
-          docker-compose down -v
+        uses: isbang/compose-action@v1.4.1
+        with:
+          compose-file: "./04_sidekick/docker-compose.yml"
+          down-flags: "--volumes"
