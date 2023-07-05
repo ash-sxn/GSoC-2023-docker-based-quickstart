@@ -21,10 +21,10 @@ jobs:
         run: |
           # Add a script here to wait for your services to be ready
           # For example, you can use the `curl` command to check if the services are up and running
-          curl http://localhost:8080  # Adjust the URL based on your specific test case
+          sleep 60 && curl http://localhost:8080  # Adjust the URL based on your specific test case
       - name: Run curl command to test the stack
         run: |
-          sleep 30 && curl http://localhost:8080  # Adjust the URL based on your specific test case
+          curl http://localhost:8080  # Adjust the URL based on your specific test case
 
       - name: Stop and remove Docker Compose services
         run: cd ./04_sidekick && docker compose down --volumes
