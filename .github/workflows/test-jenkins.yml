@@ -16,7 +16,7 @@ jobs:
       - name: Set up and start Docker Compose
         uses: isbang/compose-action@v1.4.1
         with:
-          compose-file: "./04_sidekick/docker-compose.yml"
+          compose-file: "./04_sidekick/docker-compose.yaml"
           down-flags: "--volumes"
           up-flags: "--build --remove-orphans --force-recreate -d"
 
