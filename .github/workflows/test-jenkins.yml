@@ -28,13 +28,13 @@ jobs:
 
       - name: Wait for services to be ready
         run: |     
-          # After the curl request, the output is piped to grep to search for the presence of the specific message:
-          # "Please wait while Jenkins is getting ready to work". The -q option is used with grep to suppress any output.
-          # The loop continues until this message is found in the response or the timeout of 60 seconds is reached.
-          # If the message is no longer present within the timeout, the loop exits, and the "Jenkins is running"
-          # message is displayed. Otherwise, if the timeout is reached and the message is still present, the script
-          # exits with an exit code of 1.
-          timeout 60 bash -c 'until curl -s http://localhost:8080 | grep -q "Please wait while Jenkins is getting ready to work"; do sleep 5; done' && echo "Jenkins is running" || exit 1
+          # After the curl request, the output is piped to the awk command. It is used to search for the message
+          # "Please wait while Jenkins is getting ready to work" in the curl output.
+          # If the message is found, awk exits with a non-zero status (1), and the loop continues.
+          # If the message is not found, the loop exits, and the "Jenkins is running" message is displayed.
+          timeout 60 bash -c 'until curl -s http://localhost:8080 | awk "/Please wait while Jenkins is getting ready to work/{print \"Jenkins is initializing\"; exit 1}"; do sleep 5; done' && echo "Jenkins is running" || exit 1
+
+
 
       - name: Run curl command to test the stack
         run: |
