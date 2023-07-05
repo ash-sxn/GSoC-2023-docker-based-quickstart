@@ -1,4 +1,51 @@
 # Daily Update
+### Date: 04/07/2023 TUESDAY
+
+**Start Time:** 8:01   
+**End Time:** 12:00++  
+**Hours Worked:** 6h+
+
+**8:01-10:18**
+
+- Received a message from bervinato regarding a draft PR #76 about keygen on Windows with PowerShell.
+- Not familiar with PowerShell at the moment, so it's not a priority.
+- Milestones 0 and 1 are complete.
+- Plan for the day: Edit slides to reduce content and record a presentation.
+- Watched videos on successfully presenting online.
+- Created and updated slides.
+- Practicing and rehearsing the presentation.
+
+**12:45-13:28**
+
+- Started recording.
+- Encountered difficulties with transitions, stuttering, and stopping while talking.
+- Lighting in the space is not optimal.
+- Decided to record sections separately for better control over the content and timing.
+- Introspecting on what needs improvement.
+
+**17:40**
+
+- Reviewed and made improvements to the recorded presentation.
+- Specified timing for each part of the presentation.
+- Planned the content for each section.
+
+**19:52 PM**
+- Discovered a simple-java-maven-app job still present in the Maven folder.
+- Plan to created a new PR to address the issue.
+
+**20:24 PM**
+
+- Created a PR for the issue related to the simple-java-maven-app job.
+- Working on the content for the second section.
+
+**23:42 PM**
+
+- Encountered an error while building the image for the dry run demo.
+- Created a PR to update the `.gitpod.yml` file for the Gitpod issue.
+- Planning to complete the recording and questions today.
+
+
+
 
 ### Date: 03/07/2023 MONDAY
 
