@@ -24,7 +24,7 @@ jobs:
           curl http://localhost:8080  # Adjust the URL based on your specific test case
       - name: Run curl command to test the stack
         run: |
-          curl http://localhost:8080  # Adjust the URL based on your specific test case
+          sleep 30 && curl http://localhost:8080  # Adjust the URL based on your specific test case
 
       - name: Stop and remove Docker Compose services
-        run: cd ./04_sidekick && docker compose down --volumes 
+        run: cd ./04_sidekick && docker compose down --volumes
