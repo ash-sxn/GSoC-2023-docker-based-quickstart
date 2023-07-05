@@ -17,14 +17,25 @@ jobs:
         run:
           cd ./04_sidekick && docker compose up --build --remove-orphans --force-recreate -d
 
-      - name: Wait for services to be ready
+      - name: Wait for services to start
         run: |
           # The timeout command is used to set a maximum execution time of 60 seconds. The loop inside the bash -c
           # command checks if the curl request succeeds (i.e., returns a non-empty response) using the exit code.
           # If it fails, it sleeps for 1 second and repeats the curl request until it succeeds or the timeout is reached.
-          # If the curl request is successful within the timeout, the "Jenkins is running" message is displayed.
+          # If the curl request is successful within the timeout, the "Jenkins has started" message is displayed.
           # Otherwise, if the timeout is reached, the script exits with an exit code of 1.
-          timeout 60 bash -c 'until curl -s http://localhost:8080 > /dev/null; do sleep 1; done' && echo "Jenkins is running" || exit 1
+          timeout 60 bash -c 'until curl -s http://localhost:8080 > /dev/null; do sleep 1; done' && echo "Jenkins has started" || exit 1
+
+      - name: Wait for services to be ready
+        run: |     
+          # After the curl request, the output is piped to grep to search for the presence of the specific message:
+          # "Please wait while Jenkins is getting ready to work". The -q option is used with grep to suppress any output.
+          # The loop continues until this message is found in the response or the timeout of 60 seconds is reached.
+          # If the message is no longer present within the timeout, the loop exits, and the "Jenkins is running"
+          # message is displayed. Otherwise, if the timeout is reached and the message is still present, the script
+          # exits with an exit code of 1.
+          timeout 60 bash -c 'until curl -s http://localhost:8080 | grep -q "Please wait while Jenkins is getting ready to work"; do sleep 5; done' && echo "Jenkins is running" || exit 1
+
       - name: Run curl command to test the stack
         run: |
           curl http://localhost:8080  # Adjust the URL based on your specific test case
