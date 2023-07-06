@@ -49,7 +49,7 @@ jobs:
           echo "TOKEN was found."
           # Let's launch a job. The token has been generated in the Jenkins UI (admin, settings, and so on)
           echo "Launching a job"
-          JOB_NAME="(simple) demo job"
+          JOB_NAME="%28simple%29%20demo%20job"
           # Will have to switch to "simple-java-maven-app" later on.
           # For the time being, it does not work as we haven't yet customizad the config.xml file with the end user's GitHub handle.
           # Wait for the job to start running
