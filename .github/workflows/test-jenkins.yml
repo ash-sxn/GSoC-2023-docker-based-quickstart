@@ -38,7 +38,19 @@ jobs:
 
       - name: Run curl command to test the stack
         run: |
-          curl http://localhost:8080  # Adjust the URL based on your specific test case
+          # To check the version of Jenkins, load the top page or any .../api/* page and check for the X-Jenkins response header. This contains the version number of Jenkins, like "1.404" This is also a good way to check if an URL is a Jenkins URL.
+          curl -s -I -k http://admin:butler@localhost:8080 | grep -i '^X-Jenkins:' | awk '{print $2}'
+          # Before laucnhing a job, we need to create a token for the admin user
+          CRUMB=$(curl -s -k http://admin:admin@localhost:8080/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\) -c cookies.txt)
+          TOKEN=curl -s -k 'http://admin:admin@localhost:8080/user/admin/descriptorByName/jenkins.security.ApiTokenProperty/generateNewToken' --data 'newTokenName=kb-token' -b cookies.txt -H $CRUMB | jq -r '.data.tokenValue'
+          # Let's launch a job. The token has been generated in the Jenkins UI (admin, settings, and so on)
+          curl -k -X POST http://admin:$TOKEN@localhost:8080/job/simple-java-maven-app/build
 
-      - name: Stop and remove Docker Compose services
+
+
+The api token we create is store as a hash in ./users/admin_2687221721757885282/config.xml
+I don't think we could create one through the API, and we can't use the API to get it either.
+We can just create it in the UI, save it, try to copy/paste its hashed value into the resulting container, and then use its non hashed value.
+
+- name: Stop and remove Docker Compose services
         run: cd ./04_sidekick && docker compose down --volumes
