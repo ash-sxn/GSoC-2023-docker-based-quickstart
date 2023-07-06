@@ -55,7 +55,7 @@ jobs:
           echo "Waiting for the job to start running..."
           BUILD_NUMBER=""
           while [[ -z $BUILD_NUMBER ]]; do
-            BUILD_INFO=$(curl -s -k http://localhost:8080/job/$JOB_NAME_ENCODED/api/json)
+            BUILD_INFO=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME_ENCODED/api/json)
             echo "Retrieved build info: $BUILD_INFO"
             BUILD_NUMBER=$(echo $BUILD_INFO | jq -r '.lastBuild.number')
             BUILD_IN_PROGRESS=$(echo $BUILD_INFO | jq -r '.lastBuild.building')
@@ -66,6 +66,36 @@ jobs:
             fi
             sleep 5  # Adjust the sleep duration as needed
           done
+  
+          # Delay before retrieving build information
+          sleep 5
+  
+          if [[ -z $BUILD_NUMBER ]]; then
+            echo "Job has never run"
+          else
+            echo "Job started. Build number: $BUILD_NUMBER"
+            # Wait for the job to complete
+            echo "Waiting for the job to complete..."
+            while true; do
+              BUILD_STATUS=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.result')
+              BUILD_IN_PROGRESS=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.building')
+              echo "Build status: $BUILD_STATUS"
+              echo "Build in progress: $BUILD_IN_PROGRESS"
+  
+              if [[ $BUILD_STATUS != "null" ]]; then
+                break
+              fi
+  
+              sleep 5  # Adjust the sleep duration as needed
+            done
+
+            if [[ $BUILD_STATUS == "SUCCESS" ]]; then
+              echo "Job succeeded"
+            else
+              echo "Job failed"
+            fi
+          fi
+  
 
           if [[ -z $BUILD_NUMBER ]]; then
             echo "Job has never run"
