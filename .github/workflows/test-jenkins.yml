@@ -46,11 +46,5 @@ jobs:
           # Let's launch a job. The token has been generated in the Jenkins UI (admin, settings, and so on)
           curl -k -X POST http://admin:$TOKEN@localhost:8080/job/simple-java-maven-app/build
 
-
-
-The api token we create is store as a hash in ./users/admin_2687221721757885282/config.xml
-I don't think we could create one through the API, and we can't use the API to get it either.
-We can just create it in the UI, save it, try to copy/paste its hashed value into the resulting container, and then use its non hashed value.
-
-- name: Stop and remove Docker Compose services
+      - name: Stop and remove Docker Compose services
         run: cd ./04_sidekick && docker compose down --volumes
