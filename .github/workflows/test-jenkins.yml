@@ -44,12 +44,12 @@ jobs:
           # Before launching a job, we need to create a token for the admin user
           CRUMB=$(curl -s -k http://admin:admin@localhost:8080/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\) -c cookies.txt)
           echo "CRUMB was found."
-          TOKEN=curl -s -k 'http://admin:admin@localhost:8080/user/admin/descriptorByName/jenkins.security.ApiTokenProperty/generateNewToken' --data 'newTokenName=kb-token' -b cookies.txt -H $CRUMB | jq -r '.data.tokenValue'
+          TOKEN=$(curl -s -k 'http://admin:admin@localhost:8080/user/admin/descriptorByName/jenkins.security.ApiTokenProperty/generateNewToken' --data 'newTokenName=kb-token' -b cookies.txt -H $CRUMB | jq -r '.data.tokenValue')
           echo "TOKEN was found."
           # Let's launch a job. The token has been generated in the Jenkins UI (admin, settings, and so on)
           echo "Launching a job"
           curl -k -X POST http://admin:$TOKEN@localhost:8080/job/simple-java-maven-app/build
           echo "Job launched"
-          
+
       - name: Stop and remove Docker Compose services
         run: cd ./04_sidekick && docker compose down --volumes
