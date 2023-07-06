@@ -76,6 +76,8 @@ jobs:
             echo "Waiting for the job to complete..."
             BUILD_STATUS=""
             while [[ -z $BUILD_STATUS ]]; do
+              BUILD_INFO=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME/api/json)
+              echo "Retrieved build info: $BUILD_INFO"
               BUILD_STATUS=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME/$BUILD_NUMBER/api/json | jq -r '.result')
               BUILD_IN_PROGRESS=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME/$BUILD_NUMBER/api/json | jq -r '.building')
               echo "Build status: $BUILD_STATUS"
