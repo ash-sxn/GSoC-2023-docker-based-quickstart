@@ -40,7 +40,7 @@ jobs:
         run: |
           # To check the version of Jenkins, load the top page or any .../api/* page and check for the X-Jenkins response header. This contains the version number of Jenkins, like "1.404" This is also a good way to check if an URL is a Jenkins URL.
           curl -s -I -k http://admin:butler@localhost:8080 | grep -i '^X-Jenkins:' | awk '{print $2}'
-          # Before laucnhing a job, we need to create a token for the admin user
+          # Before launching a job, we need to create a token for the admin user
           CRUMB=$(curl -s -k http://admin:admin@localhost:8080/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\) -c cookies.txt)
           TOKEN=curl -s -k 'http://admin:admin@localhost:8080/user/admin/descriptorByName/jenkins.security.ApiTokenProperty/generateNewToken' --data 'newTokenName=kb-token' -b cookies.txt -H $CRUMB | jq -r '.data.tokenValue'
           # Let's launch a job. The token has been generated in the Jenkins UI (admin, settings, and so on)
