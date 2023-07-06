@@ -52,16 +52,22 @@ jobs:
           JOB_NAME="(simple) demo job"
           # Will have to switch to "simple-java-maven-app" later on.
           # For the time being, it does not work as we haven't yet customizad the config.xml file with the end user's GitHub handle.
+          # Wait for the job to start running
+          echo "Waiting for the job to start running..."
+          BUILD_NUMBER=""
           while [[ -z $BUILD_NUMBER ]]; do
             BUILD_INFO=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME/api/json)
+            echo "Retrieved build info: $BUILD_INFO"
             BUILD_NUMBER=$(echo $BUILD_INFO | jq -r '.lastBuild.number')
             BUILD_IN_PROGRESS=$(echo $BUILD_INFO | jq -r '.lastBuild.building')
+            echo "Build number: $BUILD_NUMBER"
+            echo "Build in progress: $BUILD_IN_PROGRESS"
             if [[ -n $BUILD_NUMBER && $BUILD_IN_PROGRESS == "true" ]]; then
               break
             fi
             sleep 5  # Adjust the sleep duration as needed
           done
-        
+  
           if [[ -z $BUILD_NUMBER ]]; then
             echo "Job has never run"
           else
@@ -72,12 +78,16 @@ jobs:
             while [[ -z $BUILD_STATUS ]]; do
               BUILD_STATUS=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME/$BUILD_NUMBER/api/json | jq -r '.result')
               BUILD_IN_PROGRESS=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME/$BUILD_NUMBER/api/json | jq -r '.building')
+              echo "Build status: $BUILD_STATUS"
+              echo "Build in progress: $BUILD_IN_PROGRESS"
+  
               if [[ $BUILD_STATUS != "null" ]]; then
                 break
               fi
+  
               sleep 5  # Adjust the sleep duration as needed
             done
-        
+  
             if [[ $BUILD_STATUS == "SUCCESS" ]]; then
               echo "Job succeeded"
             else
@@ -85,7 +95,3 @@ jobs:
             fi
           fi
 
-      - name: Stop and remove Docker Compose services
-        run: |
-          cd ./04_sidekick && docker compose down --volumes
-          echo "Docker Compose services stopped"
