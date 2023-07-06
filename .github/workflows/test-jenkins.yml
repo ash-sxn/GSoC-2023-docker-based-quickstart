@@ -39,12 +39,17 @@ jobs:
       - name: Run curl command to test the stack
         run: |
           # To check the version of Jenkins, load the top page or any .../api/* page and check for the X-Jenkins response header. This contains the version number of Jenkins, like "1.404" This is also a good way to check if an URL is a Jenkins URL.
-          curl -I -k http://admin:admin@localhost:8080 | grep -i '^X-Jenkins:' | awk '{print $2}'
+          JENKINS_VERSION=$(curl -s -I -k http://admin:admin@localhost:8080 | grep -i '^X-Jenkins:' | awk '{print $2}')
+          echo "Jenkins version is: $JENKINS_VERSION"
           # Before launching a job, we need to create a token for the admin user
           CRUMB=$(curl -s -k http://admin:admin@localhost:8080/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\) -c cookies.txt)
+          echo "CRUMB was found."
           TOKEN=curl -s -k 'http://admin:admin@localhost:8080/user/admin/descriptorByName/jenkins.security.ApiTokenProperty/generateNewToken' --data 'newTokenName=kb-token' -b cookies.txt -H $CRUMB | jq -r '.data.tokenValue'
+          echo "TOKEN was found."
           # Let's launch a job. The token has been generated in the Jenkins UI (admin, settings, and so on)
+          echo "Launching a job"
           curl -k -X POST http://admin:$TOKEN@localhost:8080/job/simple-java-maven-app/build
-
+          echo "Job launched"
+          
       - name: Stop and remove Docker Compose services
         run: cd ./04_sidekick && docker compose down --volumes
