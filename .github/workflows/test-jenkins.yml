@@ -14,8 +14,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up and start Docker Compose
-        run:
+        run: |
           cd ./04_sidekick && docker compose up --build --remove-orphans --force-recreate -d
+          echo "Docker Compose started"
 
       - name: Wait for services to start
         run: |
@@ -25,16 +26,16 @@ jobs:
           # If the curl request is successful within the timeout, the "Jenkins has started" message is displayed.
           # Otherwise, if the timeout is reached, the script exits with an exit code of 1.
           timeout 60 bash -c 'until curl -s http://localhost:8080 > /dev/null; do sleep 1; done' && echo "Jenkins has started" || exit 1
+          echo "Services have started"
 
       - name: Wait for services to be ready
-        run: |     
+        run: |
           # After the curl request, the output is piped to the awk command. It is used to search for the message
           # "Please wait while Jenkins is getting ready to work" in the curl output.
           # If the message is found, awk exits with a non-zero status (1), and the loop continues.
           # If the message is not found, the loop exits, and the "Jenkins is running" message is displayed.
           timeout 60 bash -c 'until curl -s http://localhost:8080 | awk "/Please wait while Jenkins is getting ready to work/{print \"Jenkins is initializing\"; exit 1}"; do sleep 5; done' && echo "Jenkins is running" || exit 1
-
-
+          echo "Jenkins is ready"
 
       - name: Run curl command to test the stack
         run: |
@@ -52,4 +53,6 @@ jobs:
           echo "Job launched"
 
       - name: Stop and remove Docker Compose services
-        run: cd ./04_sidekick && docker compose down --volumes
+        run: |
+          cd ./04_sidekick && docker compose down --volumes
+          echo "Docker Compose services stopped"
