@@ -49,10 +49,29 @@ jobs:
           echo "TOKEN was found."
           # Let's launch a job. The token has been generated in the Jenkins UI (admin, settings, and so on)
           echo "Launching a job"
-          curl -s -k -X POST http://admin:$TOKEN@localhost:8080/job/simple-java-maven-app/build
+          JOB_NAME="simple-java-maven-app"
+          curl -s -k -X POST http://admin:$TOKEN@localhost:8080/job/$JOB_NAME/build
           echo "Job launched"
+          # Wait for the job to complete
+          echo "Waiting for the job to complete..."
+          BUILD_NUMBER=""
+          while [[ -z $BUILD_NUMBER ]]; do
+            BUILD_NUMBER=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME/api/json | jq -r '.lastBuild.number')
+            echo "Haven't found the build number yet. Trying again in 5 seconds..."
+            sleep 5  # Adjust the sleep duration as needed
+          done
+          echo "Job completed. Build number: $BUILD_NUMBER"
+          # Check the status of the last build
+          echo "Checking the status of the build..."
+          BUILD_STATUS=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME/$BUILD_NUMBER/api/json | jq -r '.result')
+          if [[ $BUILD_STATUS == "SUCCESS" ]]; then
+            echo "Job succeeded"
+          else
+            echo "Job failed"
+          fi
 
-      - name: Stop and remove Docker Compose services
+
+- name: Stop and remove Docker Compose services
         run: |
           cd ./04_sidekick && docker compose down --volumes
           echo "Docker Compose services stopped"
