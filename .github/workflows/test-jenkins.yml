@@ -23,8 +23,6 @@ jobs:
           # The timeout command is used to set a maximum execution time of 60 seconds. The loop inside the bash -c
           # command checks if the curl request succeeds (i.e., returns a non-empty response) using the exit code.
           # If it fails, it sleeps for 1 second and repeats the curl request until it succeeds or the timeout is reached.
-          # If the curl request is successful within the timeout, the "Jenkins has started" message is displayed.
-          # Otherwise, if the timeout is reached, the script exits with an exit code of 1.
           timeout 60 bash -c 'until curl -s http://localhost:8080 > /dev/null; do sleep 1; done' && echo "Jenkins has started" || exit 1
           echo "Services have started"
 
@@ -51,9 +49,8 @@ jobs:
           echo "Launching a job"
           JOB_NAME="%28simple%29%20demo%20job"
           JOB_NAME_ENCODED=$(echo "$JOB_NAME" | awk '{ gsub(/ /, "%20"); gsub(/\(/, "%28"); gsub(/\)/, "%29"); print }')
-  
           # Will have to switch to "simple-java-maven-app" later on.
-          # For the time being, it does not work as we haven't yet customizad the config.xml file with the end user's GitHub handle.
+          # For the time being, it does not work as we haven't yet customized the config.xml file with the end user's GitHub handle.
           # Wait for the job to start running
           echo "Waiting for the job to start running..."
           BUILD_NUMBER=""
@@ -69,29 +66,26 @@ jobs:
             fi
             sleep 5  # Adjust the sleep duration as needed
           done
-  
+
           if [[ -z $BUILD_NUMBER ]]; then
             echo "Job has never run"
           else
             echo "Job started. Build number: $BUILD_NUMBER"
             # Wait for the job to complete
             echo "Waiting for the job to complete..."
-            BUILD_STATUS=""
-            while [[ -z $BUILD_STATUS ]]; do
-              BUILD_INFO=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME_ENCODED/api/json)
-              echo "Retrieved build info: $BUILD_INFO"
+            while true; do
               BUILD_STATUS=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.result')
               BUILD_IN_PROGRESS=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.building')
               echo "Build status: $BUILD_STATUS"
               echo "Build in progress: $BUILD_IN_PROGRESS"
-  
+
               if [[ $BUILD_STATUS != "null" ]]; then
                 break
               fi
-  
+
               sleep 5  # Adjust the sleep duration as needed
             done
-  
+
             if [[ $BUILD_STATUS == "SUCCESS" ]]; then
               echo "Job succeeded"
             else
