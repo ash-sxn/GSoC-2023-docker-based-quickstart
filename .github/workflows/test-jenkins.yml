@@ -52,26 +52,37 @@ jobs:
           JOB_NAME="(simple) demo job"
           # Will have to switch to "simple-java-maven-app" later on.
           # For the time being, it does not work as we haven't yet customizad the config.xml file with the end user's GitHub handle.
-          curl -s -k -X POST http://admin:$TOKEN@localhost:8080/job/$JOB_NAME/build
-          echo "Job launched"
-          # Wait for the job to complete
-          echo "Waiting for the job to complete..."
-          BUILD_NUMBER=""
           while [[ -z $BUILD_NUMBER ]]; do
-            ANSWER=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME/api/json | jq .)
-            echo "Jenkins answered: $ANSWER"
-            BUILD_NUMBER=$(echo $ANSWER | jq -r '.lastBuild.number')
-            echo "Haven't found the build number yet. Trying again in 5 seconds..."
+            BUILD_INFO=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME/api/json)
+            BUILD_NUMBER=$(echo $BUILD_INFO | jq -r '.lastBuild.number')
+            BUILD_IN_PROGRESS=$(echo $BUILD_INFO | jq -r '.lastBuild.building')
+            if [[ -n $BUILD_NUMBER && $BUILD_IN_PROGRESS == "true" ]]; then
+              break
+            fi
             sleep 5  # Adjust the sleep duration as needed
           done
-          echo "Job completed. Build number: $BUILD_NUMBER"
-          # Check the status of the last build
-          echo "Checking the status of the build..."
-          BUILD_STATUS=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME/$BUILD_NUMBER/api/json | jq -r '.result')
-          if [[ $BUILD_STATUS == "SUCCESS" ]]; then
-            echo "Job succeeded"
+        
+          if [[ -z $BUILD_NUMBER ]]; then
+            echo "Job has never run"
           else
-            echo "Job failed"
+            echo "Job started. Build number: $BUILD_NUMBER"
+            # Wait for the job to complete
+            echo "Waiting for the job to complete..."
+            BUILD_STATUS=""
+            while [[ -z $BUILD_STATUS ]]; do
+              BUILD_STATUS=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME/$BUILD_NUMBER/api/json | jq -r '.result')
+              BUILD_IN_PROGRESS=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME/$BUILD_NUMBER/api/json | jq -r '.building')
+              if [[ $BUILD_STATUS != "null" ]]; then
+                break
+              fi
+              sleep 5  # Adjust the sleep duration as needed
+            done
+        
+            if [[ $BUILD_STATUS == "SUCCESS" ]]; then
+              echo "Job succeeded"
+            else
+              echo "Job failed"
+            fi
           fi
 
       - name: Stop and remove Docker Compose services
