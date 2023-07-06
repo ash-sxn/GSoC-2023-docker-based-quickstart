@@ -56,7 +56,9 @@ jobs:
           echo "Waiting for the job to complete..."
           BUILD_NUMBER=""
           while [[ -z $BUILD_NUMBER ]]; do
-            BUILD_NUMBER=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME/api/json | jq -r '.lastBuild.number')
+            ANSWER=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME/api/json | jq .)
+            echo "Jenkins answered: $ANSWER"
+            BUILD_NUMBER=$(echo $ANSWER | jq -r '.lastBuild.number')
             echo "Haven't found the build number yet. Trying again in 5 seconds..."
             sleep 5  # Adjust the sleep duration as needed
           done
