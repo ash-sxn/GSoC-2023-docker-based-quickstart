@@ -48,7 +48,7 @@ jobs:
           echo "TOKEN was found."
           # Let's launch a job. The token has been generated in the Jenkins UI (admin, settings, and so on)
           echo "Launching a job"
-          curl -k -X POST http://admin:$TOKEN@localhost:8080/job/simple-java-maven-app/build
+          curl -s -k -X POST http://admin:$TOKEN@localhost:8080/job/simple-java-maven-app/build
           echo "Job launched"
 
       - name: Stop and remove Docker Compose services
