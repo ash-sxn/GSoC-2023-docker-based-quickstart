@@ -50,13 +50,15 @@ jobs:
           # Let's launch a job. The token has been generated in the Jenkins UI (admin, settings, and so on)
           echo "Launching a job"
           JOB_NAME="%28simple%29%20demo%20job"
+          JOB_NAME_ENCODED=$(echo "$JOB_NAME" | awk '{ gsub(/ /, "%20"); gsub(/\(/, "%28"); gsub(/\)/, "%29"); print }')
+  
           # Will have to switch to "simple-java-maven-app" later on.
           # For the time being, it does not work as we haven't yet customizad the config.xml file with the end user's GitHub handle.
           # Wait for the job to start running
           echo "Waiting for the job to start running..."
           BUILD_NUMBER=""
           while [[ -z $BUILD_NUMBER ]]; do
-            BUILD_INFO=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME/api/json)
+            BUILD_INFO=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME_ENCODED/api/json)
             echo "Retrieved build info: $BUILD_INFO"
             BUILD_NUMBER=$(echo $BUILD_INFO | jq -r '.lastBuild.number')
             BUILD_IN_PROGRESS=$(echo $BUILD_INFO | jq -r '.lastBuild.building')
@@ -76,10 +78,10 @@ jobs:
             echo "Waiting for the job to complete..."
             BUILD_STATUS=""
             while [[ -z $BUILD_STATUS ]]; do
-              BUILD_INFO=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME/api/json)
+              BUILD_INFO=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME_ENCODED/api/json)
               echo "Retrieved build info: $BUILD_INFO"
-              BUILD_STATUS=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME/$BUILD_NUMBER/api/json | jq -r '.result')
-              BUILD_IN_PROGRESS=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME/$BUILD_NUMBER/api/json | jq -r '.building')
+              BUILD_STATUS=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.result')
+              BUILD_IN_PROGRESS=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.building')
               echo "Build status: $BUILD_STATUS"
               echo "Build in progress: $BUILD_IN_PROGRESS"
   
