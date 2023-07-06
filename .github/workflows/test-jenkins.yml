@@ -55,7 +55,7 @@ jobs:
           echo "Waiting for the job to start running..."
           BUILD_NUMBER=""
           while [[ -z $BUILD_NUMBER ]]; do
-            BUILD_INFO=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME_ENCODED/api/json)
+            BUILD_INFO=$(curl -s -k http://localhost:8080/job/$JOB_NAME_ENCODED/api/json)
             echo "Retrieved build info: $BUILD_INFO"
             BUILD_NUMBER=$(echo $BUILD_INFO | jq -r '.lastBuild.number')
             BUILD_IN_PROGRESS=$(echo $BUILD_INFO | jq -r '.lastBuild.building')
