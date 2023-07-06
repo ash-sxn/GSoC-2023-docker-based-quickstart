@@ -70,8 +70,7 @@ jobs:
             echo "Job failed"
           fi
 
-
-- name: Stop and remove Docker Compose services
+      - name: Stop and remove Docker Compose services
         run: |
           cd ./04_sidekick && docker compose down --volumes
           echo "Docker Compose services stopped"
