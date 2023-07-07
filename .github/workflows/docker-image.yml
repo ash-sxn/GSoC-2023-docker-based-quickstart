@@ -25,7 +25,7 @@ jobs:
         with:
           filters: |
             docker:
-              - 'Dockerfile'
+              - '03_maven_tutorial/Dockerfile'
             docker-ignore:
               - '.dockerignore'
 
@@ -33,7 +33,6 @@ jobs:
     # Wait from the paths-filter to be completed before starting next-job
     needs: paths-filter
     if: "!contains(needs.paths-filter.changes.outputs, '[]')"
-    # “!contains(toJson(github.event.pull_request.labels), ‘[]’)”
     runs-on: ubuntu-latest
     steps:  
       -
