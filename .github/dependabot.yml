@@ -5,6 +5,7 @@
 
 version: 2
 # Enable version updates for GitHub Actions workflows
+updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
