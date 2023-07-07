@@ -7,17 +7,17 @@ if [ ! -f ./.tutorials_running.txt ]; then
     exit 1
 fi
 # These could be changed in future with maven, nodejs and python
-VAR1=1
-VAR2=2
-VAR3=3
-VAR4=4
+VAR1=old
+VAR2=manual
+VAR3=new
+VAR4=maven
 
 # Assign file paths to variables VAR1-VAR3L and VARDL for defauld location
 VARDL="."
-VAR1L="./experimental_docker_compose_files/00_old_one_from_proposal"
-VAR2L="./experimental_docker_compose_files/01_simple_controller_plus_agent"
-VAR3L="./experimental_docker_compose_files/02_custom_docker_file_connecting_agent_and_controller"
-VAR4L="./experimental_docker_compose_files/03_maven_tutorial/"
+VAR1L="./00_old_one_from_proposal"
+VAR2L="./01_simple_controller_plus_agent"
+VAR3L="./02_custom_docker_file_connecting_agent_and_controller"
+VAR4L="./03_maven_tutorial"
 
 # Function to stop a tutorial based on the provided path
 stop_tutorial() {

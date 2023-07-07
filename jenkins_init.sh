@@ -5,17 +5,17 @@ set -exo pipefail
 TUTORIAL=$1
 
 # Assign values 1-4 to variables VAR1-VAR4 can be changed in future to maven, nodejs, python
-VAR1=1
-VAR2=2
-VAR3=3
-VAR4=4
+VAR1=old
+VAR2=manual
+VAR3=new
+VAR4=maven
 
 # Assign file paths to variables VAR0-VAR3L
 VARDL="."
-VAR1L="./experimental_docker_compose_files/00_old_one_from_proposal"
-VAR2L="./experimental_docker_compose_files/01_simple_controller_plus_agent"
-VAR3L="./experimental_docker_compose_files/02_custom_docker_file_connecting_agent_and_controller"
-VAR4L="./experimental_docker_compose_files/03_maven_tutorial"
+VAR1L="./00_old_one_from_proposal"
+VAR2L="./01_simple_controller_plus_agent"
+VAR3L="./02_custom_docker_file_connecting_agent_and_controller"
+VAR4L="./03_maven_tutorial"
 DOCKER_COMPOSE="docker compose"
 
 # Function to check if running in Gitpod and modify jenkins.yaml if needed
@@ -104,13 +104,13 @@ check_docker_compose() {
 generate_ssh_keys() {
   local tutorial_path=$1
   echo "generating new ssh keys"
-  bash $tutorial_path/keygen.sh $tutorial_path
+   ./$tutorial_path/keygen.sh $tutorial_path
 }
 # Function to start a tutorial based on the provided path
 start_tutorial() {
   local tutorial_path=$1
   echo "Starting tutorial $tutorial_path"
-  $DOCKER_COMPOSE -f "$tutorial_path/docker-compose.yaml" up -d
+  $DOCKER_COMPOSE -f "$tutorial_path/docker-compose.yaml" up -d --build
 }
 
 # check wsl
