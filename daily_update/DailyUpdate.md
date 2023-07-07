@@ -1,4 +1,40 @@
 # Daily Update
+### Date: 07/07/2023 FRIDAY
+
+**Start Time:** 6:23   
+**End Time:** 18:00  
+**Hours Worked:** 4h30m+
+
+**6:23**
+
+- Forgot to update the dailyupdate.md file for the past two days.
+- Checking emails from GitHub, currently having 17 issues and 6 open PRs.
+- Mentors have created milestones for better focus.
+- Researching basics of GitHub Actions and how do they work on YouTube.
+
+**8:30-9:37**
+
+- Attended Docs Office hours.
+- Completed the meeting and fixed an issue during the meeting itself.
+- Merged a PR.
+- Taking a break.
+
+**10:50-11:45**
+
+- Created a Google Calendar and shared the link with mentors.
+- Working on Milestone Week 28.
+- Identified four issues in the milestone.
+- Currently addressing the Gitpod reverse proxy setup issue.
+- Reading documentation and learning more about the issue.
+- Planning to work on the Python tutorial issue and adding GitHub Actions after resolving the proxy issue.
+
+**17:00-18:00**
+
+- Learned about Gitpod reverse proxy setup but still unsure about the solution.
+- Experiencing issues with Gitpod today.
+- I am feeling tierd today.
+- Planning to cover the pending work tomorrow.
+
 ### Date: 04/07/2023 TUESDAY
 
 **Start Time:** 8:01   
