@@ -1,4 +1,4 @@
-name: Docker Compose Test
+name: docker-compose files test
 
 on:
   push:
@@ -7,26 +7,37 @@ on:
 
 jobs:
   build-and-test:
+    strategy:
+      matrix:
+        dir: [00_old_one_from_proposal, 01_simple_controller_plus_agent, 02_custom_docker_file_connecting_agent_and_controller, 03_maven_tutorial]
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
-      - name: Set up and start Docker Compose
+      - name: running ${{ matrix.dir }}
         run: |
-          cd ./04_sidekick && docker compose up --build --remove-orphans --force-recreate -d
-          echo "Docker Compose started"
-
-      - name: Wait for services to start
+          # determining wich example is running 
+          if [ ${{ matrix.dir }} == "00_old_one_from_proposal" ]; then
+              ARG=old
+            elif [ ${{ matrix.dir }} == "01_simple_controller_plus_agent" ]; then
+              ARG=manual
+            elif [ ${{ matrix.dir }} == "02_custom_docker_file_connecting_agent_and_controller" ]; then
+              ARG=new
+            elif [ ${{ matrix.dir }} == "03_maven_tutorial" ]; then
+              ARG=maven
+            else
+              # If directory is not one of the four directories, add it to temporary file
+              echo "internal examples have not been modified" 
+            fi
+      - name: running the jenkins_inti.sh with argument
         run: |
-          # The timeout command is used to set a maximum execution time of 60 seconds. The loop inside the bash -c
-          # command checks if the curl request succeeds (i.e., returns a non-empty response) using the exit code.
-          # If it fails, it sleeps for 1 second and repeats the curl request until it succeeds or the timeout is reached.
-          timeout 60 bash -c 'until curl -s http://localhost:8080 > /dev/null; do sleep 1; done' && echo "Jenkins has started" || exit 1
-          echo "Services have started"
+            if [ git diff --name-only HEAD^ HEAD | awk -F "/" '{print $1}' | uniq | grep "${{ matrix.dir }}" ]; then 
+              ./jenkins_init.sh $ARG
+            else
+              echo "No Internal examples were modified"
 
-      - name: Wait for services to be ready
+      - name: Waiting for services to be ready
         run: |
           # After the curl request, the output is piped to the awk command. It is used to search for the message
           # "Please wait while Jenkins is getting ready to work" in the curl output.
@@ -34,6 +45,7 @@ jobs:
           # If the message is not found, the loop exits, and the "Jenkins is running" message is displayed.
           timeout 60 bash -c 'until curl -s http://localhost:8080 | awk "/Please wait while Jenkins is getting ready to work/{print \"Jenkins is initializing\"; exit 1}"; do sleep 5; done' && echo "Jenkins is running" || exit 1
           echo "Jenkins is ready"
+
 
       - name: Run curl command to test the stack
         run: |
