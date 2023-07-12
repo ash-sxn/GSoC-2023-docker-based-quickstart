@@ -6,7 +6,7 @@ on:
       - '*'
 
 jobs:
-  build-and-test:
+  build-and-test_internal_examples:
     strategy:
       matrix:
         dir: [00_old_one_from_proposal, 01_simple_controller_plus_agent, 02_custom_docker_file_connecting_agent_and_controller, 03_maven_tutorial]
@@ -139,5 +139,128 @@ jobs:
           else
             echo "No Internal examples were modified"
           fi
+      
+      - name: 
+        run: |
+          ./jenkins_teardown.sh
 
-        
+
+  build-and-test-default:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up and start Docker Compose
+        run: |
+          ./jenkins_init.sh
+          echo "Docker Compose started"
+
+      - name: Waiting for services to start
+        run: |
+          # The timeout command is used to set a maximum execution time of 60 seconds. The loop inside the bash -c
+          # command checks if the curl request succeeds (i.e., returns a non-empty response) using the exit code.
+          # If it fails, it sleeps for 1 second and repeats the curl request until it succeeds or the timeout is reached.
+          timeout 60 bash -c 'until curl -s http://localhost:8080 > /dev/null; do sleep 1; done' && echo "Jenkins has started" || exit 1
+          echo "Services have started"
+
+      - name: Waiting for services to be ready
+        run: |
+          # After the curl request, the output is piped to the awk command. It is used to search for the message
+          # "Please wait while Jenkins is getting ready to work" in the curl output.
+          # If the message is found, awk exits with a non-zero status (1), and the loop continues.
+          # If the message is not found, the loop exits, and the "Jenkins is running" message is displayed.
+          timeout 60 bash -c 'until curl -s http://localhost:8080 | awk "/Please wait while Jenkins is getting ready to work/{print \"Jenkins is initializing\"; exit 1}"; do sleep 5; done' && echo "Jenkins is running" || exit 1
+          echo "Jenkins is ready"
+
+      - name: Run curl command to test the stack
+        run: |
+          # To check the version of Jenkins, load the top page or any .../api/* page and check for the X-Jenkins response header. This contains the version number of Jenkins, like "1.404" This is also a good way to check if an URL is a Jenkins URL.
+          JENKINS_VERSION=$(curl -s -I -k http://admin:admin@localhost:8080 | grep -i '^X-Jenkins:' | awk '{print $2}')
+          echo "Jenkins version is: $JENKINS_VERSION"
+          # Before launching a job, we need to create a token for the admin user
+          CRUMB=$(curl -s -k http://admin:admin@localhost:8080/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\) -c cookies.txt)
+          echo "CRUMB was found."
+          TOKEN=$(curl -s -k 'http://admin:admin@localhost:8080/user/admin/descriptorByName/jenkins.security.ApiTokenProperty/generateNewToken' --data 'newTokenName=kb-token' -b cookies.txt -H $CRUMB | jq -r '.data.tokenValue')
+          echo "TOKEN was found."
+          # Let's launch a job. The token has been generated in the Jenkins UI (admin, settings, and so on)
+          echo "Launching a job"
+          JOB_NAME="%28simple%29%20demo%20job"
+          JOB_NAME_ENCODED=$(echo "$JOB_NAME" | awk '{ gsub(/ /, "%20"); gsub(/\(/, "%28"); gsub(/\)/, "%29"); print }')
+          # Will have to switch to "simple-java-maven-app" later on.
+          # For the time being, it does not work as we haven't yet customized the config.xml file with the end user's GitHub handle.
+          # Wait for the job to start running
+          echo "Waiting for the job to start running..."
+          BUILD_NUMBER=""
+          while [[ -z $BUILD_NUMBER ]]; do
+            BUILD_INFO=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME_ENCODED/api/json)
+            echo "Retrieved build info: $BUILD_INFO"
+            BUILD_NUMBER=$(echo $BUILD_INFO | jq -r '.lastBuild.number')
+            BUILD_IN_PROGRESS=$(echo $BUILD_INFO | jq -r '.lastBuild.building')
+            echo "Build number: $BUILD_NUMBER"
+            echo "Build in progress: $BUILD_IN_PROGRESS"
+            if [[ -n $BUILD_NUMBER && $BUILD_IN_PROGRESS == "true" ]]; then
+              break
+            fi
+            sleep 5  # Adjust the sleep duration as needed
+          done
+  
+          # Delay before retrieving build information
+          sleep 5
+  
+          if [[ -z $BUILD_NUMBER ]]; then
+            echo "Job has never run"
+          else
+            echo "Job started. Build number: $BUILD_NUMBER"
+            # Wait for the job to complete
+            echo "Waiting for the job to complete..."
+            while true; do
+              BUILD_STATUS=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.result')
+              BUILD_IN_PROGRESS=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.building')
+              echo "Build status: $BUILD_STATUS"
+              echo "Build in progress: $BUILD_IN_PROGRESS"
+  
+              if [[ $BUILD_STATUS != "null" ]]; then
+                break
+              fi
+  
+              sleep 5  # Adjust the sleep duration as needed
+            done
+
+            if [[ $BUILD_STATUS == "SUCCESS" ]]; then
+              echo "Job succeeded"
+            else
+              echo "Job failed"
+            fi
+          fi
+  
+
+          if [[ -z $BUILD_NUMBER ]]; then
+            echo "Job has never run"
+          else
+            echo "Job started. Build number: $BUILD_NUMBER"
+            # Wait for the job to complete
+            echo "Waiting for the job to complete..."
+            while true; do
+              BUILD_STATUS=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.result')
+              BUILD_IN_PROGRESS=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.building')
+              echo "Build status: $BUILD_STATUS"
+              echo "Build in progress: $BUILD_IN_PROGRESS"
+
+              if [[ $BUILD_STATUS != "null" ]]; then
+                break
+              fi
+
+              sleep 5  # Adjust the sleep duration as needed
+            done
+
+            if [[ $BUILD_STATUS == "SUCCESS" ]]; then
+              echo "Job succeeded"
+            else
+              echo "Job failed"
+            fi
+          fi
+      - name: 
+        run: |
+          ./jenkins_teardown.sh
