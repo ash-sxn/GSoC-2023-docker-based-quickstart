@@ -180,7 +180,7 @@ jobs:
             fi
             sleep 5  # Adjust the sleep duration as needed
           done
-  
+          echo "This is BUILD__NUMBER $BUILD_NUMBER"
           # Delay before retrieving build information
           sleep 5
   
