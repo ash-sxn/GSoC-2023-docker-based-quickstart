@@ -63,6 +63,7 @@ jobs:
             echo "Launching a job"
             JOB_NAME="%28simple%29%20demo%20job"
             JOB_NAME_ENCODED=$(echo "$JOB_NAME" | awk '{ gsub(/ /, "%20"); gsub(/\(/, "%28"); gsub(/\)/, "%29"); print }')
+            echo "JOB_NAME_ENCODED is $JOB_NAME_ENCODED"
             # Will have to switch to "simple-java-maven-app" later on.
             # For the time being, it does not work as we haven't yet customized the config.xml file with the end user's GitHub handle.
             # Wait for the job to start running
