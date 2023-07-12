@@ -168,7 +168,7 @@ jobs:
       - name: Waiting for services to be ready
         run: |
           # After the curl request, the output is piped to the awk command. It is used to search for the message
-          # "Please wait while Jenkins is getting ready to work" in the curl o4utput.
+          # "Please wait while Jenkins is getting ready to work" in the curl output.
           # If the message is found, awk exits with a non-zero status (1), and the loop continues.
           # If the message is not found, the loop exits, and the "Jenkins is running" message is displayed.
           timeout 60 bash -c 'until curl -s http://localhost:8080 | awk "/Please wait while Jenkins is getting ready to work/{print \"Jenkins is initializing\"; exit 1}"; do sleep 5; done' && echo "Jenkins is running" || exit 1
@@ -194,8 +194,7 @@ jobs:
           echo "Waiting for the job to start running..."
           BUILD_NUMBER=""
           while [[ -z $BUILD_NUMBER ]]; do
-            BUILD_INFO=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME_ENCODED/api/json) || echo "Failed to retrieve build info: $BUILD_INFO"
-            echo "Retrieved build info: $BUILD_INFO"
+            BUILD_INFO=$(curl -s -k http://admin:$TOKEN@localhost:8080/job/$JOB_NAME_ENCODED/api/json)
             echo "Retrieved build info: $BUILD_INFO"
             BUILD_NUMBER=$(echo $BUILD_INFO | jq -r '.lastBuild.number')
             BUILD_IN_PROGRESS=$(echo $BUILD_INFO | jq -r '.lastBuild.building')
