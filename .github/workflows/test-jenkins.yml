@@ -135,7 +135,7 @@ jobs:
             else
               echo "Job failed"
             fi
-          fiS
+          fi
           else
             echo "No Internal examples were modified"
           fi
