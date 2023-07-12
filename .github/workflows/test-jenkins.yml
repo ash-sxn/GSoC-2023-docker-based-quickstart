@@ -32,10 +32,10 @@ jobs:
             fi
       - name: running the jenkins_inti.sh with argument
         run: |
-            if [ git diff --name-only HEAD^ HEAD | awk -F "/" '{print $1}' | uniq | grep "${{ matrix.dir }}" ]; then 
-              ./jenkins_init.sh $ARG
+            if [ $(git diff --name-only HEAD^ HEAD | awk -F "/" '{print $1}' | uniq | grep -c "01_simple_controller_plus_agent") -ne 0 ]; then
             else
               echo "No Internal examples were modified"
+            fi
 
       - name: Waiting for services to be ready
         run: |
