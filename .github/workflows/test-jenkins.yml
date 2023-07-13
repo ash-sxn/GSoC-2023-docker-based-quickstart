@@ -54,7 +54,7 @@ jobs:
           # "Please wait while Jenkins is getting ready to work" in the curl output.
           # If the message is found, awk exits with a non-zero status (1), and the loop continues.
           # If the message is not found, the loop exits, and the "Jenkins is running" message is displayed.
-          timeout 60 bash -c 'until curl -s http://localhost:8080 | awk "/Please wait while Jenkins is getting ready to work/{print \"Jenkins is initializing\"; exit 1}"; do sleep 5; done' && echo "Jenkins is running" || exit 1
+          timeout 60 bash -c 'until curl -s -f http://localhost:8080/login > /dev/null; do sleep 5; done' && echo "Jenkins is running" || echo "Jenkins is not running"
           echo "Jenkins is ready"
           JENKINS_VERSION=$(curl -s -I -k http://admin:admin@localhost:8080 | grep -i '^X-Jenkins:' | awk '{print $2}')
           echo "Jenkins version is: $JENKINS_VERSION"
@@ -166,7 +166,7 @@ jobs:
           # "Please wait while Jenkins is getting ready to work" in the curl output.
           # If the message is found, awk exits with a non-zero status (1), and the loop continues.
           # If the message is not found, the loop exits, and the "Jenkins is running" message is displayed.
-          timeout 60 bash -c 'until curl -s http://localhost:8080 | awk "/Please wait while Jenkins is getting ready to work/{print \"Jenkins is initializing\"; exit 1}"; do sleep 5; done' && echo "Jenkins is running" || exit 1
+          timeout 60 bash -c 'until curl -s -f http://localhost:8080/login > /dev/null; do sleep 5; done' && echo "Jenkins is running" || echo "Jenkins is not running"
           echo "Jenkins is ready"
 
       - name: Run curl command to test the stack
