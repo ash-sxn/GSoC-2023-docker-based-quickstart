@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: running ${{ matrix.dir }}
         run: |
@@ -37,7 +37,7 @@ jobs:
               # If directory is not one of the four directories, add it to temporary file
               echo "internal examples have not been modified" 
             fi
-            echo "ARG=$ARG" >> $GITHUB_ENV
+            
       - name: running the jenkins_init.sh with argument
         run: |
             git log
