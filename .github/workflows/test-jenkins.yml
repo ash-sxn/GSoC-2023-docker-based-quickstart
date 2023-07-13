@@ -33,7 +33,7 @@ jobs:
       - name: running the jenkins_init.sh with argument
         run: |
             git log
-            if [ $(git diff --name-only HEAD^ HEAD | awk -F "/" '{print $1}' | uniq | grep -c "01_simple_controller_plus_agent") -ne 0 ]; then
+            if [ $(git diff --name-only HEAD HEAD^ | awk -F "/" '{print $1}' | uniq | grep -c "01_simple_controller_plus_agent") -ne 0 ]; then
               ./jenkins_init.sh $ARG
             else
               echo "No Internal examples were modified"
@@ -51,7 +51,7 @@ jobs:
 
       - name: Run curl command to test the stack
         run: |         
-          if [ $(git diff --name-only HEAD^ HEAD | awk -F "/" '{print $1}' | uniq | grep -c "01_simple_controller_plus_agent") -ne 0 ]; then
+          if [ $(git diff --name-only HEAD HEAD^ | awk -F "/" '{print $1}' | uniq | grep -c "01_simple_controller_plus_agent") -ne 0 ]; then
             # To check the version of Jenkins, load the top page or any .../api/* page and check for the X-Jenkins response header. This contains the version number of Jenkins, like "1.404" This is also a good way to check if an URL is a Jenkins URL.
             JENKINS_VERSION=$(curl -s -I -k http://admin:admin@localhost:8080 | grep -i '^X-Jenkins:' | awk '{print $2}')
             echo "Jenkins version is: $JENKINS_VERSION"
