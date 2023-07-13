@@ -42,7 +42,7 @@ jobs:
         run: |
             git log
             git show --name-only --pretty=format: HEAD | uniq
-            if [ $(git show --name-only --pretty=format: HEAD | uniq | grep -c "${{ matrix.dir }}") -ne 0 ]; then
+            if [ ! $(git show --name-only --pretty=format: HEAD | uniq | grep -c "${{ matrix.dir }}") -ne 0 ]; then
               ./jenkins_init.sh $ARG
             else
               echo "No Internal examples were modified"
