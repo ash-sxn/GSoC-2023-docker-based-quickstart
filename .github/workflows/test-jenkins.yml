@@ -20,12 +20,19 @@ jobs:
           # determining wich example is running 
           if [ ${{ matrix.dir }} == "00_old_one_from_proposal" ]; then
               ARG=old
+              echo "Running $ARG tutorial"
+
             elif [ ${{ matrix.dir }} == "01_simple_controller_plus_agent" ]; then
               ARG=manual
+              echo "Running $ARG tutorial"
+
             elif [ ${{ matrix.dir }} == "02_custom_docker_file_connecting_agent_and_controller" ]; then
               ARG=new
+              echo "Running $ARG tutorial"
+
             elif [ ${{ matrix.dir }} == "03_maven_tutorial" ]; then
               ARG=maven
+              echo "Running $ARG tutorial"
             else
               # If directory is not one of the four directories, add it to temporary file
               echo "internal examples have not been modified" 
