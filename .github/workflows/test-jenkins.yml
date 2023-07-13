@@ -30,8 +30,9 @@ jobs:
               # If directory is not one of the four directories, add it to temporary file
               echo "internal examples have not been modified" 
             fi
-      - name: running the jenkins_inti.sh with argument
+      - name: running the jenkins_init.sh with argument
         run: |
+            git log
             if [ $(git diff --name-only HEAD^ HEAD | awk -F "/" '{print $1}' | uniq | grep -c "01_simple_controller_plus_agent") -ne 0 ]; then
               ./jenkins_init.sh $ARG
             else
