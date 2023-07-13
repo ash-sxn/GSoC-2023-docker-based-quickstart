@@ -37,6 +37,7 @@ jobs:
               # If directory is not one of the four directories, add it to temporary file
               echo "internal examples have not been modified" 
             fi
+            echo "ARG=$ARG" >> $GITHUB_ENV
       - name: running the jenkins_init.sh with argument
         run: |
             git log
