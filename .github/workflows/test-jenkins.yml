@@ -48,7 +48,7 @@ jobs:
               ./jenkins_init.sh $ARG
             else
               echo "No Internal examples were modified"
-              echo "::set-env name=NO_CHANGES::true"
+              echo 'NO_CHANGES=true' >> $GITHUB_ENV
 
             fi
 
