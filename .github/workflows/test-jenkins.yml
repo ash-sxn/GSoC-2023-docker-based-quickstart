@@ -94,7 +94,7 @@ jobs:
           # Wait for the job to start running
           echo "Waiting for the job to start running..."
           BUILD_NUMBER=""
-          while [[ -z $BUILD_NUMBER ]]; do
+          while [[ -z $BUILD_NUMBER || $BUILD_NUMBER == "null" ]]; do
             BUILD_INFO=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/api/json)
             echo "Retrieved build info: $BUILD_INFO"
             BUILD_NUMBER=$(echo $BUILD_INFO | jq -r '.lastBuild.number')
@@ -110,7 +110,7 @@ jobs:
           # Delay before retrieving build information
           sleep 5
 
-          if [[ -z $BUILD_NUMBER ]]; then
+          if [[ -z $BUILD_NUMBER || $BUILD_NUMBER == "null" ]]; then
             echo "Job has never run"
           else
             echo "Job started. Build number: $BUILD_NUMBER"
@@ -222,7 +222,7 @@ jobs:
               echo "Build status: $BUILD_STATUS"
               echo "Build in progress: $BUILD_IN_PROGRESS"
   
-              if [[ $BUILD_STATUS != "null" ]]; then
+              if [[ $BUILD_STATUS = "null" ]]; then
                 break
               fi
   
