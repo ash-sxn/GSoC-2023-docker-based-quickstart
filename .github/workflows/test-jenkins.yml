@@ -66,9 +66,9 @@ jobs:
 
 
       - name: Run curl command to test the stack
-        if: env.NO_CHANGES != 'true' || ${{ matrix.dir }} != '00_old_one_from_proposal' || ${{ matrix.dir }} != '01_simple_controller_plus_agent'
+        if: env.NO_CHANGES != 'true' && (${{ matrix.dir }} != '00_old_one_from_proposal' || ${{ matrix.dir }} != '01_simple_controller_plus_agent')
         run: |         
-          set -x
+          set -x || ${{ matrix.dir }} != '00_old_one_from_proposal' || ${{ matrix.dir }} != '01_simple_controller_plus_agent'
           # Installing dependencies 
           # To check Sthe version of Jenkins, load the top page or any .../api/* page and check for the X-Jenkins response header. This contains the version number of Jenkins, like "1.404" This is also a good way to check if an URL is a Jenkins URL.
           JENKINS_VERSION=$(curl -s -I -k http://admin:admin@127.0.0.1:8080 | grep -i '^X-Jenkins:' | awk '{print $2}')
