@@ -42,7 +42,7 @@ jobs:
       - name: checking files running the jenkins_init.sh with argument
         run: |
             echo "The changed directories are:"
-            git show --name-only --pretty=format: HEAD | awk -F'/' '{print $1}' | uniq
+            git diff --name-only HEAD^ HEAD | awk -F'/' '{print $1}' | uniq
             if [ ! $(git show --name-only --pretty=format: HEAD | uniq | grep -c "${{ matrix.dir }}") -ne 0 ]; then
               echo "Changed directories are $(git show --name-only --pretty=format: HEAD | uniq | grep -c "${{ matrix.dir }}")" 
               ./jenkins_init.sh $ARG
