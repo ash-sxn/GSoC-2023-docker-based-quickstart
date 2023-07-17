@@ -204,11 +204,11 @@ jobs:
             if [[ -n $BUILD_NUMBER && $BUILD_IN_PROGRESS == "true" ]]; then
               break
             fi
-            sleep 10  # Adjust the sleep duration as needed
+            sleep 5  # Adjust the sleep duration as needed
           done
           echo "This is BUILD__NUMBER $BUILD_NUMBER"
           # Delay before retrieving build information
-          sleep 10
+          sleep 5
   
           if [[ -z $BUILD_NUMBER ]]; then
             echo "Job has never run"
@@ -226,7 +226,7 @@ jobs:
                 break
               fi
   
-              sleep 10  # Adjust the sleep duration as needed
+              sleep 5  # Adjust the sleep duration as needed
             done
 
             if [[ $BUILD_STATUS == "SUCCESS" ]]; then
