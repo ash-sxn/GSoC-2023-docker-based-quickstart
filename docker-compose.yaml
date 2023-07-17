@@ -15,6 +15,6 @@ services:
     image: jenkins/ssh-agent:5.5.0-jdk17
     container_name: desktop-jenkins_agent-1
     environment:
-      - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOrE9ruJy21SwqbC/RUnFU5zfwgoj/w+1tYCpgx1aLrx jh@jh-Modern-14-B5M
+      - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE8N1MZH2vLaDgUxs4RBFbUPvJ3QHmklYU5umKd6eU7a jh@jh-Modern-14-B5M
 volumes: 
   jenkins_home:
