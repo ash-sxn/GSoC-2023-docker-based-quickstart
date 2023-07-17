@@ -66,7 +66,7 @@ jobs:
 
 
       - name: Run curl command to test the stack
-        if: env.NO_CHANGES != 'true' && ${{ matrix.dir }} != '00_old_one_from_proposal' && ${{ matrix.dir }} != '01_simple_controller_plus_agent'
+        if: env.NO_CHANGES != 'true' || ${{ matrix.dir }} != '00_old_one_from_proposal' || ${{ matrix.dir }} != '01_simple_controller_plus_agent'
         run: |         
           set -x
           # Installing dependencies 
