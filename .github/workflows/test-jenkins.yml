@@ -49,7 +49,6 @@ jobs:
             else
               echo "No Internal examples were modified"
               echo 'NO_CHANGES=true' >> $GITHUB_ENV
-
             fi
 
       - name: Waiting for services to be ready
