@@ -114,7 +114,7 @@ jobs:
             echo "Waiting for the job to complete..."
             while true; do
               BUILD_STATUS=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.result')
-              BUILD_IN_PROGRESS=$https://www.youtube.com/(curl -s -k http://admin:$TOKEN@127.0.0.1:8080127.0.0.1:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.building')
+              BUILD_IN_PROGRESS=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080127.0.0.1:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.building')
               echo "Build status: $BUILD_STATUS"
               echo "Build in progress: $BUILD_IN_PROGRESS"
 
