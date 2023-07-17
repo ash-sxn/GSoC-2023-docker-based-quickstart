@@ -78,47 +78,63 @@ jobs:
           echo "CRUMB was found."
           TOKEN=$(curl -s -k 'http://admin:admin@127.0.0.1:8080/user/admin/descriptorByName/jenkins.security.ApiTokenProperty/generateNewToken' --data 'newTokenName=kb-token' -b cookies.txt -H $CRUMB | jq -r '.data.tokenValue')
           echo "TOKEN was found."
-          # Let's launch a job. The token has been generated in the Jenkins UI (admin, settings, and so on)
+          # Let's launch a job. The token has been generated in the previous steps.
           echo "Launching a job"
           JOB_NAME="%28simple%29%20demo%20job"
+          # Encode the JOB_NAME to replace spaces, open parentheses, and closing parentheses with their corresponding URL-encoded values.
+          # This is necessary when using the JOB_NAME in a URL or any other context where special characters need to be encoded.
+          # Spaces are replaced with "%20", open parentheses with "%28", and closing parentheses with "%29".
+          # The encoded result is stored in the JOB_NAME_ENCODED variable.
           JOB_NAME_ENCODED=$(echo "$JOB_NAME" | awk '{ gsub(/ /, "%20"); gsub(/\(/, "%28"); gsub(/\)/, "%29"); print }')
           echo "JOB_NAME_ENCODED is $JOB_NAME_ENCODED"
           # Will have to switch to "simple-java-maven-app" later on.
           # For the time being, it does not work as we haven't yet customized the config.xml file with the end user's GitHub handle.
           # Wait for the job to start running
           echo "Waiting for the job to start running..."
-          BUILD_NUMBER=""
-          while [[ -z $BUILD_NUMBER || $BUILD_NUMBER == "null" ]]; do
-            BUILD_INFO=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/api/json)
-            echo "Retrieved build info: $BUILD_INFO"
-            BUILD_NUMBER=$(echo $BUILD_INFO | jq -r '.lastBuild.number')
-            BUILD_IN_PROGRESS=$(echo $BUILD_INFO | jq -r '.lastBuild.building')
-            echo "Build number: $BUILD_NUMBER"
-            echo "Build in progress: $BUILD_IN_PROGRESS"
-            if [[ -n $BUILD_NUMBER && $BUILD_IN_PROGRESS == "true" ]]; then
-              break
-            fi
-            sleep 5  # Adjust the sleep duration as needed
-          done
+ BUILD_NUMBER=""
+while [[ -z $BUILD_NUMBER || $BUILD_NUMBER == "null" ]]; do
+  # Retrieve build info from Jenkins API using cURL
+  BUILD_INFO=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/api/json)
+  echo "Retrieved build info: $BUILD_INFO"
+  
+  # Extract the build number from the JSON response using jq
+  BUILD_NUMBER=$(echo $BUILD_INFO | jq -r '.lastBuild.number')
+  
+  # Check if the build is in progress
+  BUILD_IN_PROGRESS=$(echo $BUILD_INFO | jq -r '.lastBuild.building')
+  echo "Build number: $BUILD_NUMBER"
+  echo "Build in progress: $BUILD_IN_PROGRESS"
+  
+  # If the build number is not empty and the build is in progress, break out of the loop
+  if [[ -n $BUILD_NUMBER && $BUILD_IN_PROGRESS == "true" ]]; then
+    break
+  fi
+  
+  # Sleep for 5 seconds before checking the build status again
+  sleep 5  # Adjust the sleep duration as needed
+done
           echo "This is BUILD__NUMBER $BUILD_NUMBER"
           # Delay before retrieving build information
           sleep 5
           if [[ -z $BUILD_NUMBER || $BUILD_NUMBER == "null" ]]; then
+          # If the build number is empty or "null", it means the job has never run
             echo "Job has never run"
           else
+          # If the build number is not empty, the job has started and the build number is displayed
             echo "Job started. Build number: $BUILD_NUMBER"
+          fi
             # Wait for the job to complete
             echo "Waiting for the job to complete..."
             while true; do
+            # Retrieve the build status and whether the build is in progress
               BUILD_STATUS=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.result')
               BUILD_IN_PROGRESS=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080127.0.0.1:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.building')
               echo "Build status: $BUILD_STATUS"
               echo "Build in progress: $BUILD_IN_PROGRESS"
-
+              # If the build status is not "null", it means the build has been completed
               if [[ $BUILD_STATUS != "null" ]]; then
                 break
               fi
-
               sleep 5  # Adjust the sleep duration as needed
             done
 
