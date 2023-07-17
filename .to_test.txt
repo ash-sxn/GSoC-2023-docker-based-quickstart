@@ -1,5 +1,0 @@
-.github
-.tutorials_running.txt
-02_custom_docker_file_connecting_agent_and_controller
-04_sidekick
-docker-compose.yaml
