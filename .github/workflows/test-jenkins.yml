@@ -210,7 +210,7 @@ jobs:
           # Delay before retrieving build information
           sleep 5
   
-          if [[ -z $BUILD_NUMBER ]]; then
+          if [[ -z $BUILD_NUMBER || $BUILD_NUMBER == "null" ]]; then
             echo "Job has never run"
           else
             echo "Job started. Build number: $BUILD_NUMBER"
