@@ -38,7 +38,8 @@ jobs:
               echo "internal examples have not been modified" 
             fi
             
-      - name: running the jenkins_init.sh with argument
+            
+      - name: checking files running the jenkins_init.sh with argument
         run: |
             git log
             git show --name-only --pretty=format: HEAD | uniq
@@ -47,9 +48,12 @@ jobs:
               ./jenkins_init.sh $ARG
             else
               echo "No Internal examples were modified"
+              echo "::set-env name=NO_CHANGES::true"
+
             fi
 
       - name: Waiting for services to be ready
+        if: env.NO_CHANGES != 'true'
         run: |
           # After the curl request, the output is piped to the awk command. It is used to search for the message
           # "Please wait while Jenkins is getting ready to work" in the curl output.
@@ -66,6 +70,7 @@ jobs:
 
 
       - name: Run curl command to test the stack
+        if: env.NO_CHANGES != 'true'
         run: |         
           set -x
           # Installing dependencies 
@@ -131,6 +136,7 @@ jobs:
             fi
           fi
       - name: Teardown
+        if: env.NO_CHANGES != 'true'
         run: |
           ./jenkins_teardown.sh
 
