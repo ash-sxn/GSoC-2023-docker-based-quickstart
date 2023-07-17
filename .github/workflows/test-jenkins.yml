@@ -118,7 +118,7 @@ jobs:
             echo "Waiting for the job to complete..."
             while true; do
               BUILD_STATUS=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.result')
-              BUILD_IN_PROGRESS=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080127.0.0.1:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.building')
+              BUILD_IN_PROGRESS=$https://www.youtube.com/(curl -s -k http://admin:$TOKEN@127.0.0.1:8080127.0.0.1:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.building')
               echo "Build status: $BUILD_STATUS"
               echo "Build in progress: $BUILD_IN_PROGRESS"
 
@@ -204,11 +204,11 @@ jobs:
             if [[ -n $BUILD_NUMBER && $BUILD_IN_PROGRESS == "true" ]]; then
               break
             fi
-            sleep 5  # Adjust the sleep duration as needed
+            sleep 10  # Adjust the sleep duration as needed
           done
           echo "This is BUILD__NUMBER $BUILD_NUMBER"
           # Delay before retrieving build information
-          sleep 5
+          sleep 10
   
           if [[ -z $BUILD_NUMBER ]]; then
             echo "Job has never run"
@@ -226,7 +226,7 @@ jobs:
                 break
               fi
   
-              sleep 5  # Adjust the sleep duration as needed
+              sleep 10  # Adjust the sleep duration as needed
             done
 
             if [[ $BUILD_STATUS == "SUCCESS" ]]; then
