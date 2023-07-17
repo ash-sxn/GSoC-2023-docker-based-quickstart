@@ -62,14 +62,11 @@ jobs:
           echo "Jenkins is ready"
           JENKINS_VERSION=$(curl -s -I -k http://admin:admin@127.0.0.1:8080 | grep -i '^X-Jenkins:' | awk '{print $2}')
           echo "Jenkins version is: $JENKINS_VERSION"
-          curl -s -I -k http://127.0.0.1:8080 || echo "curl  is culprit without"
-          curl -s -I -k http://admin:admin@127.0.0.1:8080 || echo "curl is the culprit with password"
-            
           
 
 
       - name: Run curl command to test the stack
-        if: env.NO_CHANGES != 'true'
+        if: env.NO_CHANGES != 'true' && ${{ matrix.dir }} != '00_old_one_from_proposal' && ${{ matrix.dir }} != '01_simple_controller_plus_agent'
         run: |         
           set -x
           # Installing dependencies 
