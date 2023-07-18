@@ -1,7 +1,8 @@
 FROM jenkins/ssh-agent:5.7.0-jdk17 as ssh-agent
 
 # ca-certificates because curl will need it later on for the Maven installation
-RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl 
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl && apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
 
 # Now time to install Maven
 ARG MAVEN_VERSION=3.9.2
