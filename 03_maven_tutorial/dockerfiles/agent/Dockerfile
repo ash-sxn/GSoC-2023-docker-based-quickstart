@@ -6,6 +6,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
 
 # Now time to install Maven
 ARG MAVEN_VERSION=3.9.2
+
+
+# Set SHELL flags for RUN commands to allow -e and pipefail
+# Rationale: https://github.com/hadolint/hadolint/wiki/DL4006
+SHELL ["/bin/bash", "-eo", "pipefail", "-c"]
+
 # Add a checksum for the maven binary
 RUN curl -sS -L -O --output-dir /tmp/ --create-dirs  https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
     && printf "%s" "$(sha512sum /tmp/apache-maven-${MAVEN_VERSION}-bin.tar.gz)" | sha512sum -c - \
