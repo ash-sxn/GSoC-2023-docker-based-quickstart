@@ -1,4 +1,26 @@
 # Daily Update
+**Start Time:** 7:12  
+
+**End Time:** 24:00++ 
+
+**Hours Worked:** 5hr30m
+
+### Date: 18/07/2023 Tuesday
+
+**7:12-9:00**
+
+- Started working on resolving GitHub Actions error from the previous day.
+- Received an email from Alyssa, suggesting the creation of a blog post summarizing the previous week's midterm presentation. The deadline for the blog post is Friday.
+- Experimenting with separate shell scripts for the GitHub Actions process, as suggested by Bervianto.
+
+**18:00-20:00** **&&** **22:00-24:00++** 
+
+- Started working on the Python tutorial.
+- Tested the Python tutorial with a newly created Dockerfile for the agent.
+- Ran the tutorials and Jenkinsfiles to test the functionality.
+- Updated the teardown and init scripts to work with the 04 tutorial using the Python keyword.
+
+
 ### Date: 07/07/2023 FRIDAY
 
 **Start Time:** 6:23   
