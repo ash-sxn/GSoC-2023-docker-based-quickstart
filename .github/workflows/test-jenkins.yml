@@ -91,28 +91,28 @@ jobs:
           # For the time being, it does not work as we haven't yet customized the config.xml file with the end user's GitHub handle.
           # Wait for the job to start running
           echo "Waiting for the job to start running..."
- BUILD_NUMBER=""
-while [[ -z $BUILD_NUMBER || $BUILD_NUMBER == "null" ]]; do
-  # Retrieve build info from Jenkins API using cURL
-  BUILD_INFO=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/api/json)
-  echo "Retrieved build info: $BUILD_INFO"
-  
-  # Extract the build number from the JSON response using jq
-  BUILD_NUMBER=$(echo $BUILD_INFO | jq -r '.lastBuild.number')
-  
-  # Check if the build is in progress
-  BUILD_IN_PROGRESS=$(echo $BUILD_INFO | jq -r '.lastBuild.building')
-  echo "Build number: $BUILD_NUMBER"
-  echo "Build in progress: $BUILD_IN_PROGRESS"
-  
-  # If the build number is not empty and the build is in progress, break out of the loop
-  if [[ -n $BUILD_NUMBER && $BUILD_IN_PROGRESS == "true" ]]; then
-    break
-  fi
-  
-  # Sleep for 5 seconds before checking the build status again
-  sleep 5  # Adjust the sleep duration as needed
-done
+          BUILD_NUMBER=""
+          while [[ -z $BUILD_NUMBER || $BUILD_NUMBER == "null" ]]; do
+            # Retrieve build info from Jenkins API using cURL
+            BUILD_INFO=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/api/json)
+            echo "Retrieved build info: $BUILD_INFO"
+            
+            # Extract the build number from the JSON response using jq
+            BUILD_NUMBER=$(echo $BUILD_INFO | jq -r '.lastBuild.number')
+            
+            # Check if the build is in progress
+            BUILD_IN_PROGRESS=$(echo $BUILD_INFO | jq -r '.lastBuild.building')
+            echo "Build number: $BUILD_NUMBER"
+            echo "Build in progress: $BUILD_IN_PROGRESS"
+            
+            # If the build number is not empty and the build is in progress, break out of the loop
+            if [[ -n $BUILD_NUMBER && $BUILD_IN_PROGRESS == "true" ]]; then
+              break
+            fi
+            
+            # Sleep for 5 seconds before checking the build status again
+            sleep 5  # Adjust the sleep duration as needed
+          done
           echo "This is BUILD__NUMBER $BUILD_NUMBER"
           # Delay before retrieving build information
           sleep 5
