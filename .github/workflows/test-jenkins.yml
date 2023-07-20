@@ -248,7 +248,7 @@ jobs:
             else
               echo "Job failed"
             fi
-          fi
+          
       - name: Teardown
         run: |
           ./jenkins_teardown.sh
