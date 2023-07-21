@@ -198,9 +198,10 @@ jobs:
           JOB_NAME_ENCODED=$(echo "$JOB_NAME" | awk '{ gsub(/ /, "%20"); gsub(/\(/, "%28"); gsub(/\)/, "%29"); print }')
           echo "JOB_NAME_ENCODED is $JOB_NAME_ENCODED"
           # Starting the job 
-          curl -X POST http://127.0.0.1:8080/job/$JOB_NAME_ENCODED/buildWithParameters --user admin:$TOKEN 
+          curl -X POST -u admin:$TOKEN 127.0.0.1:8080/job/%28simple%29%20demo%20job/build
           # Wait for the job to start running
           echo "Waiting for the job to start running..."
+          sleep 3
           # Initialize the build number
           BUILD_NUMBER=""
           # Loop until the build number is retrieved
