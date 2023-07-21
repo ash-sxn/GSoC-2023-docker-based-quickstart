@@ -204,7 +204,7 @@ jobs:
           curl -X POST -u admin:$TOKEN 127.0.0.1:8080/job/%28simple%29%20demo%20job/build
           # Wait for the job to start running
           echo "Waiting for the job to start running..."
-          sleep 3
+          sleep 10
           # Initialize the build number
           BUILD_NUMBER=""
           # Loop until the build number is retrieved
@@ -243,7 +243,7 @@ jobs:
               echo "Build status: $BUILD_STATUS"
               echo "Build in progress: $BUILD_IN_PROGRESS"
               # Break the loop if the build status is not available (null)
-              if [[ $BUILD_STATUS = "null" ]]; then
+              if [[ $BUILD_STATUS != "null" ]]; then
                 break
               fi
               sleep 5  # Adjust the sleep duration as needed
