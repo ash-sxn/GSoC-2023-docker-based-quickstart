@@ -89,7 +89,10 @@ jobs:
           echo "JOB_NAME_ENCODED is $JOB_NAME_ENCODED"
           # Will have to switch to "simple-java-maven-app" later on.
           # For the time being, it does not work as we haven't yet customized the config.xml file with the end user's GitHub handle.
+          #Staring the job
+          curl -X POST -u admin:$TOKEN 127.0.0.1:8080/job/%28simple%29%20demo%20job/build
           # Wait for the job to start running
+          sleep 3
           echo "Waiting for the job to start running..."
           BUILD_NUMBER=""
           while [[ -z $BUILD_NUMBER || $BUILD_NUMBER == "null" ]]; do
@@ -116,7 +119,7 @@ jobs:
           echo "This is BUILD__NUMBER $BUILD_NUMBER"
           # Delay before retrieving build information
           sleep 5
-          if [[ -z $BUILD_NUMBER || $BUILD_NUMBER == "null" ]]; then
+          if [[ -z $BUILD_NUMBER ]]; then
           # If the build number is empty or "null", it means the job has never run
             echo "Job has never run"
           else
@@ -224,7 +227,7 @@ jobs:
           # Delay before retrieving build information
           sleep 5
   
-          if [[ -z $BUILD_NUMBER || $BUILD_NUMBER == "null" ]]; then
+          if [[ -z $BUILD_NUMBER ]]; then
             echo "Job has never run"
           else
             echo "Job started. Build number: $BUILD_NUMBER"
