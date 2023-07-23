@@ -1,6 +1,9 @@
 services:
   jenkins_controller: 
-    build: dockerfiles/.
+    build:
+      context: dockerfiles/.
+      args:
+        JENKINS_HOST: 127.0.0.1
     restart: on-failure
     ports:
       - "8080:8080"
