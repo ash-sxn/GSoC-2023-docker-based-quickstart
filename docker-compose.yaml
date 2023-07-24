@@ -2,8 +2,8 @@ services:
   jenkins_controller: 
     build:
       context: dockerfiles/.
-      args:
-        JENKINS_HOST: 127.0.0.1
+    environment:
+      JAVA_OPTS: "-Dhudson.diagnosis.ReverseProxySetupMonitor.disable=true"
     restart: on-failure
     ports:
       - "8080:8080"
