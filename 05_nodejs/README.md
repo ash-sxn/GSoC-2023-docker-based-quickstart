@@ -29,16 +29,16 @@ This example uses 02 example with custom ssh agent to perform [NodeJS Tutorial](
   - get inside the `simple-node-js-react-npm-app ` with `cd simple-node-js-react-npm-app ` and create a `Jenkinsfile` with this content 
   ```
   pipeline {
-      agent any
-      stages {
-          
-          stage('Build') { 
-              steps {
-                  sh 'mvn -B -DskipTests clean package' 
-              }
-          }
-      }
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh 'npm install'
+            }
+        }
+    }
   }
+  
   ```
   - Save your `Jenkinsfile` 
   - run the commands `git add .` to add the Jenkinsfile to the staging then run `git commit -m "Add initial Jenkinsfile"` to commit the changes, then run `git push origin master` to push the changes to you forked repo  
@@ -63,12 +63,7 @@ This example uses 02 example with custom ssh agent to perform [NodeJS Tutorial](
 
         stage('Test') {
             steps {
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
+                sh './jenkins/scripts/test.sh'
             }
         }
   - run the commands `git add .` to add the edited Jenkinsfile to the staging then run `git commit -m "Add 'Test' stage"` to commit the changes, then run `git push origin master` to push the changes to you forked repo   
@@ -77,9 +72,11 @@ This example uses 02 example with custom ssh agent to perform [NodeJS Tutorial](
   
   - Again open your Jenkinsfile and Copy and paste the following Declarative Pipeline syntax under the Test stage of your Jenkinsfile and save the file
 
-        stage('Deliver') {
+        stage('Deliver') { 
             steps {
-                sh './jenkins/scripts/deliver.sh'
+                sh './jenkins/scripts/deliver.sh' 
+                input message: 'Finished using the website? (Click "Proceed" to continue)' 
+                sh './jenkins/scripts/kill.sh' 
             }
         }
   - run the commands `git add .` to add the edited Jenkinsfile to the staging then run `git commit -m "Add 'Deliver' stage"` to commit the changes, then run `git push origin master` to push the changes to you forked repo   
