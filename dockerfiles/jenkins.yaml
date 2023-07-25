@@ -20,6 +20,9 @@ jenkins:
       nodeDescription: "ssh jenkins docker agent "
       remoteFS: "/home/jenkins/agent"
       retentionStrategy: "always"
+  disabledAdministrativeMonitors:
+    - "hudson.diagnosis.ReverseProxySetupMonitor"
+
 credentials:
   system:
     domainCredentials:
@@ -35,5 +38,3 @@ credentials:
 unclassified:
   location:
     url: "http://127.0.0.1:8080/"
-disabledAdministrativeMonitors:
-- "hudson.diagnosis.ReverseProxySetupMonitor"
