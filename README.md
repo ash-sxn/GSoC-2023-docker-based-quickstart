@@ -46,13 +46,14 @@ It can be found [here](https://chrome.google.com/webstore/detail/gitpod-online-i
  
 ### Suppressing Jenkins Warning using JCASC
 
-We suppressed a reverse proxy setup warning in Jenkins using Jenkins Configuration as Code (JCASC) in this setup because It was causing issue for the gitpod experience
+In order to improve the Gitpod experience with Jenkins, we decided to suppress a reverse proxy setup warning in Jenkins.
+This warning was causing issues in the Gitpod environment.
 
+To achieve this, we made use of Jenkins Configuration as Code ([JCASC](https://www.jenkins.io/projects/jcasc/)) and added the following property to the JCASC YAML file:
 
 We've added the following property in JCASC YAML file:
+
 ```yaml
 jenkins:
   disabledAdministrativeMonitors:
     - "hudson.diagnosis.ReverseProxySetupMonitor"
-```
-for more information about this please look [here](https://github.com/ash-sxn/GSoC-2023-docker-based-quickstart/issues/114)
