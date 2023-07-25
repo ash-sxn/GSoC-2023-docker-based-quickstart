@@ -1,9 +1,9 @@
-## Example 3
-### Maven Tutorial
-This example uses 02 example with custom ssh agent to perform [Maven Tutorial](https://www.jenkins.io/doc/tutorials/build-a-java-app-with-maven/) 
+## Example 5
+###  NodeJS Tutorial
+This example uses 02 example with custom ssh agent to perform [NodeJS Tutorial](https://www.jenkins.io/doc/tutorials/simple-node-js-react-npm-app /) 
 ### Files 
 * `dockerfiles/Dockerfile` is used to create a custom image from the `jenkins/jenkins` image and copies `plugins.txt` and `jenkins.yaml` into the container for plugins installation and JCasC configuration.
-* `dockerfile/agent/Dockerfile` is used to create a custom agent image from `jenkins/ssh-agent` with maven installed to perform the tutorial
+* `dockerfile/agent/Dockerfile` is used to create a custom agent image from `jenkins/ssh-agent` with nodeJS installed to perform the tutorial
 * `keygen.sh` is a script that generates new ssh-keys in secrets directory everytime it runs and updates the docker compose file with new keys 
 * `fork-and-clone.sh` is script that takes github credentials from user and fork and clone a repo used in the tutorial from a docker container using Dockerfile 
 * ` jenkins.yaml` is a JCasC configuration file that can be edited to customize the build accordingly.
@@ -12,21 +12,21 @@ This example uses 02 example with custom ssh agent to perform [Maven Tutorial](h
 * The `docker-compose.yaml` file defines two containers: the Jenkins controller and an agent. It then connects them to a common network, sets the private key in the controller and the public key in the agent, defines a named volume, and builds the image from the `Dockerfile`.
 
 ### Steps to run the example 
-* Make sure you are in the `03_maven_tutorial` directory by using the command `pwd`. 
+* Make sure you are in the `05_nodejs` directory by using the command `pwd`. 
 * Run the script with `./keygen.sh` command to generate ssh keys 
 * Then use the command `docker compose up -d --build` to run the example.
 * after the containers are successfully running (check with `docker compose ps`). You can access the controller on [`http://localhost:8080`](http://localhost:8080)
 * You can log in using the `admin` username and the `admin` password.
-### Steps to follow the [Maven Tutorial](https://www.jenkins.io/doc/tutorials/build-a-java-app-with-maven)
+### Steps to follow the [NodeJS Tutorial](https://www.jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm)
 
-- [Fork and clone the sample repository](https://www.jenkins.io/doc/tutorials/build-a-java-app-with-maven/#fork-and-clone-the-sample-repository-on-github)
+- [Fork and clone the sample repository](https://www.jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/#fork-and-clone-the-sample-repository-on-github)
 
-  - Make sure you are in `03_maven_tutorial` directory and Dockerfile and fork-and-clone.sh is present there
-  - Run `./fork-and-clone.sh` command, and enter your github credentails to get a clone of a your fork of [`simple-java-maven-app`](https://github.com/jenkins-docs/simple-java-maven-app)  
-  - If everything ran sucessfully you should have a `simple-java-maven-app` directory 
-- [Create your initial Pipeline as a Jenkinsfile](https://www.jenkins.io/doc/tutorials/build-a-java-app-with-maven/#create-your-pipeline-project-in-jenkins)
+  - Make sure you are in `05_nodejs` directory and Dockerfile and fork-and-clone.sh is present there
+  - Run `./fork-and-clone.sh` command, and enter your github credentails to get a clone of a your fork of [`simple-node-js-react-npm-app `](https://github.com/jenkins-docs/simple-node-js-react-npm-app )  
+  - If everything ran sucessfully you should have a `simple-node-js-react-npm-app ` directory 
+- [Create your initial Pipeline as a Jenkinsfile](https://www.jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/#create-your-pipeline-project-in-jenkins)
   
-  - get inside the `simple-java-maven` with `cd simple-java-maven` and create a `Jenkinsfile` with this content 
+  - get inside the `simple-node-js-react-npm-app ` with `cd simple-node-js-react-npm-app ` and create a `Jenkinsfile` with this content 
   ```
   pipeline {
       agent any
@@ -43,7 +43,7 @@ This example uses 02 example with custom ssh agent to perform [Maven Tutorial](h
   - Save your `Jenkinsfile` 
   - run the commands `git add .` to add the Jenkinsfile to the staging then run `git commit -m "Add initial Jenkinsfile"` to commit the changes, then run `git push origin master` to push the changes to you forked repo  
   - Go to Jenkins, log in and click create new jobs under Welcome to Jenkins!
-  - In the Enter an item name field, specify the name for your new Pipeline project (e.g. simple-java-maven-app).
+  - In the Enter an item name field, specify the name for your new Pipeline project (e.g. simple-node-js-react-npm-app ).
 
   - Scroll down and click Pipeline, then click OK at the end of the page.
 
@@ -53,11 +53,11 @@ This example uses 02 example with custom ssh agent to perform [Maven Tutorial](h
 
   - From the SCM field, choose Git.
 
-  - In the Repository URL field, specify the directory path of your forked repository above, which is https://github.com/<username>/simple-java-maven-app.git (replace <username> with your github username)
+  - In the Repository URL field, specify the directory path of your forked repository above, which is https://github.com/<username>/simple-node-js-react-npm-app.git (replace <username> with your github username)
 
   - Click Save to save your new Pipeline project. You’re now ready to begin. Click `Build Now` button to build your project
 
-- [Add a test stage to your Pipeline](https://www.jenkins.io/doc/tutorials/build-a-java-app-with-maven/#add-a-test-stage-to-your-pipeline)
+- [Add a test stage to your Pipeline](https://www.jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/#add-a-test-stage-to-your-pipeline)
 
   - Again open your Jenkinsfile and Copy and paste the following Declarative Pipeline syntax under the Build stage of your Jenkinsfile and save the file
 
@@ -73,7 +73,7 @@ This example uses 02 example with custom ssh agent to perform [Maven Tutorial](h
         }
   - run the commands `git add .` to add the edited Jenkinsfile to the staging then run `git commit -m "Add 'Test' stage"` to commit the changes, then run `git push origin master` to push the changes to you forked repo   
   - The Press the `Build Now` button again to run the both Build and Test stage
-- [Add a final deliver stage to your Pipeline](https://www.jenkins.io/doc/tutorials/build-a-java-app-with-maven/#add-a-final-deliver-stage-to-your-pipeline)
+- [Add a final deliver stage to your Pipeline](https://www.jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/#add-a-final-deliver-stage-to-your-pipeline)
   
   - Again open your Jenkinsfile and Copy and paste the following Declarative Pipeline syntax under the Test stage of your Jenkinsfile and save the file
 
@@ -100,4 +100,4 @@ If you also want to remove the named volumes, you can use the `--volumes` flag:
 This ensures that all resources, including volumes, are removed.
 
 Note that the `docker compose down` command should be executed from the same directory where your `docker-compose.yaml` file is located.
-* To remove the named volume, run `docker volume rm 03_maven_tutorial_jenkins_home` 
+* To remove the named volume, run `docker volume rm 05_nodejs_jenkins_home` 
