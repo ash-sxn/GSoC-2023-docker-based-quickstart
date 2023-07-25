@@ -1,87 +1,24 @@
 # Daily Update
-### Date: 17/07/2023 MONDAY
+**Start Time:** 7:12  
 
-**7:00 AM**
+**End Time:** 24:00++ 
 
-- Working on resolving errors in GitHub Actions.
-- Added an if condition to run certain steps only when there are changes noted.
-- Solved the issue with the build number by checking if it is null in the if statement.
-- Testing the 03 examples with Github Actions.
-- Created a pull request (PR) for the GitHub Actions implementation.
-- Attended the weekly meeting at 19:00 and discussed various topics.
-- Checked for feedback on the PR.
-- Planning to apply the Remote Access API shared by Bruno tomorrow.
-- I'v not noted the hours work for the previous week but from tomorrow I will put more emphasis on that
+**Hours Worked:** 5hr30m
 
+### Date: 18/07/2023 Tuesday
 
-### Date: 13/07/2023 THURSDAY
+**7:12-9:00**
 
-**7:47 AM**
+- Started working on resolving GitHub Actions error from the previous day.
+- Received an email from Alyssa, suggesting the creation of a blog post summarizing the previous week's midterm presentation. The deadline for the blog post is Friday.
+- Experimenting with separate shell scripts for the GitHub Actions process, as suggested by Bervianto.
 
-- Working on resolving errors in GitHub Actions.
-- Encountering issues with the `git diff` command and finding a solution using `git show` instead.
-- Facing another error related to the curl command not receiving a response from the server.
-- Realized that the curl command is not using `localhost` as the URL.
-- Attempted to pass arguments between steps, but encountered issues.
-- Identified the cause of an error in the curl command related to the initialization of Jenkins.
-- Attended office hours at 20:30.
+**18:00-20:00** **&&** **22:00-24:00++** 
 
-
-### Date: 12/07/2023 WEDNESDAY
-
-**12:03 PM**
-
-- Made progress today.
-- Planning to create a PR on GitHub Actions and start working on the Python example.
-- Facing multiple errors but solving them one by one.
-- Learning about crumb and API token in Jenkins.
-- Encountered an error related to the build number being null.
-- Installed yq manually to solve the issue.
-- Need to handle a different approach for the 01 00 example using if-else statements.
-- Experienced some strange behavior where the job failed to run initially but worked fine on re-run.
-- Still encountering errors and investigating the cause.
-
-
-### Date: 11/07/2023 TUESDAY
-
-**9:59 AM**
-
-- Woke up late.
-- Getting back to work.
-- Planning to create a PR on the GitHub Actions topic.
-- Currently facing some small errors and trying to solve them.
-- Reading GitHub Actions documentation for better understanding.
-- Working on modifying the test-jenkins.yml file to run the directory with changes when pushing.
-
-**16:53 PM**
-
-- Getting back to work.
-- Learning about how to use variables in the GitHub Actions file.
-- Feeling a bit overwhelmed and getting easily distracted today.
-
-### Date: 10/07/2023 MONDAY
-
-**7:04 AM**
-
-- Starting work.
-- Working on PR#88, adding GitHub Actions for Jenkins instance.
-- Trying to understand and test the script's "Run Curl to test the stack" part.
-- Gaining understanding of the script.
-
-
-**13:30 PM**
-
-- Attended the weekly meeting.
-- Jean-Marc started the meeting, but Bruno and Bervianto were absent.
-- Found out later that Bruno started the meeting using a different URL.
-- Created and updated the doodle.
-
-
-**21:19 PM**
-
-- Testing more with the GitHub Actions script.
-- Creating a test-jenkins.yaml in the workflow directory from scratch on a separate branch.
-
+- Started working on the Python tutorial.
+- Tested the Python tutorial with a newly created Dockerfile for the agent.
+- Ran the tutorials and Jenkinsfiles to test the functionality.
+- Updated the teardown and init scripts to work with the 04 tutorial using the Python keyword.
 
 
 ### Date: 07/07/2023 FRIDAY
