@@ -11,13 +11,14 @@ VAR1=old
 VAR2=manual
 VAR3=new
 VAR4=maven
-
+VAR5=python
 # Assign file paths to variables VAR1-VAR3L and VARDL for defauld location
 VARDL="."
 VAR1L="./00_old_one_from_proposal"
 VAR2L="./01_simple_controller_plus_agent"
 VAR3L="./02_custom_docker_file_connecting_agent_and_controller"
 VAR4L="./03_maven_tutorial"
+VAR5L="./04_python_tutorial"
 
 # Function to stop a tutorial based on the provided path
 stop_tutorial() {
@@ -46,6 +47,8 @@ do
     stop_tutorial "$VAR3L"
   elif [[ "$TUTORIAL" == "$VAR4" ]]; then
     stop_tutorial "$VAR4L"
+  elif [[ "$TUTORIAL" == "$VAR5" ]]; then
+    stop_tutorial "$VAR5L"
   elif [[ "$TUTORIAL" == "0" ]]; then
     stop_tutorial "$VARDL"
   else

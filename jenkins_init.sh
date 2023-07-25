@@ -9,13 +9,15 @@ VAR1=old
 VAR2=manual
 VAR3=new
 VAR4=maven
+VAR5=python
 
-# Assign file paths to variables VAR0-VAR3L
+# Assign file paths to variables VARDL-VAR5L
 VARDL="."
 VAR1L="./00_old_one_from_proposal"
 VAR2L="./01_simple_controller_plus_agent"
 VAR3L="./02_custom_docker_file_connecting_agent_and_controller"
 VAR4L="./03_maven_tutorial"
+VAR5L="./04_python_tutorial"
 DOCKER_COMPOSE="docker compose"
 
 # Function to check if running in Gitpod and modify jenkins.yaml if needed
@@ -131,6 +133,9 @@ elif [[ "$TUTORIAL" == "$VAR3" ]]; then
 elif [[ "$TUTORIAL" == "$VAR4" ]]; then
   generate_ssh_keys "$VAR4L"
   start_tutorial "$VAR4L"
+elif [[ "$TUTORIAL" == "$VAR5" ]]; then
+  generate_ssh_keys "$VAR5L"
+  start_tutorial "$VAR5L"
 else
   # If no valid argument was passed, run the default tutorial
   echo "No valid argument was selected. Running the default tutorial"
