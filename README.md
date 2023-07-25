@@ -57,3 +57,6 @@ We've added the following property in JCASC YAML file:
 jenkins:
   disabledAdministrativeMonitors:
     - "hudson.diagnosis.ReverseProxySetupMonitor"
+```
+
+For more detailed information about this configuration and the context behind it, please refer to the corresponding issue.
