@@ -43,3 +43,16 @@ It can be found [here](https://chrome.google.com/webstore/detail/gitpod-online-i
 ### Clean Up Instructions
 * To stop and remove the running containers `jenkins_teardown.sh` script is used  
 * use `./jenkins_teardown.sh` command to stop and remove the running example 
+ 
+### Suppressing Jenkins Warning using JCASC
+
+We suppressed a reverse proxy setup warning in Jenkins using Jenkins Configuration as Code (JCASC) in this setup because It was causing issue for the gitpod experience
+
+
+We've added the following property in JCASC YAML file:
+```yaml
+jenkins:
+  disabledAdministrativeMonitors:
+    - "hudson.diagnosis.ReverseProxySetupMonitor"
+```
+for more information about this please look [here](https://github.com/ash-sxn/GSoC-2023-docker-based-quickstart/issues/114)
