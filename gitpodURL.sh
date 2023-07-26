@@ -14,4 +14,4 @@ export JENKINS_EXT_URL="$(gp url 8080)"
 echo Jenkins should be accessible here: "$JENKINS_EXT_URL"
 
 # Use yq to update the value of the .unclassified.location.url field in the configuration file
-yq eval ".unclassified.location.url = \"https://8080-$service_url/\"" "$config_file" > "$config_file.tmp" && mv "$config_file.tmp" "$config_file"
+# yq eval ".unclassified.location.url = \"https://8080-$service_url/\"" "$config_file" > "$config_file.tmp" && mv "$config_file.tmp" "$config_file"
