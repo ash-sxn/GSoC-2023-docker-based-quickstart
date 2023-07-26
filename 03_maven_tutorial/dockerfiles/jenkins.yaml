@@ -20,9 +20,9 @@ jenkins:
       nodeDescription: "ssh jenkins docker agent "
       remoteFS: "/home/jenkins/agent"
       retentionStrategy: "always"
-  # Suppressing Revere Proxy Setup is broken warning, mainly for the gitpod 
-  disabledAdministrativeMonitors:
-    - "hudson.diagnosis.ReverseProxySetupMonitor"
+  # Suppressing "Reverse Proxy Setup is broken" warning, mainly for the gitpod
+  #disabledAdministrativeMonitors:
+  #  - "hudson.diagnosis.ReverseProxySetupMonitor"
 credentials:
   system:
     domainCredentials:
