@@ -112,7 +112,7 @@ generate_ssh_keys() {
 start_tutorial() {
   local tutorial_path=$1
   echo "Starting tutorial $tutorial_path"
-  $DOCKER_COMPOSE -f "$tutorial_path/docker-compose.yaml" up -d --build
+  $DOCKER_COMPOSE -f "$tutorial_path/docker-compose.yaml" up --detach --build --force-recreate
 }
 
 # check wsl

@@ -2,6 +2,8 @@ services:
   jenkins_controller: 
     build: dockerfiles/.
     restart: on-failure
+    environment:
+      - JENKINS_EXT_URL=${JENKINS_EXT_URL:-http://localhost:8080} # Default to localhost:8080 with HTTP
     ports:
       - "8080:8080"
     volumes:
