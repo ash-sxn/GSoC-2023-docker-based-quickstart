@@ -26,13 +26,15 @@ It can be found [here](https://chrome.google.com/webstore/detail/gitpod-online-i
       * 00_old_one_from_proposal
       * 01_simple_controller_plus_agent
       * 02_custom_docker_file_connecting_agent_and_controller
-      * 03_maven_tutorial (Not ready yet)
+      * 03_maven_tutorial 
+      * 04_python_tutorial 
 * to run the different examples add these arguments to the ./jenkins_init.sh command
 
     * `old` - 00_old_one_from_proposal => `./jenkins_init.sh old`
     * `manual` - 01_simple_controller_plus_agent => `./jenkins_init.sh manual`
     * `new` - 02_custom_docker_file_connecting_agent_and_controller => `./jenkins_init.sh new`
-    * `maven` - 03_maven_tutorial (doesn't work right now, still in devlopment ) => `./jenkins_init.sh maven`
+    * `maven` - 03_maven_tutorial => `./jenkins_init.sh maven`
+    * `python` - 04_python-tutorial => `./jenkins_init.sh python`
 * If no argument is used i.e. `./jenkins_init.sh`, It runs the latest example present in the root directory docker-compose file
 
 ### How to Verify Jenkins installation
@@ -43,3 +45,20 @@ It can be found [here](https://chrome.google.com/webstore/detail/gitpod-online-i
 ### Clean Up Instructions
 * To stop and remove the running containers `jenkins_teardown.sh` script is used  
 * use `./jenkins_teardown.sh` command to stop and remove the running example 
+ 
+### Suppressing Jenkins Warning using JCASC
+
+In order to improve the Gitpod experience with Jenkins, we decided to suppress a reverse proxy setup warning in Jenkins.
+This warning was causing issues in the Gitpod environment.
+
+To achieve this, we made use of Jenkins Configuration as Code ([JCASC](https://www.jenkins.io/projects/jcasc/)) and added the following property to the JCASC YAML file:
+
+We've added the following property in JCASC YAML file:
+
+```yaml
+jenkins:
+  disabledAdministrativeMonitors:
+    - "hudson.diagnosis.ReverseProxySetupMonitor"
+```
+
+For more detailed information about this configuration and the context behind it, please refer to the corresponding issue.

@@ -1,11 +1,31 @@
 # Daily Update
+
+## Date: 25/07/2023 Tuesday
+
+**Working on Node Tutorial**
+
+- Currently troubleshooting an error in Node that reads: `Error: error:0308010C:digital envelope routines::unsupported at new Hash ...`
+- Identified that the error was due to using the latest version of Node (v16). Resolved the issue by switching to version v14.
+
+**Working on Issue #114**
+
+- Reading the email from JMM regarding the issue and starting to work on it.
+
+**Working on PRs**
+
+- Created a PR (#116) to address the Reverse Proxy issue and suppress warnings.
+- Created another PR (#115) for the Node Tutorial. This PR also includes a rebase of the Python Tutorial branch to expand upon the modifications in the Jenkins init and teardown scripts.
+
+I didn't note the correct time today. from the top of my head I'd say 5 hrs
+
+### Date: 18/07/2023 Tuesday
+
 **Start Time:** 7:12  
 
 **End Time:** 24:00++ 
 
 **Hours Worked:** 5hr30m
 
-### Date: 18/07/2023 Tuesday
 
 **7:12-9:00**
 
