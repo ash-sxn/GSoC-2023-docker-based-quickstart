@@ -9,7 +9,7 @@ jobs:
   build-and-testIE:
     strategy:
       matrix:
-        dir: [00_old_one_from_proposal, 01_simple_controller_plus_agent, 02_custom_docker_file_connecting_agent_and_controller, 03_maven_tutorial,04_python_tutorial,05_nodejs]
+        dir: [00_old_one_from_proposal, 01_simple_controller_plus_agent, 02_custom_docker_file_connecting_agent_and_controller, 03_maven_tutorial, 04_python_tutorial,05_nodejs]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
