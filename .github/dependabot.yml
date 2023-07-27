@@ -93,3 +93,10 @@ updates:
     open-pull-requests-limit: 10
     ignore:
       - dependency-name: "jenkins/jenkins"
+  # GitHub actions
+  - package-ecosystem: "github-actions"
+    target-branch: main
+    directory: "/"
+    schedule:
+      # Check for updates to GitHub Actions every week
+      interval: "weekly"
