@@ -48,6 +48,7 @@ services:
 
   maven:
     build: dockerfiles/maven/.
+    container_name: desktop-jenkins_agent-1
     profiles:
       - maven
     depends_on:
@@ -65,6 +66,7 @@ services:
 
   python:
     build: dockerfiles/python/.
+    container_name: desktop-jenkins_agent-1
     profiles:
       - python
     depends_on:
@@ -82,6 +84,7 @@ services:
 
   node:
     build: dockerfiles/node/.
+    container_name: desktop-jenkins_agent-1
     profiles:
       - node
     depends_on:
