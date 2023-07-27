@@ -43,7 +43,6 @@ jobs:
         with:
           path: ".""
           fail-build: false
-          only-fixed: true
           severity-cutoff: critical
 
       - name: Upload vulnerability report
