@@ -1,6 +1,7 @@
 services:
   sidekick_service:
     # Configuration for the sidekick service
+    profiles: ["default"]
     build: dockerfiles/sidekick/.
     stdin_open: true
     tty: true
@@ -14,6 +15,7 @@ services:
       retries: 5
 
   jenkins_controller:
+    profiles: ["default"]
     build: dockerfiles/.
     restart: on-failure
     ports:
@@ -30,12 +32,15 @@ services:
       timeout: 10s
       retries: 5
 
-  jenkins_agent:
+  default_agent:
+    profiles: ["default"]
     image: jenkins/ssh-agent:5.5.0-jdk17
     container_name: desktop-jenkins_agent-1
     depends_on:
       sidekick_service:
         condition: service_completed_successfully  # Depends on the successful completion of the sidekick_service
+      jenkins_controller:
+        condition: service_started 
     healthcheck:
       test: [ "CMD-SHELL", "[ -f /home/jenkins/.ssh/authorized_keys ] || exit 1" ]  # Checks if the authorized_keys file exists in the /home/jenkins/.ssh path
       interval: 5s
@@ -43,6 +48,52 @@ services:
       retries: 5
     volumes:
       - agent-ssh-dir:/home/jenkins/.ssh:ro  # Mounts the agent-ssh-dir volume to the /home/jenkins/.ssh path inside the container as read-only
+
+  maven:
+    build: dockerfiles/maven/.
+    depends_on:
+      sidekick_service:
+        condition: service_completed_successfully  # Depends on the successful completion of the sidekick_service
+      jenkins_controller:
+        condition: service_started 
+    healthcheck:
+      test: [ "CMD-SHELL", "[ -f /home/jenkins/.ssh/authorized_keys ] || exit 1" ]  # Checks if the authorized_keys file exists in the /home/jenkins/.ssh path
+      interval: 5s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - agent-ssh-dir:/home/jenkins/.ssh:ro  # Mounts the agent-ssh-dir volume to the /home/jenkins/.ssh path inside the container as read-only
+
+  python:
+    build: dockerfiles/python/.
+    depends_on:
+      sidekick_service:
+        condition: service_completed_successfully  # Depends on the successful completion of the sidekick_service
+      jenkins_controller:
+        condition: service_started 
+    healthcheck:
+      test: [ "CMD-SHELL", "[ -f /home/jenkins/.ssh/authorized_keys ] || exit 1" ]  # Checks if the authorized_keys file exists in the /home/jenkins/.ssh path
+      interval: 5s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - agent-ssh-dir:/home/jenkins/.ssh:ro  # Mounts the agent-ssh-dir volume to the /home/jenkins/.ssh path inside the container as read-only
+
+  node:
+    build: dockerfiles/node/.
+    depends_on:
+      sidekick_service:
+        condition: service_completed_successfully  # Depends on the successful completion of the sidekick_service
+      jenkins_controller:
+        condition: service_started 
+    healthcheck:
+      test: [ "CMD-SHELL", "[ -f /home/jenkins/.ssh/authorized_keys ] || exit 1" ]  # Checks if the authorized_keys file exists in the /home/jenkins/.ssh path
+      interval: 5s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - agent-ssh-dir:/home/jenkins/.ssh:ro  # Mounts the agent-ssh-dir volume to the /home/jenkins/.ssh path inside the container as read-only
+    
 
 volumes:
   jenkins_home:
