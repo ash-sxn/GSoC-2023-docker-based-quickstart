@@ -1,0 +1,22 @@
+services:
+  jenkins_controller: 
+    build: dockerfiles/.
+    restart: on-failure
+    ports:
+      - "8080:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - type: bind
+        source: ./secrets/jenkins_agent_ed
+        target: /run/secrets/SSH_AGENT_KEY
+        read_only: true
+    
+  jenkins_agent:
+    build: dockerfiles/agent/.
+    ports:
+      - "3000:3000"
+    container_name: desktop-jenkins_agent-1
+    environment:
+      - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPSkKPsJNqYtFsa65wOXCQY8w/u4EBnD1szTagwFRw/6 jh@jh-Modern-14-B5M
+volumes: 
+  jenkins_home:
