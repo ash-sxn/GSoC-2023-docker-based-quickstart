@@ -1,7 +1,6 @@
 services:
   sidekick_service:
     # Configuration for the sidekick service
-    profiles: ["default"]
     build: dockerfiles/sidekick/.
     stdin_open: true
     tty: true
@@ -15,7 +14,6 @@ services:
       retries: 5
 
   jenkins_controller:
-    profiles: ["default"]
     build: dockerfiles/.
     restart: on-failure
     ports:
@@ -33,7 +31,6 @@ services:
       retries: 5
 
   default_agent:
-    profiles: ["default"]
     image: jenkins/ssh-agent:5.5.0-jdk17
     container_name: desktop-jenkins_agent-1
     depends_on:
@@ -51,6 +48,8 @@ services:
 
   maven:
     build: dockerfiles/maven/.
+    profiles:
+      - maven
     depends_on:
       sidekick_service:
         condition: service_completed_successfully  # Depends on the successful completion of the sidekick_service
@@ -66,6 +65,8 @@ services:
 
   python:
     build: dockerfiles/python/.
+    profiles:
+      - python
     depends_on:
       sidekick_service:
         condition: service_completed_successfully  # Depends on the successful completion of the sidekick_service
@@ -81,6 +82,8 @@ services:
 
   node:
     build: dockerfiles/node/.
+    profiles:
+      - node
     depends_on:
       sidekick_service:
         condition: service_completed_successfully  # Depends on the successful completion of the sidekick_service
