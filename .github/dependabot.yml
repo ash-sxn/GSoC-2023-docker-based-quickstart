@@ -55,3 +55,41 @@ updates:
     open-pull-requests-limit: 10
     ignore:
       - dependency-name: "jenkins/jenkins"
+  - package-ecosystem: docker
+    directory: "./04_python_tutorial/dockerfiles"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "jenkins/jenkins"
+  - package-ecosystem: docker
+    directory: "./04_python_tutorial/dockerfiles/agent"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+  - package-ecosystem: docker
+    directory: "./dockerfiles"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "jenkins/jenkins"
+  - package-ecosystem: docker
+    directory: "./05_nodejs/dockerfiles"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "jenkins/jenkins"
+  - package-ecosystem: docker
+    directory: "./05_nodejs/dockerfiles/agent"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+  - package-ecosystem: docker
+    directory: "./dockerfiles"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "jenkins/jenkins"
