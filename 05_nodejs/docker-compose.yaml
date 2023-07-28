@@ -2,8 +2,6 @@ services:
   jenkins_controller: 
     build: dockerfiles/.
     restart: on-failure
-    environment:
-      - JENKINS_EXT_URL=${JENKINS_EXT_URL:-http://localhost:8080} # Default to localhost:8080 with HTTP
     ports:
       - "8080:8080"
     volumes:
@@ -14,9 +12,11 @@ services:
         read_only: true
     
   jenkins_agent:
-    image: jenkins/ssh-agent:5.7.0-jdk17
+    build: dockerfiles/agent/.
+    ports:
+      - "3000:3000"
     container_name: desktop-jenkins_agent-1
     environment:
-      - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE0bf3h3pwvmLTaNNLwtOeVTj2916w3JaztidO5LCZny jh@jh-Modern-14-B5M
+      - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPSkKPsJNqYtFsa65wOXCQY8w/u4EBnD1szTagwFRw/6 jh@jh-Modern-14-B5M
 volumes: 
   jenkins_home:

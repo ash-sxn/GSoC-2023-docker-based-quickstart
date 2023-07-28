@@ -20,8 +20,6 @@ jenkins:
       nodeDescription: "ssh jenkins docker agent "
       remoteFS: "/home/jenkins/agent"
       retentionStrategy: "always"
-  disabledAdministrativeMonitors:
-    - "hudson.diagnosis.ReverseProxySetupMonitor"
 credentials:
   system:
     domainCredentials:
@@ -31,9 +29,10 @@ credentials:
           description: "private ssh key for jenkins agent "
           privateKeySource:
             directEntry:
-              privateKey: ${readFile:/ssh-dir/jenkins_agent_ed}
+              privateKey: "${SSH_AGENT_KEY}"
           scope: SYSTEM
           username: "jenkins"
 unclassified:
   location:
     url: "http://127.0.0.1:8080/"
+
