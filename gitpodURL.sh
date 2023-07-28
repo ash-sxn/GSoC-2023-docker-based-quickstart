@@ -11,7 +11,7 @@ echo Jenkins can be accessed here: "https://8080-$service_url"
 
 # Let's try with the gp command
 gp env JENKINS_EXT_URL="$(gp url 8080)"
-eval $(gp env -e JENKINS_EXT_URL="$(gp url 8080)")
+eval "$(gp env -e JENKINS_EXT_URL="$(gp url 8080)")"
 echo Jenkins should be accessible here: "$JENKINS_EXT_URL"
 
 # Use yq to update the value of the .unclassified.location.url field in the configuration file
