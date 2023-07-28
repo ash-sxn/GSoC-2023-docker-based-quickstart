@@ -2,7 +2,7 @@ image:
   file: .gitpod/Dockerfile
 
 tasks:
-  - init: sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 && sudo chmod a+x /usr/local/bin/yq && ./02_custom_docker_file_connecting_agent_and_controller/gitpodURL.sh && ./03_maven_tutorial/gitpodURL.sh && ./gitpodURL.sh && eval $(gp env -e JENKINS_EXT_URL="$(gp url 8080)")
+  - init: sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 && sudo chmod a+x /usr/local/bin/yq && ./02_custom_docker_file_connecting_agent_and_controller/gitpodURL.sh && ./03_maven_tutorial/gitpodURL.sh && ./gitpodURL.sh && eval "$(gp env -e JENKINS_EXT_URL="$(gp url 8080)")"
 
 ports:
   - name: Jenkins controller
