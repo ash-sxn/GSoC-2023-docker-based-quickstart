@@ -21,7 +21,7 @@
 * But If you do plan to use gitpod in the future, it's recommended to install the gitpod extension which will create a launch with the gitpod button on every GitHub repo you visit.
 It can be found [here](https://chrome.google.com/webstore/detail/gitpod-online-ide/dodmmooeoklaejobgleioelladacbeki) for Chromium and [here](https://addons.mozilla.org/firefox/addon/gitpod/) for Firefox.
 ### Steps to run examples from the repo
-* `docker compose up ` is used to run examples from the project 
+* `docker compose up` is used to run examples from the project 
     * There are 6 working examples in the project right now :- 
       * 00_old_one_from_proposal
       * 01_simple_controller_plus_agent
