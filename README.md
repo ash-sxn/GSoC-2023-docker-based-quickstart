@@ -36,7 +36,7 @@ It can be found [here](https://chrome.google.com/webstore/detail/gitpod-online-i
     * `maven` - 03_maven_tutorial => `docker compose up -d maven`
     * `python` - 04_python-tutorial => `docker compose up -d python`
     * `node` - 05_nodejs => `docker compose up -d node`
-* If no argument is used i.e. `docker compose up -d `, It runs the latest default example.
+* If no argument is used i.e. `docker compose up -d`, It runs the latest default example.
 
 ### How to Verify Jenkins installation
 * You can check the status of the container with the `docker ps` command or the `docker compose ps` one.
