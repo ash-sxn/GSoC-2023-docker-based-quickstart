@@ -27,6 +27,7 @@ jobs:
         run: |
           if [[ $(echo "${{ steps.changes.outputs.files }}" | grep -E "(^|/)Dockerfile($|/)|(^|/)context/") ]]; then
             echo "Dockerfile or context directory has changed."
+            echo varialbe is below 
             echo "${{ steps.changes.outputs.files }}"
           else
             echo "No Dockerfile or context directory changes. Skipping Docker image build and push steps."
