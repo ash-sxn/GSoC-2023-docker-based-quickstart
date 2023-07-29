@@ -31,6 +31,8 @@ jobs:
             echo "${{ steps.changes.outputs.files }}"
           else
             echo "No Dockerfile or context directory changes. Skipping Docker image build and push steps."
+            echo varialbe is below 
+            echo "${{ steps.changes.outputs.files }}"
             exit 0
           fi
       -
