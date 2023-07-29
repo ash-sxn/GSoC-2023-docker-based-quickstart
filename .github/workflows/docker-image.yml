@@ -1,0 +1,101 @@
+name: docker image building and pushing
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches: [ '*' ]
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # Will build everyday at 4:30 and 16:30
+    - cron:  '30 4,16 * * *'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:  
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Retrieve modified files
+        id: changes
+        run: echo "::set-output name=files::$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})"
+      -
+        name: Check for Dockerfile and context changes
+        run: |
+          if [[ $(echo "${{ steps.changes.outputs.files }}" | grep -E "(^|/)Dockerfile($|/)|(^|/)context/") ]]; then
+            echo "Dockerfile or context directory has changed."
+          else
+            echo "No Dockerfile or context directory changes. Skipping Docker image build and push steps."
+            exit 0
+          fi
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/} | sed -e 's#/#-#g')"
+        id: extract_branch
+      -
+        name: Build and push a simple bundled instance
+        uses: docker/build-push-action@v4
+        with:
+          context: ./00_old_one_from_proposal
+          platforms: linux/amd64, linux/aarch64
+          push: true
+          tags: ash191245141/jenkinsci-tutorials:bundled_instance_${{ steps.extract_branch.outputs.branch }}
+      -
+        name: Build and push a simple jenkins controller
+        uses: docker/build-push-action@v4
+        with:
+          context: ./dockerfiles
+          platforms: linux/amd64, linux/aarch64
+          push: true
+          tags: ash191245141/jenkinsci-tutorials:simple_controller_${{ steps.extract_branch.outputs.branch }}
+      -
+
+        name: Build and push the jenkins agent for maven tutorial
+        uses: docker/build-push-action@v4
+        with:
+          context: ./dockerfiles/maven
+          platforms: linux/amd64, linux/aarch64
+          push: true
+          tags: ash191245141/jenkinsci-tutorials:maven_agent_${{ steps.extract_branch.outputs.branch }}
+      -
+        name: Build and push the jenkins agent for python tutorial
+        uses: docker/build-push-action@v4
+        with:
+          context: ./dockerfiles/python
+          platforms: linux/amd64, linux/aarch64
+          push: true
+          tags: ash191245141/jenkinsci-tutorials:python_agent_${{ steps.extract_branch.outputs.branch }}
+      -
+        name: Build and push the jenkins agent for node tutorial
+        uses: docker/build-push-action@v4
+        with:
+          context: ./dockerfiles/node
+          platforms: linux/amd64, linux/aarch64
+          push: true
+          tags: ash191245141/jenkinsci-tutorials:node_agent_${{ steps.extract_branch.outputs.branch }}
+
+      -
+        name: Build and push the jenkins agent for sidekick tutorial
+        uses: docker/build-push-action@v4
+        with:
+            context: ./dockerfiles/sidekick
+            platforms: linux/amd64, linux/aarch64
+            push: true
+            tags: ash191245141/jenkinsci-tutorials:sidekick_${{ steps.extract_branch.outputs.branch }}
+
+    
