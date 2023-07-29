@@ -233,4 +233,4 @@ jobs:
           fi
       - name: Teardown
         run: |
-          docker compose down 
+          docker compose down
