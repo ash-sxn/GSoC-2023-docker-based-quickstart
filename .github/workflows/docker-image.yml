@@ -63,7 +63,7 @@ jobs:
           context: ./00_old_one_from_proposal
           platforms: linux/amd64, linux/aarch64
           push: true
-          tags: ash191245141/jenkinsci-tutorials:00_old_one_${{ steps.extract_branch.outputs.branch == 'main' && '' || steps.extract_branch.outputs.branch }}
+          tags: ash191245141/jenkinsci-tutorials:00_old_one_${{ steps.extract_branch.outputs.branch }}
       -
         name: Build and push a simple jenkins controller
         if: contains(steps.changes.outputs.files, 'dockerfiles/Dockerfile')
