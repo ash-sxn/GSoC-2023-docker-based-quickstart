@@ -43,21 +43,19 @@ This example uses 02 example with custom ssh agent to perform [Maven Tutorial](h
   - Save your `Jenkinsfile` 
   - run the commands `git add .` to add the Jenkinsfile to the staging then run `git commit -m "Add initial Jenkinsfile"` to commit the changes, then run `git push origin master` to push the changes to you forked repo  
   - Go to Jenkins, log in and click create new jobs under Welcome to Jenkins!
-  - In the Enter an item name field, specify the name for your new Pipeline project (e.g. simple-java-maven-app).
+  - In the Enter an item name field, specify the name for your new Multibranch Pipeline project (e.g. simple-java-maven-app).
 
-  - Scroll down and click Pipeline, then click OK at the end of the page.
+  - Scroll down and click Multibranch Pipeline, then click OK at the end of the page.
 
-  - Click the Pipeline tab at the top of the page to scroll down to the Pipeline section.
+  - Click on the Add source in the branch Sources section below discription 
+  - Select Git and paste the link of your forked repo of the simple-java-maven-app in project Repository. it will look something like this `https://github.com/<username>/simple-java-maven-app.git` (replace `<username>` with your github username)
 
-  - From the Definition field, choose the Pipeline script from SCM option. This option instructs Jenkins to obtain your Pipeline from Source Control Management (SCM), which will be your forked Git repository.
+  - Click Save at the bottom to save your new Multibranch Pipeline project. You’re now ready to begin.
 
-  - From the SCM field, choose Git.
+  - It will automatically scan for all the branches in your repo It'll search for `master` branch in `simple-java-maven-app` and start building from the jenkinsfile you pushed in the repo click on the Status section to see.
 
-  - In the Repository URL field, specify the directory path of your forked repository above, which is https://github.com/<username>/simple-java-maven-app.git (replace <username> with your github username)
+  - click on the `master`(branch name of your repo) to see if your build was sucessfull or not.
 
-  - Click Save to save your new Pipeline project. You’re now ready to begin. Click `Build Now` button to build your project
-
-- [Add a test stage to your Pipeline](https://www.jenkins.io/doc/tutorials/build-a-java-app-with-maven/#add-a-test-stage-to-your-pipeline)
 
   - Again open your Jenkinsfile and Copy and paste the following Declarative Pipeline syntax under the Build stage of your Jenkinsfile and save the file
 
@@ -72,7 +70,7 @@ This example uses 02 example with custom ssh agent to perform [Maven Tutorial](h
             }
         }
   - run the commands `git add .` to add the edited Jenkinsfile to the staging then run `git commit -m "Add 'Test' stage"` to commit the changes, then run `git push origin master` to push the changes to you forked repo   
-  - The Press the `Build Now` button again to run the both Build and Test stage
+  - The Press the `Build Now` button to run the both Build and Test stage
 - [Add a final deliver stage to your Pipeline](https://www.jenkins.io/doc/tutorials/build-a-java-app-with-maven/#add-a-final-deliver-stage-to-your-pipeline)
   
   - Again open your Jenkinsfile and Copy and paste the following Declarative Pipeline syntax under the Test stage of your Jenkinsfile and save the file
@@ -83,7 +81,7 @@ This example uses 02 example with custom ssh agent to perform [Maven Tutorial](h
             }
         }
   - run the commands `git add .` to add the edited Jenkinsfile to the staging then run `git commit -m "Add 'Deliver' stage"` to commit the changes, then run `git push origin master` to push the changes to you forked repo   
-  - The Press the `Build Now` button again to run Build, Test and Deliver stages
+  - The Press the `Build Now` button to run Build, Test and Deliver stages
 
 ### Clean Up Instructions 
 

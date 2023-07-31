@@ -48,14 +48,20 @@ This tutorial utilizes two examples with a custom SSH agent to demonstrate the [
   - Save your `Jenkinsfile`.
   - Run the commands `git add .` to add the `Jenkinsfile` to the staging, then run `git commit -m "Add initial Jenkinsfile"` to commit the changes. Finally, run `git push origin master` to push the changes to your forked repo.
  - Go to Jenkins, login, and click "Create new jobs" under "Welcome to Jenkins!".
-  - In the "Enter an item name" field, specify the name for your new Pipeline project (e.g., "`simple-node-js-react-npm-app`").
 
-  - Scroll down and click "Pipeline", then click "OK" at the end of the page.
-  - Click the "Pipeline" tab at the top of the page to scroll down to the Pipeline section.
-  - In the "Definition" field, choose the "Pipeline script from SCM" option. This option instructs Jenkins to obtain your Pipeline from Source Control Management (SCM), which will be your forked Git repository.
-  - From the "SCM" field, choose "Git".
-  - In the "Repository URL" field, specify the directory path of your forked repository above, which is `https://github.com/<username>/simple-node-js-react-npm-app.git` (replace `<username>` with your GitHub username).
-  - Click "Save" to save your new Pipeline project. You’re now ready to begin. Click the "Build Now" button to build your project.
+  - In the Enter an item name field, specify the name for your new Multibranch Pipeline project (e.g. simple-node-js-react-npm-app).
+
+  - Scroll down and click Multibranch Pipeline, then click OK at the end of the page.
+
+  - Click on the Add source in the branch Sources section below discription 
+  - Select Git and paste the link of your forked repo of the simple-node-js-react-npm-app in project Repository. it will look something like this `https://github.com/<username>/simple-node-js-react-npm-app.git` (replace `<username>` with your github username)
+
+  - Click Save at the bottom to save your new Multibranch Pipeline project. You’re now ready to begin.
+
+  - It will automatically scan for all the branches in your repo It'll search for `master` branch in `simple-node-js-react-npm-app` and start building from the jenkinsfile you pushed in the repo click on the Status section to see.
+
+  - click on the `master`(branch name of your repo) to see if your build was sucessfull or not.
+
 
 - [Add a test stage to your Pipeline](https://www.jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/#add-a-test-stage-to-your-pipeline)
 
@@ -67,7 +73,7 @@ This tutorial utilizes two examples with a custom SSH agent to demonstrate the [
             }
         }
   - Run the command `git add .` to add the edited `Jenkinsfile` to the staging, then run `git commit -m "Add 'Test' stage"` to commit the changes. Finally, run `git push origin master` to push the changes to your forked repo.
-  - Press the "Build Now" button again to run both the Build and Test stages.
+  - Press the "Build Now" button to run both the Build and Test stages.
  - [Add a final deliver stage to your Pipeline](https://www.jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/#add-a-final-deliver-stage-to-your-pipeline)
   
   - Again, open your `Jenkinsfile` and copy-paste the following Declarative Pipeline syntax under the Test stage of your Jenkinsfile. Then, save the file.
@@ -80,7 +86,7 @@ This tutorial utilizes two examples with a custom SSH agent to demonstrate the [
             }
         }
   - Run the command `git add .` to add the edited `Jenkinsfile` to the staging, then run `git commit -m "Add 'Deliver' stage"` to commit the changes. Afterward, run `git push origin master` to push the changes to your forked repository.
-  - Press the "Build Now" button again to run the Build, Test, and Deliver stages.
+  - Press the "Build Now" button to run the Build, Test, and Deliver stages.
 
 ### Clean Up Instructions 
 
