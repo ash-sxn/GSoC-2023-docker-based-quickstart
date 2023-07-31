@@ -11,6 +11,9 @@ on:
     # Will build everyday at 4:30 and 16:30
     - cron:  '30 4,16 * * *'
 
+env:
+  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+
 jobs:
   docker:
     runs-on: ubuntu-latest
