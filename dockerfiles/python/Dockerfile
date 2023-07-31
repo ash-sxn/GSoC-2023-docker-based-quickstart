@@ -14,6 +14,5 @@ RUN pip install docker-py feedparser nosexcover prometheus_client pycobertura py
 # Add the Jenkins agent user to the environment
 RUN echo "PATH=${PATH}" >> /etc/environment
 
-
 # Set ownership for Jenkins agent home directory
 RUN chown -R jenkins:jenkins "${JENKINS_AGENT_HOME}"
