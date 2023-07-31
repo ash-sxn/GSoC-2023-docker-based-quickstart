@@ -63,7 +63,7 @@ jobs:
           context: ./00_old_one_from_proposal
           platforms: linux/amd64, linux/aarch64
           push: true
-          tags: ash191245141/jenkinsci-tutorials:00_old_one_${{ steps.extract_branch.outputs.branch }}
+          tags: ash191245141/jenkinsci-tutorials:00_old_one_${{ steps.extract_branch.outputs.branch == 'main' && '' || steps.extract_branch.outputs.branch }}
       -
         name: Build and push a simple jenkins controller
         if: contains(steps.changes.outputs.files, 'dockerfiles/Dockerfile')
@@ -72,7 +72,7 @@ jobs:
           context: ./dockerfiles
           platforms: linux/amd64, linux/aarch64
           push: true
-          tags: ash191245141/jenkinsci-tutorials:simple_controller_${{ steps.extract_branch.outputs.branch }}
+          tags: ash191245141/jenkinsci-tutorials:simple_controller_${{ steps.extract_branch.outputs.branch == 'main' && '' || steps.extract_branch.outputs.branch }}
       -
 
         name: Build and push the jenkins agent for maven tutorial
@@ -82,7 +82,7 @@ jobs:
           context: ./dockerfiles/maven
           platforms: linux/amd64, linux/aarch64
           push: true
-          tags: ash191245141/jenkinsci-tutorials:maven_agent_${{ steps.extract_branch.outputs.branch }}
+          tags: ash191245141/jenkinsci-tutorials:maven_agent_${{ steps.extract_branch.outputs.branch == 'main' && '' || steps.extract_branch.outputs.branch }}
       -
         name: Build and push the jenkins agent for python tutorial
         if: contains(steps.changes.outputs.files, 'dockerfiles/python/Dockerfile')
@@ -91,7 +91,7 @@ jobs:
           context: ./dockerfiles/python
           platforms: linux/amd64, linux/aarch64
           push: true
-          tags: ash191245141/jenkinsci-tutorials:python_agent_${{ steps.extract_branch.outputs.branch }}
+          tags: ash191245141/jenkinsci-tutorials:python_agent_${{ steps.extract_branch.outputs.branch == 'main' && '' || steps.extract_branch.outputs.branch }}
       -
         name: Build and push the jenkins agent for node tutorial
         if: contains(steps.changes.outputs.files, 'dockerfiles/node/Dockerfile')
@@ -100,7 +100,7 @@ jobs:
           context: ./dockerfiles/node
           platforms: linux/amd64, linux/aarch64
           push: true
-          tags: ash191245141/jenkinsci-tutorials:node_agent_${{ steps.extract_branch.outputs.branch }}
+          tags: ash191245141/jenkinsci-tutorials:node_agent_${{ steps.extract_branch.outputs.branch == 'main' && '' || steps.extract_branch.outputs.branch }}
 
       -
         name: Build and push the jenkins agent for sidekick tutorial
@@ -110,6 +110,6 @@ jobs:
             context: ./dockerfiles/sidekick
             platforms: linux/amd64, linux/aarch64
             push: true
-            tags: ash191245141/jenkinsci-tutorials:sidekick_${{ steps.extract_branch.outputs.branch }}
+            tags: ash191245141/jenkinsci-tutorials:sidekick_${{ steps.extract_branch.outputs.branch == 'main' && '' || steps.extract_branch.outputs.branch }}
 
     
