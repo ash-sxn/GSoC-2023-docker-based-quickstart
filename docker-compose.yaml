@@ -84,6 +84,8 @@ services:
 
   node:
     build: dockerfiles/node/.
+    environment:
+      - GITPOD_WORKSPACE_URL=${GITPOD_WORKSPACE_URL}    
     container_name: desktop-jenkins_agent-1
     profiles:
       - node
