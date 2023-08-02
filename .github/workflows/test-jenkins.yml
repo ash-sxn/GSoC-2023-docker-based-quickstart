@@ -11,11 +11,76 @@ jobs:
       matrix:
         dir: [maven, python, node]
     runs-on: ubuntu-latest
+    env:
+      GITHUB_USERNAME: ash-sxn
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
+      - name: Set Repository URL
+        id: set_repo_url
+        run: |
+          if [[ "${{ matrix.dir }}" == "maven" ]]; then
+            echo "::set-output name=repo_url::${GITHUB_USERNAME}/simple-java-maven-app"
+          elif [[ "${{ matrix.dir }}" == "python" ]]; then
+            echo "::set-output name=repo_url::${GITHUB_USERNAME}/simple-python-pyinstaller-app"
+          elif [[ "${{ matrix.dir }}" == "node" ]]; then
+            echo "::set-output name=repo_url::${GITHUB_USERNAME}/simple-node-js-react-npm-app"
+          fi
+        shell: bash
+
+      - name: Test Jenkins Job
+        run: |
+          # Full repo URL
+          REPO_URL="https://github.com/${{ steps.set_repo_url.outputs.repo_url }}.git"
+          # adding test job to the tutorial
+          XML_CONTENT="<?xml version='1.1' encoding='UTF-8'?>
+          <org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject plugin="workflow-multibranch@756.v891d88f2cd46">
+            <actions/>
+            <description></description>
+            <properties/>
+            <folderViews class="jenkins.branch.MultiBranchProjectViewHolder" plugin="branch-api@2.1122.v09cb_8ea_8a_724">
+              <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
+            </folderViews>
+            <healthMetrics/>
+            <icon class="jenkins.branch.MetadataActionFolderIcon" plugin="branch-api@2.1122.v09cb_8ea_8a_724">
+              <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
+            </icon>
+            <orphanedItemStrategy class="com.cloudbees.hudson.plugins.folder.computed.DefaultOrphanedItemStrategy" plugin="cloudbees-folder@6.815.v0dd5a_cb_40e0e">
+              <pruneDeadBranches>true</pruneDeadBranches>
+              <daysToKeep>-1</daysToKeep>
+              <numToKeep>-1</numToKeep>
+              <abortBuilds>false</abortBuilds>
+            </orphanedItemStrategy>
+            <triggers/>
+            <disabled>false</disabled>
+            <sources class="jenkins.branch.MultiBranchProject$BranchSourceList" plugin="branch-api@2.1122.v09cb_8ea_8a_724">
+              <data>
+                <jenkins.branch.BranchSource>
+                  <source class="jenkins.plugins.git.GitSCMSource" plugin="git@5.2.0">
+                    <id>d3fe3e52-4cc1-4f38-a54e-237ff4e4ecf2</id>
+                    <remote>${REPO_URL}</remote>
+                    <credentialsId></credentialsId>
+                    <traits>
+                      <jenkins.plugins.git.traits.BranchDiscoveryTrait/>
+                    </traits>
+                  </source>
+                  <strategy class="jenkins.branch.DefaultBranchPropertyStrategy">
+                    <properties class="empty-list"/>
+                  </strategy>
+                </jenkins.branch.BranchSource>
+              </data>
+              <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
+            </sources>
+            <factory class="org.jenkinsci.plugins.workflow.multibranch.WorkflowBranchProjectFactory">
+              <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
+              <scriptPath>Jenkinsfile</scriptPath>
+            </factory>
+          </org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject>"
+
+          echo "$XML_CONTENT" > dockerfiles/jobs/${{ matrix.dir }}/config.xml
             
       - name: checking files & running the docker compose up with ${{ matrix.dir }} argument
         run: |
@@ -56,7 +121,7 @@ jobs:
           echo "TOKEN was found."
           # Let's launch a job. The token has been generated in the previous steps.
           echo "Launching a job"
-          JOB_NAME="%28simple%29%20demo%20job"
+          JOB_NAME="${{ matrix.dir }}"
           # Encode the JOB_NAME to replace spaces, open parentheses, and closing parentheses with their corresponding URL-encoded values.
           # This is necessary when using the JOB_NAME in a URL or any other context where special characters need to be encoded.
           # Spaces are replaced with "%20", open parentheses with "%28", and closing parentheses with "%29".
@@ -66,7 +131,7 @@ jobs:
           # Will have to switch to "simple-java-maven-app" later on.
           # For the time being, it does not work as we haven't yet customized the config.xml file with the end user's GitHub handle.
           #Staring the job
-          curl -X POST -u admin:$TOKEN 127.0.0.1:8080/job/$JOB_NAME/build
+          curl -X POST -u admin:$TOKEN 127.0.0.1:8080/job/$JOB_NAME/job/master/build
           # Wait for the job to start running
           sleep 3
           echo "Waiting for the job to start running..."
