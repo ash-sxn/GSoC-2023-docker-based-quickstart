@@ -80,6 +80,7 @@ jobs:
             </factory>
           </org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject>"
 
+          mkdir -p dockerfiles/jobs/${{ matrix.dir }}
           echo "$XML_CONTENT" > dockerfiles/jobs/${{ matrix.dir }}/config.xml
             
       - name: checking files & running the docker compose up with ${{ matrix.dir }} argument
