@@ -109,3 +109,4 @@ Note that the `docker compose down` command should be executed from the same dir
 To remove the named volume, run:
 
 `docker volume rm 03_maven_tutorial_jenkins_home` 
+
