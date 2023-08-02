@@ -1,16 +1,17 @@
 ## Example 5: NodeJS Tutorial
-This tutorial utilizes two examples with a custom SSH agent to demonstrate the [NodeJS Tutorial](https://www.jenkins.io/doc/tutorials/simple-node-js-react-npm-app/).
+
+This tutorial utilizes two Docker containers with a custom SSH agent to demonstrate the [NodeJS Tutorial](https://www.jenkins.io/doc/tutorials/simple-node-js-react-npm-app/).
 
 ### Files
 
-* `dockerfiles/Dockerfile` is used to create a custom image from the `jenkins/jenkins` image and copies `plugins.txt` and `jenkins.yaml` into the container for plugin installation and JCasC configuration.
-* `The dockerfile/agent/Dockerfile` is used to create a custom agent image from `jenkins/ssh-agent` with NodeJS installed, enabling it to perform the tutorial.
-* `keygen.sh` is a script that generates new SSH keys in the secrets directory every time it runs and updates the Docker Compose file with the new keys.
-* `fork-and-clone.sh` is a script that takes GitHub credentials from the user, forks, and clones a repository used in the tutorial from within a Docker container using the Dockerfile.
-* `jenkins.yaml` is a JCasC configuration file that can be edited to customize the build accordingly.
-* `gitpodURL.sh` is a script that replaces `http://127.0.0.1:8080` with the appropriate Gitpod URL in the `jenkins.yaml` file.
-* `plugins.txt` is a list of plugins that are installed with the help of [`jenkins-plugin-cli`](https://www.jenkins.io/doc/book/managing/plugins/#install-with-cli).
-* The `docker-compose.yaml` file defines two containers: the Jenkins controller and an agent. It then connects them to a common network, sets the private key in the controller, and the public key in the agent, defines a named volume, and builds the image from the `Dockerfile`.
+* `dockerfiles/Dockerfile`: Used to create a custom image from the `jenkins/jenkins` image and copies `plugins.txt` and `jenkins.yaml` into the container for plugin installation and JCasC configuration.
+* `dockerfile/agent/Dockerfile`: Used to create a custom agent image from `jenkins/ssh-agent` with NodeJS installed, enabling it to perform the tutorial.
+* `keygen.sh`: A script that generates new SSH keys in the secrets directory every time it runs and updates the Docker Compose file with the new keys.
+* `fork-and-clone.sh`: A script that takes GitHub credentials from the user, forks, and clones a repository used in the tutorial from within a Docker container using the Dockerfile.
+* `jenkins.yaml`: A JCasC configuration file that can be edited to customize the build accordingly.
+* `gitpodURL.sh`: A script that replaces `http://127.0.0.1:8080` with the appropriate Gitpod URL in the `jenkins.yaml` file.
+* `plugins.txt`: A list of plugins that are installed with the help of [`jenkins-plugin-cli`](https://www.jenkins.io/doc/book/managing/plugins/#install-with-cli).
+* The `docker-compose.yaml` file defines two containers: the Jenkins controller and an agent. It connects them to a common network, sets the private key in the controller, and the public key in the agent, defines a named volume, and builds the image from the `Dockerfile`.
 
 ### Steps to run the example
 
@@ -53,8 +54,7 @@ This tutorial utilizes two examples with a custom SSH agent to demonstrate the [
 - Click on "Add source" in the "Branch Sources" section below the description.
 - Select Git and paste the link of your forked repo of the simple-node-js-react-npm-app in the "Repository" field. It will look something like this `https://github.com/<username>/simple-node-js-react-npm-app.git` (replace `<username>` with your GitHub username).
 - Click "Save" at the bottom to save your new Multibranch Pipeline project. You're now ready to begin.
-- It will automatically scan for all the branches in your repo. It'll search for the `master` branch in `simple-node-js-react-npm-app` and start building from the Jenkinsfile you pushed in the repo. Click on the "Status" section to see.
-- Click on the `master` (branch name of your repo) to see if your build was successful or not.
+- It will automatically scan for all the branches in your repo. It'll search for the `master` branch in `simple-node-js-react-npm-app` and start building from the Jenkinsfile you pushed in the repo. Click on the "Status" section to see if your build was successful or not.
 
 - [Add a test stage to your Pipeline](https://www.jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/#add-a-test-stage-to-your-pipeline)
     - Once again, open your `Jenkinsfile` and copy and paste the following Declarative Pipeline syntax under the Build stage of your Jenkinsfile. Then, save the file.
@@ -100,11 +100,10 @@ If you also want to remove the named volumes, you can use the `--volumes` flag:
 
 `docker compose down --volumes` 
 
-
 This command will ensure that all associated resources, including named volumes, are removed when bringing down the Docker Compose environment.
 
 Note that the `docker compose down` command should be executed from the same directory where your `docker-compose.yaml` file is located.
 
 To remove the named volume, run:
 
-`docker volume rm 05_nodejs_jenkins_home` 
+`docker volume rm 05_nodejs_jenkins_home`
