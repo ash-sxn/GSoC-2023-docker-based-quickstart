@@ -132,7 +132,6 @@ jobs:
           # Will have to switch to "simple-java-maven-app" later on.
           # For the time being, it does not work as we haven't yet customized the config.xml file with the end user's GitHub handle.
           #Staring the job
-          curl -X POST -u admin:$TOKEN 127.0.0.1:8080/job/$JOB_NAME/build
           curl -X POST -u admin:$TOKEN 127.0.0.1:8080/job/$JOB_NAME/job/master/build
           # Wait for the job to start running
           sleep 3
