@@ -132,6 +132,7 @@ jobs:
           # Will have to switch to "simple-java-maven-app" later on.
           # For the time being, it does not work as we haven't yet customized the config.xml file with the end user's GitHub handle.
           #Staring the job
+          curl -X POST -u admin:$TOKEN 127.0.0.1:8080/job/$JOB_NAME/build
           curl -X POST -u admin:$TOKEN 127.0.0.1:8080/job/$JOB_NAME/job/master/build
           # Wait for the job to start running
           sleep 3
@@ -139,7 +140,7 @@ jobs:
           BUILD_NUMBER=""
           while [[ -z $BUILD_NUMBER || $BUILD_NUMBER == "null" ]]; do
             # Retrieve build info from Jenkins API using cURL
-            BUILD_INFO=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/api/json)
+            BUILD_INFO=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/jobs/master/api/json)
             echo "Retrieved build info: $BUILD_INFO"
             
             # Extract the build number from the JSON response using jq
