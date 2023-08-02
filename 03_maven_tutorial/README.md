@@ -1,5 +1,4 @@
 ## Example 3: Maven Tutorial
-
 This example uses 02 examples with a custom SSH agent to perform the [Maven Tutorial](https://www.jenkins.io/doc/tutorials/build-a-java-app-with-maven/).
 
 ### Files

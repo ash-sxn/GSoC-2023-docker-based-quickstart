@@ -1,5 +1,4 @@
 ## Example 4: Python Tutorial
-
 This example uses 02 examples with a custom SSH agent to perform the [Python Tutorial](https://www.jenkins.io/doc/tutorials/build-a-python-app-with-pyinstaller/).
 
 ### Files
