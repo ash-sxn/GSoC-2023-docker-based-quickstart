@@ -18,14 +18,11 @@ This example uses 02 example with custom ssh agent to perform [Python Tutorial](
 * after the containers are successfully running (check with `docker compose ps`). You can access the controller on [`http://localhost:8080`](http://localhost:8080)
 * You can log in using the `admin` username and the `admin` password.
 ### Steps to follow the [Python Tutorial](https://www.jenkins.io/doc/tutorials/build-a-python-app-with-pyinstaller/)
-
 - [Fork and clone the sample repository](https://www.jenkins.io/doc/tutorials/build-a-python-app-with-pyinstaller/#fork-and-clone-the-sample-repository-on-github)
-
   - Make sure you are in `04_python_tutorial` directory and Dockerfile and fork-and-clone.sh is present there
   - Run `./fork-and-clone.sh` command, and enter your github credentails to get a clone of a your fork of [`simple-python-pyinstaller-app`](https://github.com/jenkins-docs/simple-python-pyinstaller-app)  
   - If everything ran sucessfully you should have a `simple-python-pyinstaller-app` directory 
 - [Create your initial Pipeline as a Jenkinsfile](https://www.jenkins.io/doc/tutorials/build-a-python-app-with-pyinstaller/#create-your-pipeline-project-in-jenkins)
-  
   - get inside the `simple-python-pyinstaller-app` with `cd simple-python-pyinstaller-app` and create a `Jenkinsfile` with this content 
   ```
     pipeline {
@@ -41,24 +38,17 @@ This example uses 02 example with custom ssh agent to perform [Python Tutorial](
     }
   ```
   - Save your `Jenkinsfile` 
+
   - run the commands `git add .` to add the Jenkinsfile to the staging then run `git commit -m "Add initial Jenkinsfile"` to commit the changes, then run `git push origin master` to push the changes to you forked repo  
   - Go to Jenkins, log in and click create new jobs under Welcome to Jenkins!
   - In the Enter an item name field, specify the name for your new Multibranch Pipeline project (e.g. simple-python-pyinstaller-app).
-
   - Scroll down and click Multibranch Pipeline, then click OK at the end of the page.
-
   - Click on the Add source in the branch Sources section below discription 
   - Select Git and paste the link of your forked repo of the simple-python-pyinstaller-app in project Repository. it will look something like this `https://github.com/<username>/simple-python-pyinstaller-app.git` (replace `<username>` with your github username)
-
   - Click Save at the bottom to save your new Multibranch Pipeline project. You’re now ready to begin.
-
-  - It will automatically scan for all the branches in your repo It'll search for `master` branch in `simple-python-pyinstaller-app` and start building from the jenkinsfile you pushed in the repo click on the Status section to see.
-
+  - It will automatically scan for all the branches in your repo It'll search for `master` branch in `simple-python-pyinstaller-app` and start building from the jenkinsfile you pushed in the repo click on the Status section to see
   - click on the `master`(branch name of your repo) to see if your build was sucessfull or not.
-
-
 - [Add a test stage to your Pipeline](https://www.jenkins.io/doc/tutorials/build-a-python-app-with-pyinstaller/#add-a-test-stage-to-your-pipeline)
-
   - Again open your Jenkinsfile and Copy and paste the following Declarative Pipeline syntax under the Build stage of your Jenkinsfile and save the file
 
         stage('Test') {
@@ -74,7 +64,6 @@ This example uses 02 example with custom ssh agent to perform [Python Tutorial](
   - run the commands `git add .` to add the edited Jenkinsfile to the staging then run `git commit -m "Add 'Test' stage"` to commit the changes, then run `git push origin master` to push the changes to you forked repo   
   - The Press the `Build Now` button to run the both Build and Test stage
 - [Add a final deliver stage to your Pipeline](https://www.jenkins.io/doc/tutorials/build-a-java-app-with-maven/#add-a-final-deliver-stage-to-your-pipeline)
-  
   - Again open your Jenkinsfile and Copy and paste the following Declarative Pipeline syntax under the Test stage of your Jenkinsfile and save the file
 
         stage('Deliver') {
@@ -89,9 +78,7 @@ This example uses 02 example with custom ssh agent to perform [Python Tutorial](
         }
   - run the commands `git add .` to add the edited Jenkinsfile to the staging then run `git commit -m "Add 'Deliver' stage"` to commit the changes, then run `git push origin master` to push the changes to you forked repo   
   - The Press the `Build Now` button to run Build, Test and Deliver stages
-
 ### Clean Up Instructions 
-
 * To stop and clean up a working Docker Compose setup, you can use the following command:
 `docker compose down` 
 
