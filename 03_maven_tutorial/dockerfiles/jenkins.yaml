@@ -7,35 +7,34 @@ jenkins:
         - id: "admin"
           password: "admin"
   authorizationStrategy: loggedInUsersCanDoAnything
-  nodes:  
-  - permanent:
-      labelString: "docker jenkins agent"
-      launcher:
-        ssh:
-          credentialsId: "jenkins-ssh-agent-private-key"
-          host: "desktop-jenkins_agent-1"
-          port: 22
-          sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
-      name: "docker-ssh-jenkins-agent"
-      nodeDescription: "ssh jenkins docker agent "
-      remoteFS: "/home/jenkins/agent"
-      retentionStrategy: "always"
+  nodes:
+    - permanent:
+        labelString: "docker jenkins agent"
+        launcher:
+          ssh:
+            credentialsId: "jenkins-ssh-agent-private-key"
+            host: "desktop-jenkins_agent-1"
+            port: 22
+            sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+        name: "docker-ssh-jenkins-agent"
+        nodeDescription: "ssh jenkins docker agent "
+        remoteFS: "/home/jenkins/agent"
+        retentionStrategy: "always"
   # Suppressing Revere Proxy Setup is broken warning, mainly for the gitpod 
   disabledAdministrativeMonitors:
     - "hudson.diagnosis.ReverseProxySetupMonitor"
 credentials:
   system:
     domainCredentials:
-    - credentials:
-      - basicSSHUserPrivateKey:
-          id: "jenkins-ssh-agent-private-key"
-          description: "private ssh key for jenkins agent "
-          privateKeySource:
-            directEntry:
-              privateKey: "${SSH_AGENT_KEY}"
-          scope: SYSTEM
-          username: "jenkins"
+      - credentials:
+          - basicSSHUserPrivateKey:
+              id: "jenkins-ssh-agent-private-key"
+              description: "private ssh key for jenkins agent "
+              privateKeySource:
+                directEntry:
+                  privateKey: "${SSH_AGENT_KEY}"
+              scope: SYSTEM
+              username: "jenkins"
 unclassified:
   location:
-    url: "http://127.0.0.1:8080/"
-
+    url: "https://8080-gounthar-gsoc2023docker-kiodgqyt62n.ws-eu102.gitpod.io/"
