@@ -154,7 +154,7 @@ jobs:
           #Staring the job
           curl -X POST -u admin:$TOKEN 127.0.0.1:8080/job/$JOB_NAME/build
           # Wait for the job to start running
-          sleep 3
+          sleep 60
           echo "Waiting for the job to start running..."
           BUILD_NUMBER=""
           while [[ -z $BUILD_NUMBER || $BUILD_NUMBER == "null" ]]; do
