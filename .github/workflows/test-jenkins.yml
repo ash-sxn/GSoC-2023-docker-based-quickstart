@@ -84,9 +84,7 @@ jobs:
           echo "pwd is $(pwd)"
           echo "ls is $(ls -la)"
           echo "$XML_CONTENT" > ./dockerfiles/jobs/${{ matrix.dir }}/config.xml
-          echo "list jobs $(ls ./dockerfiles/jobs/)"
-          echo "list ${{ matrix.dir }} is $(ls ./dockerfiles/jobs/${{ matrix.dir }})"
-          echo "config file is: $(cat ./dockerfiles/jobs/${{ matrix.dir }}/config.xml)"
+          echo "list jobs $(ls -l ./dockerfiles/jobs/*)"
 
             
       - name: checking files & running the docker compose up with ${{ matrix.dir }} argument
