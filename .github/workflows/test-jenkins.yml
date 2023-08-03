@@ -85,7 +85,7 @@ jobs:
           echo "ls is $(ls -la)"
           echo "$XML_CONTENT" > ./dockerfiles/jobs/${{ matrix.dir }}/config.xml
           echo "list jobs $(ls ./dockerfiles/jobs/)"
-          echo "list ${{ matrix.dir }} is $(./dockerfiles/jobs/${{ matrix.dir }})"
+          echo "list ${{ matrix.dir }} is $(ls ./dockerfiles/jobs/${{ matrix.dir }})"
           echo "config file is: $(cat ./dockerfiles/jobs/${{ matrix.dir }}/config.xml)"
 
             
