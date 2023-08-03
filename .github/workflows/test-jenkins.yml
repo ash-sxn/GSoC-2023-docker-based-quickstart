@@ -82,6 +82,7 @@ jobs:
 
           mkdir -p ./dockerfiles/jobs/${{ matrix.dir }}
           echo "pwd is $(pwd)"
+          echo "ls is $(ls -la)"
           echo "$XML_CONTENT" > ./dockerfiles/jobs/${{ matrix.dir }}/config.xml
 
             
