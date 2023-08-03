@@ -14,7 +14,7 @@ updates:
       # Ignore updates for dependencies with names containing "github-script"
       - dependency-name: "*github-script*"
 
-# Enable version updates for Docker
+  # Enable version updates for Docker
   - package-ecosystem: docker
     directory: "./00_old_one_from_proposal"
     schedule:
@@ -45,6 +45,44 @@ updates:
       - dependency-name: "jenkins/jenkins"
   - package-ecosystem: docker
     directory: "./03_maven_tutorial/dockerfiles/agent"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+  - package-ecosystem: docker
+    directory: "./dockerfiles"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "jenkins/jenkins"
+  - package-ecosystem: docker
+    directory: "./04_python_tutorial/dockerfiles"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "jenkins/jenkins"
+  - package-ecosystem: docker
+    directory: "./04_python_tutorial/dockerfiles/agent"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+  - package-ecosystem: docker
+    directory: "./dockerfiles"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "jenkins/jenkins"
+  - package-ecosystem: docker
+    directory: "./05_nodejs/dockerfiles"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "jenkins/jenkins"
+  - package-ecosystem: docker
+    directory: "./05_nodejs/dockerfiles/agent"
     schedule:
       interval: weekly
     open-pull-requests-limit: 10

@@ -15,37 +15,37 @@
 * Gitpod is a cloud development environment for teams to efficiently and securely develop software.
 * Gitpod supports many IDEs, such as VScode, IntelliJ, and many more.  
 
- ### How to setup the repo in Gitpod?
+ ### How to set up the repo in Gitpod?
 * For starting your gitpod workspace you can use `gitpod.io/#` as a prefix on any GitHub, gitlab, or bitbucket repo URL
 * For our repo you can get the gitpod workspace from [here](https://gitpod.io/#https://github.com/ash-sxn/GSoC-2023-docker-based-quickstart)  
 * But If you do plan to use gitpod in the future, it's recommended to install the gitpod extension which will create a launch with the gitpod button on every GitHub repo you visit.
 It can be found [here](https://chrome.google.com/webstore/detail/gitpod-online-ide/dodmmooeoklaejobgleioelladacbeki) for Chromium and [here](https://addons.mozilla.org/firefox/addon/gitpod/) for Firefox.
 ### Steps to run examples from the repo
-* `jenkins_init.sh` script is used to run examples from the project 
-    * There are three working examples in the project right now :- 
+* `docker compose up` is used to run examples from the project 
+    * There are 6 working examples in the project right now: 
       * 00_old_one_from_proposal
       * 01_simple_controller_plus_agent
       * 02_custom_docker_file_connecting_agent_and_controller
       * 03_maven_tutorial 
-      * 04_python_tutorial 
-* to run the different examples add these arguments to the ./jenkins_init.sh command
+      * 04_python_tutorial
+      * 05_nodejs 
+* These examples have `README` file in it to run them manually
 
-    * `old` - 00_old_one_from_proposal => `./jenkins_init.sh old`
-    * `manual` - 01_simple_controller_plus_agent => `./jenkins_init.sh manual`
-    * `new` - 02_custom_docker_file_connecting_agent_and_controller => `./jenkins_init.sh new`
-    * `maven` - 03_maven_tutorial => `./jenkins_init.sh maven`
-    * `python` - 04_python-tutorial => `./jenkins_init.sh python`
-* If no argument is used i.e. `./jenkins_init.sh`, It runs the latest example present in the root directory docker-compose file
+* To run the different examples with `docker compose up -d` add these arguments to the command:
+    * `maven` - 03_maven_tutorial => `docker compose up -d maven`
+    * `python` - 04_python-tutorial => `docker compose up -d python`
+    * `node` - 05_nodejs => `docker compose up -d node`
+* If no argument is used i.e. `docker compose up -d`, it runs the latest default example.
 
-### How to Verify Jenkins installation
+### How to Verify Jenkins Installation
 * You can check the status of the container with the `docker ps` command or the `docker compose ps` one.
-* You can Access your running Jenkins on [http://127.0.0.1:8080](http://127.0.0.1:8080)
-* On gitpod If containers are running successfully you should see a pop-up titled `A service is available on port 8080`. If it doesn't come up, you can see the running service from the `PORTS` section on the right part of the terminal .
+* You can access your running Jenkins on [http://127.0.0.1:8080](http://127.0.0.1:8080)
+* On Gitpod if containers are running successfully you should see a pop-up titled `A service is available on port 8080`.
+If it doesn't come up, you can see the running service from the `PORTS` section on the right part of the terminal.
 
 ### Clean Up Instructions
-* To stop and remove the running containers `jenkins_teardown.sh` script is used  
-* use `./jenkins_teardown.sh` command to stop and remove the running example 
- 
+* To stop and remove the running containers `docker compose down` is used.
+
 ### Suppressing Jenkins Warning using JCASC
 
 In order to improve the Gitpod experience with Jenkins, we decided to suppress a reverse proxy setup warning in Jenkins.
@@ -53,7 +53,7 @@ This warning was causing issues in the Gitpod environment.
 
 To achieve this, we made use of Jenkins Configuration as Code ([JCASC](https://www.jenkins.io/projects/jcasc/)) and added the following property to the JCASC YAML file:
 
-We've added the following property in JCASC YAML file:
+We've added the following property in the JCASC YAML file:
 
 ```yaml
 jenkins:
@@ -61,4 +61,4 @@ jenkins:
     - "hudson.diagnosis.ReverseProxySetupMonitor"
 ```
 
-For more detailed information about this configuration and the context behind it, please refer to the corresponding issue.
+For more detailed information about this configuration and the context behind it, please refer to the [corresponding issue](https://github.com/ash-sxn/GSoC-2023-docker-based-quickstart/issues/61).
