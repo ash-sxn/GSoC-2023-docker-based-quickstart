@@ -16,3 +16,4 @@ RUN echo "PATH=${PATH}" >> /etc/environment
 
 # Set ownership for Jenkins agent home directory
 RUN chown -R jenkins:jenkins "${JENKINS_AGENT_HOME}"
+

@@ -170,11 +170,11 @@ jobs:
             fi
             
             # Sleep for 5 seconds before checking the build status again
-            sleep 5  # Adjust the sleep duration as needed
+            sleep 15  # Adjust the sleep duration as needed
           done
           echo "This is BUILD__NUMBER $BUILD_NUMBER"
           # Delay before retrieving build information
-          sleep 5
+          sleep 15
           if [[ -z $BUILD_NUMBER ]]; then
           # If the build number is empty or "null", it means the job has never run
             echo "Job has never run"
