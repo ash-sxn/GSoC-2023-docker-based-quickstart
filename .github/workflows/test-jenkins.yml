@@ -38,48 +38,42 @@ jobs:
           # adding test job to the tutorial
           XML_CONTENT=$(cat << 'EOL'
           <?xml version='1.1' encoding='UTF-8'?>
-          <org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject plugin="workflow-multibranch@756.v891d88f2cd46">
-            <actions/>
+          <flow-definition plugin="workflow-job@1316.vd2290d3341a_f">
+            <actions>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@2.2144.v077a_d1928a_40"/>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@2.2144.v077a_d1928a_40">
+                <jobProperties/>
+                <triggers/>
+                <parameters/>
+                <options/>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+            </actions>
             <description></description>
+            <keepDependencies>false</keepDependencies>
             <properties/>
-            <folderViews class="jenkins.branch.MultiBranchProjectViewHolder" plugin="branch-api@2.1122.v09cb_8ea_8a_724">
-              <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
-            </folderViews>
-            <healthMetrics/>
-            <icon class="jenkins.branch.MetadataActionFolderIcon" plugin="branch-api@2.1122.v09cb_8ea_8a_724">
-              <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
-            </icon>
-            <orphanedItemStrategy class="com.cloudbees.hudson.plugins.folder.computed.DefaultOrphanedItemStrategy" plugin="cloudbees-folder@6.815.v0dd5a_cb_40e0e">
-              <pruneDeadBranches>true</pruneDeadBranches>
-              <daysToKeep>-1</daysToKeep>
-              <numToKeep>-1</numToKeep>
-              <abortBuilds>false</abortBuilds>
-            </orphanedItemStrategy>
+            <definition class="org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition" plugin="workflow-cps@3722.v85ce2a_c6240b_">
+              <scm class="hudson.plugins.git.GitSCM" plugin="git@5.2.0">
+                <configVersion>2</configVersion>
+                <userRemoteConfigs>
+                  <hudson.plugins.git.UserRemoteConfig>
+                    <url>${REPO_URL}</url>
+                  </hudson.plugins.git.UserRemoteConfig>
+                </userRemoteConfigs>
+                <branches>
+                  <hudson.plugins.git.BranchSpec>
+                    <name>*/master</name>
+                  </hudson.plugins.git.BranchSpec>
+                </branches>
+                <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+                <submoduleCfg class="empty-list"/>
+                <extensions/>
+              </scm>
+              <scriptPath>Jenkinsfile</scriptPath>
+              <lightweight>true</lightweight>
+            </definition>
             <triggers/>
             <disabled>false</disabled>
-            <sources class="jenkins.branch.MultiBranchProject$BranchSourceList" plugin="branch-api@2.1122.v09cb_8ea_8a_724">
-              <data>
-                <jenkins.branch.BranchSource>
-                  <source class="jenkins.plugins.git.GitSCMSource" plugin="git@5.2.0">
-                    <id>d3fe3e52-4cc1-4f38-a54e-237ff4e4ecf2</id>
-                    <remote>${REPO_URL}</remote>
-                    <credentialsId></credentialsId>
-                    <traits>
-                      <jenkins.plugins.git.traits.BranchDiscoveryTrait/>
-                    </traits>
-                  </source>
-                  <strategy class="jenkins.branch.DefaultBranchPropertyStrategy">
-                    <properties class="empty-list"/>
-                  </strategy>
-                </jenkins.branch.BranchSource>
-              </data>
-              <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
-            </sources>
-            <factory class="org.jenkinsci.plugins.workflow.multibranch.WorkflowBranchProjectFactory">
-              <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
-              <scriptPath>Jenkinsfile</scriptPath>
-            </factory>
-          </org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject>
+          </flow-definition>
           EOL
           )
 
@@ -152,14 +146,14 @@ jobs:
           echo "JOB_PRESENT is $JOB_PRESENT"
           # For the time being, it does not work as we haven't yet customized the config.xml file with the end user's GitHub handle.
           #Staring the job
-          curl -X POST -u admin:$TOKEN 127.0.0.1:8080/job/$JOB_NAME_ENCODED/job/master/build
+          curl -X POST -u admin:$TOKEN 127.0.0.1:8080/job/$JOB_NAME_ENCODED/build
           # Wait for the job to start running
           sleep 10
           echo "Waiting for the job to start running..."
           BUILD_NUMBER="null"
           while [[ -z $BUILD_NUMBER || $BUILD_NUMBER == "null" ]]; do
             # Retrieve build info from Jenkins API using cURL
-            BUILD_INFO=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/job/master/api/json)
+            BUILD_INFO=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/api/json)
             echo "Retrieved build info: $BUILD_INFO"
             
             # Extract the build number from the JSON response using jq
