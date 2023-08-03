@@ -114,7 +114,10 @@ jobs:
           echo "DOCKER_CONTAINER_NUM is: $DOCKER_CONTAINER_NUM"
           # Getting inside the container to check jobs 
           echo "jobs in the container are:"
-          docker exec -it $DOCKER_CONTAINER_NUM ls -l /var/jenkins_home/jobs/*
+          docker exec $DOCKER_CONTAINER_NUM ls -l /var/jenkins_home/jobs/
+          docker exec $DOCKER_CONTAINER_NUM ls -l /var/jenkins_home/jobs/maven
+          echo "config is :"
+          docker exec $DOCKER_CONTAINER_NUM cat /var/jenkins_home/jobs/maven/config.xml
 
 
 
