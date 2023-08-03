@@ -165,7 +165,7 @@ jobs:
             echo "Build in progress: $BUILD_IN_PROGRESS"
             
             # If the build number is not empty and the build is in progress, break out of the loop
-            if [[ $BUILD_NUMBER != "null" && $BUILD_IN_PROGRESS == "null" ]]; then
+            if [[ -n $BUILD_NUMBER && $BUILD_IN_PROGRESS == "true" ]]; then
               break
             fi
             
