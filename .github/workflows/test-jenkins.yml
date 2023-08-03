@@ -152,11 +152,11 @@ jobs:
           echo "JOB_PRESENT is $JOB_PRESENT"
           # For the time being, it does not work as we haven't yet customized the config.xml file with the end user's GitHub handle.
           #Staring the job
-          curl -X POST -u admin:$TOKEN 127.0.0.1:8080/job/$JOB_NAME_ENCODED/build
+          curl -X POST -u admin:$TOKEN 127.0.0.1:8080/job/$JOB_NAME_ENCODED/job/master/build
           # Wait for the job to start running
-          sleep 60
+          sleep 10
           echo "Waiting for the job to start running..."
-          BUILD_NUMBER=""
+          BUILD_NUMBER="null"
           while [[ -z $BUILD_NUMBER || $BUILD_NUMBER == "null" ]]; do
             # Retrieve build info from Jenkins API using cURL
             BUILD_INFO=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/job/master/api/json)
@@ -171,7 +171,7 @@ jobs:
             echo "Build in progress: $BUILD_IN_PROGRESS"
             
             # If the build number is not empty and the build is in progress, break out of the loop
-            if [[ -n $BUILD_NUMBER && $BUILD_IN_PROGRESS == "true" ]]; then
+            if [[ $BUILD_NUMBER != "null" && $BUILD_IN_PROGRESS == "null" ]]; then
               break
             fi
             
