@@ -33,11 +33,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run hadolint scanning on the old proposal Dockerfile
-<<<<<<< HEAD
         uses: hadolint/hadolint-action@54c9adbab1582c2ef04b2016b760714a4bfde3cf
-=======
-        uses: hadolint/hadolint-action@v3.1.0
->>>>>>> upstream/main
         with:
           dockerfile: ./00_old_one_from_proposal/Dockerfile
           format: sarif
@@ -46,11 +42,7 @@ jobs:
           no-fail: true
 
       - name: Run hadolint scanning on the custom Dockerfile
-<<<<<<< HEAD
         uses: hadolint/hadolint-action@54c9adbab1582c2ef04b2016b760714a4bfde3cf
-=======
-        uses: hadolint/hadolint-action@v3.1.0
->>>>>>> upstream/main
         with:
           dockerfile: ./02_custom_docker_file_connecting_agent_and_controller/dockerfiles/Dockerfile
           format: sarif
@@ -59,11 +51,7 @@ jobs:
           no-fail: true
 
       - name: Run hadolint scanning on the Maven agent Dockerfile
-<<<<<<< HEAD
         uses: hadolint/hadolint-action@54c9adbab1582c2ef04b2016b760714a4bfde3cf
-=======
-        uses: hadolint/hadolint-action@v3.1.0
->>>>>>> upstream/main
         with:
           dockerfile: ./03_maven_tutorial/dockerfiles/agent/Dockerfile
           format: sarif
@@ -72,11 +60,7 @@ jobs:
           no-fail: true
 
       - name: Run hadolint scanning on the Maven Jenkins controller Dockerfile
-<<<<<<< HEAD
         uses: hadolint/hadolint-action@54c9adbab1582c2ef04b2016b760714a4bfde3cf
-=======
-        uses: hadolint/hadolint-action@v3.1.0
->>>>>>> upstream/main
         with:
           dockerfile: ./03_maven_tutorial/dockerfiles/Dockerfile
           format: sarif
@@ -85,11 +69,7 @@ jobs:
           no-fail: true
 
       - name: Run hadolint scanning on the Python agent Dockerfile
-<<<<<<< HEAD
         uses: hadolint/hadolint-action@54c9adbab1582c2ef04b2016b760714a4bfde3cf
-=======
-        uses: hadolint/hadolint-action@v3.1.0
->>>>>>> upstream/main
         with:
           dockerfile: ./04_python_tutorial/dockerfiles/agent/Dockerfile
           format: sarif
@@ -98,11 +78,7 @@ jobs:
           no-fail: true
 
       - name: Run hadolint scanning on the Python Jenkins controller Dockerfile
-<<<<<<< HEAD
         uses: hadolint/hadolint-action@54c9adbab1582c2ef04b2016b760714a4bfde3cf
-=======
-        uses: hadolint/hadolint-action@v3.1.0
->>>>>>> upstream/main
         with:
           dockerfile: ./04_python_tutorial/dockerfiles/Dockerfile
           format: sarif
@@ -111,11 +87,7 @@ jobs:
           no-fail: true
 
       - name: Run hadolint scanning on the node agent Dockerfile
-<<<<<<< HEAD
         uses: hadolint/hadolint-action@54c9adbab1582c2ef04b2016b760714a4bfde3cf
-=======
-        uses: hadolint/hadolint-action@v3.1.0
->>>>>>> upstream/main
         with:
           dockerfile: ./05_nodejs/dockerfiles/agent/Dockerfile
           format: sarif
@@ -124,11 +96,7 @@ jobs:
           no-fail: true
 
       - name: Run hadolint scanning on the node Jenkins controller Dockerfile
-<<<<<<< HEAD
         uses: hadolint/hadolint-action@54c9adbab1582c2ef04b2016b760714a4bfde3cf
-=======
-        uses: hadolint/hadolint-action@v3.1.0
->>>>>>> upstream/main
         with:
           dockerfile: ./05_nodejs/dockerfiles/Dockerfile
           format: sarif
