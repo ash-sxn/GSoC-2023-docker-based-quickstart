@@ -36,7 +36,8 @@ jobs:
           # Full repo URL
           REPO_URL="https://github.com/${{ steps.set_repo_url.outputs.repo_url }}.git"
           # adding test job to the tutorial
-          XML_CONTENT="<?xml version='1.1' encoding='UTF-8'?>
+          XML_CONTENT=$(cat << 'EOL'
+          <?xml version='1.1' encoding='UTF-8'?>
           <org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject plugin="workflow-multibranch@756.v891d88f2cd46">
             <actions/>
             <description></description>
@@ -78,7 +79,9 @@ jobs:
               <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
               <scriptPath>Jenkinsfile</scriptPath>
             </factory>
-          </org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject>"
+          </org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject>
+          EOL
+          )
 
           mkdir ./dockerfiles/jobs/${{ matrix.dir }}
           echo "pwd is $(pwd)"
