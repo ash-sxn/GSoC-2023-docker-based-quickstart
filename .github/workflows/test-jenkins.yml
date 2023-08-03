@@ -110,7 +110,7 @@ jobs:
           echo "Jenkins version is: $JENKINS_VERSION"
           
           # extracting the docker container number  
-          DOCKER_CONTAINER_NUM=docker ps --format '{{.ID}}\t{{.Names}}'| grep controller | awk '{print $1}'
+          DOCKER_CONTAINER_NUM=$(docker ps --format '{{.ID}}\t{{.Names}}'| grep controller | awk '{print $1}')
           echo "DOCKER_CONTAINER_NUM is: $DOCKER_CONTAINER_NUM"
           # Getting inside the container to check jobs 
           echo "jobs in the container are:"
