@@ -70,21 +70,27 @@ This tutorial utilizes two Docker containers with a custom SSH agent to demonstr
     - Run the command `git add .` to add the edited `Jenkinsfile` to the staging, then run `git commit -m "Add 'Test' stage"` to commit the changes. Finally, run `git push origin master` to push the changes to your forked repo.
     - Press the "Build Now" button to run both the Build and Test stages.
 
+
 - [Add a final deliver stage to your Pipeline](https://www.jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/#add-a-final-deliver-stage-to-your-pipeline)
     - Once more, open your `Jenkinsfile` and copy-paste the following Declarative Pipeline syntax under the Test stage of your Jenkinsfile. Then, save the file.
+        ```groovy
+        stage('Deliver') { 
+            steps {
+                sh './jenkins/scripts/deliver.sh' 
+                // Remove the initial 'https://' and prepend 'https://3000-' to the URL.
+                script {
+                    def modifiedUrl = 'https://3000-' + env.GITPOD_WORKSPACE_URL.substring('https://'.length())
+                    echo "If you are using Gitpod use this link instead ${modifiedUrl}"
+                }
 
-      ```groovy
-      stage('Deliver') { 
-          steps {
-              sh './jenkins/scripts/deliver.sh' 
-              input message: 'Finished using the website? (Click "Proceed" to continue)' 
-              sh './jenkins/scripts/kill.sh' 
-          }
-      }
-      ```
+                input message: 'Finished using the website? (Click "Proceed" to continue)' 
+                sh './jenkins/scripts/kill.sh' 
+            }
+        }
+        ```
+  - Run the command `git add .` to add the edited `Jenkinsfile` to the staging, then run `git commit -m "Add 'Deliver' stage"` to commit the changes. Afterward, run `git push origin master` to push the changes to your forked repository.
+  - Press the "Build Now" button again to run the Build, Test, and Deliver stages.
 
-    - Run the command `git add .` to add the edited `Jenkinsfile` to the staging, then run `git commit -m "Add 'Deliver' stage"` to commit the changes. Afterward, run `git push origin master` to push the changes to your forked repository.
-    - Press the "Build Now" button to run the Build, Test, and Deliver stages.
 
 ### Clean Up Instructions
 
