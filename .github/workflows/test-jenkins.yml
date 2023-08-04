@@ -36,7 +36,7 @@ jobs:
           # Full repo URL
           REPO_URL="https://github.com/${{ steps.set_repo_url.outputs.repo_url }}.git"
           # adding test job to the tutorial
-          XML_CONTENT=$(cat << 'EOL'
+          XML_CONTENT=$(cat <<EOL
           <?xml version='1.1' encoding='UTF-8'?>
           <flow-definition plugin="workflow-job@1316.vd2290d3341a_f">
             <actions>
