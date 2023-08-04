@@ -194,6 +194,7 @@ jobs:
               if [[ $BUILD_STATUS != "null" ]]; then
                 break
               fi
+              curl -X POST -u admin:$TOKEN http://127.0.0.1:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/input/PROCEED/proceedEmpty
               sleep 5  # Adjust the sleep duration as needed
             done
 
