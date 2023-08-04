@@ -187,7 +187,7 @@ jobs:
             while true; do
             # Retrieve the build status and whether the build is in progress
               BUILD_STATUS=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.result')
-              BUILD_IN_PROGRESS=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080127.0.0.1:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.building')
+              BUILD_IN_PROGRESS=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.building')
               echo "Build status: $BUILD_STATUS"
               echo "Build in progress: $BUILD_IN_PROGRESS"
               # If the build status is not "null", it means the build has been completed
@@ -201,6 +201,7 @@ jobs:
               echo "Job succeeded"
             else
               echo "Job failed"
+              curl -s -k -u admin:$TOKEN http://127.0.0.1:8080/job/$JOB_NAME/$BUILD_NUMBER/console
             fi
 
       - name: Teardown
@@ -294,7 +295,7 @@ jobs:
             while true; do
               # Retrieve the build status and job progress using API calls
               BUILD_STATUS=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.result')
-              BUILD_IN_PROGRESS=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080127.0.0.1:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.building')
+              BUILD_IN_PROGRESS=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.building')
               # Display the build status and progress
               echo "Build status: $BUILD_STATUS"
               echo "Build in progress: $BUILD_IN_PROGRESS"
