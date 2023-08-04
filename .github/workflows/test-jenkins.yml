@@ -201,6 +201,8 @@ jobs:
               echo "Job succeeded"
             else
               echo "Job failed"
+              echo "below is the console output"
+              echo "====================="
               curl -s -k -u admin:$TOKEN http://127.0.0.1:8080/job/$JOB_NAME/$BUILD_NUMBER/console
             fi
 
