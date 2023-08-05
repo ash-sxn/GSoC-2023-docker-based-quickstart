@@ -265,7 +265,7 @@ jobs:
           
           # Let's set the JOB_NAME it's same as the running tutorial (i.e. maven, python, node)
           echo "Launching a job"
-          JOB_NAME="${{ matrix.dir }}"
+          JOB_NAME="%28simple%29%20demo%20job"
           
           # Encode the JOB_NAME to replace spaces, open parentheses, and closing parentheses with their corresponding URL-encoded values.
           # This is necessary when using the JOB_NAME in a URL or any other context where special characters need to be encoded.
@@ -337,9 +337,6 @@ jobs:
                 break
               fi
 
-              # Below step is for the node tutorial only, in which we need to give input (click PROCEED) in order to complete the pipeline
-              curl -s -k -X POST -u admin:$TOKEN http://127.0.0.1:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/input/PROCEED/proceedEmpty
-              
               sleep 5  # Adjust the sleep duration as needed
             done
 
