@@ -1,3 +1,4 @@
+# This workflow tests the docker-compose files for the default, maven, python, and node directories
 name: docker-compose files test
 
 on:
@@ -6,11 +7,14 @@ on:
       - '*'
 
 jobs:
+  # This job builds and tests the docker-compose files for the maven, python, and node directories
   build-and-testIE:
     strategy:
       matrix:
         dir: [maven, python, node]
     runs-on: ubuntu-latest
+
+    # Set environment variables for the github username for using the forked repo for tutorials (currently using mine)
     env:
       GITHUB_USERNAME: ash-sxn
     steps:
@@ -18,7 +22,8 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
+        
+        # Set the repository URL based on the directory specified in the matrix
       - name: Set Repository URL
         id: set_repo_url
         run: |
@@ -30,12 +35,13 @@ jobs:
             echo "::set-output name=repo_url::${GITHUB_USERNAME}/simple-node-js-react-npm-app"
           fi
         shell: bash
-
+        # Create a config.xml file in the dockerfiles/jobs directory to add the test job to the instance 
       - name: Test Jenkins Job
         run: |
-          # Full repo URL
+          # Full repo URL  
           REPO_URL="https://github.com/${{ steps.set_repo_url.outputs.repo_url }}.git"
-          # adding test job to the tutorial
+
+          # adding test job to the tutorial with REPO_URL
           XML_CONTENT=$(cat <<EOL
           <?xml version='1.1' encoding='UTF-8'?>
           <flow-definition plugin="workflow-job@1316.vd2290d3341a_f">
@@ -79,11 +85,10 @@ jobs:
 
           mkdir ./dockerfiles/jobs/${{ matrix.dir }}
           echo "pwd is $(pwd)"
-          echo "ls is $(ls -la)"
           echo "$XML_CONTENT" > ./dockerfiles/jobs/${{ matrix.dir }}/config.xml
           echo "list jobs $(ls -l ./dockerfiles/jobs/*)"
 
-            
+        # Check if any files in the specified directory have changed and run docker-compose up with the directory as an argument if there are changes
       - name: checking files & running the docker compose up with ${{ matrix.dir }} argument
         run: |
             if [ $(git diff --name-only HEAD^ HEAD | uniq | grep -c "${{ matrix.dir }}") -ne 0 ]; then
@@ -94,6 +99,8 @@ jobs:
               echo 'NO_CHANGES=true' >> $GITHUB_ENV
             fi
 
+        # Wait for services to be ready if there were changes in the specified directory
+      - &wait-to-be-ready
       - name: Waiting for services to be ready
         if: env.NO_CHANGES != 'true'
         run: |
@@ -105,19 +112,9 @@ jobs:
           echo "Jenkins is ready"
           JENKINS_VERSION=$(curl -s -I -k http://admin:admin@127.0.0.1:8080 | grep -i '^X-Jenkins:' | awk '{print $2}')
           echo "Jenkins version is: $JENKINS_VERSION"
-          
-          # extracting the docker container number  
-          DOCKER_CONTAINER_NUM=$(docker ps --format '{{.ID}}\t{{.Names}}'| grep controller | awk '{print $1}')
-          echo "DOCKER_CONTAINER_NUM is: $DOCKER_CONTAINER_NUM"
-          # Getting inside the container to check jobs 
-          echo "jobs in the container are:"
-          docker exec $DOCKER_CONTAINER_NUM ls -l /var/jenkins_home/jobs/
-          docker exec $DOCKER_CONTAINER_NUM ls -l /var/jenkins_home/jobs/${{ matrix.dir }}
-          echo "config is :"
-          docker exec $DOCKER_CONTAINER_NUM cat /var/jenkins_home/jobs/${{ matrix.dir }}/config.xml
 
-
-
+        #  Test The stack 
+      - &test-the-stack
       - name: Run curl command to test the stack
         if: env.NO_CHANGES != 'true'
         run: |         
@@ -126,32 +123,39 @@ jobs:
           # To check Sthe version of Jenkins, load the top page or any .../api/* page and check for the X-Jenkins response header. This contains the version number of Jenkins, like "1.404" This is also a good way to check if an URL is a Jenkins URL.
           JENKINS_VERSION=$(curl -s -I -k http://admin:admin@127.0.0.1:8080 | grep -i '^X-Jenkins:' | awk '{print $2}')
           echo "Jenkins version is: $JENKINS_VERSION"
+
           # Before launching a job, we need to create a token for the admin user
           CRUMB=$(curl -s -k http://admin:admin@127.0.0.1:8080/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\) -c cookies.txt)
           echo "CRUMB was found."
           TOKEN=$(curl -s -k 'http://admin:admin@127.0.0.1:8080/user/admin/descriptorByName/jenkins.security.ApiTokenProperty/generateNewToken' --data 'newTokenName=kb-token' -b cookies.txt -H $CRUMB | jq -r '.data.tokenValue')
           echo "TOKEN was found."
-          # Let's launch a job. The token has been generated in the previous steps.
+          
+          # Let's set the JOB_NAME it's same as the running tutorial (i.e. maven, python, node)
           echo "Launching a job"
           JOB_NAME="${{ matrix.dir }}"
+          
           # Encode the JOB_NAME to replace spaces, open parentheses, and closing parentheses with their corresponding URL-encoded values.
           # This is necessary when using the JOB_NAME in a URL or any other context where special characters need to be encoded.
           # Spaces are replaced with "%20", open parentheses with "%28", and closing parentheses with "%29".
-          # The encoded result is stored in the JOB_NAME_ENCODED variable.
+          # The encoded result is stored in the JOB_NAME_ENCODED variable. This step was usefull with using (simple demo job)
           JOB_NAME_ENCODED=$(echo "$JOB_NAME" | awk '{ gsub(/ /, "%20"); gsub(/\(/, "%28"); gsub(/\)/, "%29"); print }')
           echo "JOB_NAME_ENCODED is $JOB_NAME_ENCODED"
-          # Will have to switch to "simple-java-maven-app" later on.
-          # Checking the present job 
+
+          # Checking the present job, debug step, checks if the test job is present.
           JOB_PRESENT=$(curl -u admin:$TOKEN http://127.0.0.1:8080/api/json?tree=jobs%5Bname%5D)
           echo "JOB_PRESENT is $JOB_PRESENT"
-          # For the time being, it does not work as we haven't yet customized the config.xml file with the end user's GitHub handle.
-          #Staring the job
+
+          #Staring the job, TOKEN has been set in previous step
           curl -X POST -u admin:$TOKEN 127.0.0.1:8080/job/$JOB_NAME_ENCODED/build
+
           # Wait for the job to start running
           sleep 10
           echo "Waiting for the job to start running..."
           BUILD_NUMBER="null"
+
+          # While loop checks if BUILD__NUMBER is empty or null, breaks otherwise
           while [[ -z $BUILD_NUMBER || $BUILD_NUMBER == "null" ]]; do
+
             # Retrieve build info from Jenkins API using cURL
             BUILD_INFO=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/api/json)
             echo "Retrieved build info: $BUILD_INFO"
@@ -173,17 +177,22 @@ jobs:
             sleep 15  # Adjust the sleep duration as needed
           done
           echo "This is BUILD__NUMBER $BUILD_NUMBER"
+          
           # Delay before retrieving build information
           sleep 15
           if [[ -z $BUILD_NUMBER ]]; then
+          
           # If the build number is empty or "null", it means the job has never run
             echo "Job has never run"
           else
+          
           # If the build number is not empty, the job has started and the build number is displayed
             echo "Job started. Build number: $BUILD_NUMBER"
           fi
+          
             # Wait for the job to complete
             echo "Waiting for the job to complete..."
+          
             while true; do
             # Retrieve the build status and whether the build is in progress
               BUILD_STATUS=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.result')
@@ -194,10 +203,14 @@ jobs:
               if [[ $BUILD_STATUS != "null" ]]; then
                 break
               fi
+
+              # Below step is for the node tutorial only, in which we need to give input (click PROCEED) in order to complete the pipeline
               curl -s -k -X POST -u admin:$TOKEN http://127.0.0.1:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/input/PROCEED/proceedEmpty
+              
               sleep 5  # Adjust the sleep duration as needed
             done
 
+            # Checks BUILD_STATUS to see if job succeeded or failed and if failed gives console output of why it failed and exit
             if [[ $BUILD_STATUS == "SUCCESS" ]]; then
               echo "Job succeeded"
             else
@@ -205,6 +218,7 @@ jobs:
               echo "below is the console output"
               echo "====================="
               curl -s -k -u admin:$TOKEN http://127.0.0.1:8080/job/$JOB_NAME/$BUILD_NUMBER/console
+              exit 1 # Exit with a non-zero status to fail the step and stop the workflow
             fi
 
       - name: Teardown
@@ -224,97 +238,10 @@ jobs:
           docker compose up -d 
           echo "Docker Compose started"
 
-      - name: Waiting for services to start
-        run: |
-          # The timeout command is used to set a maximum execution time of 60 seconds. The loop inside the bash -c
-          # command checks if the curl request succeeds (i.e., returns a non-empty response) using the exit code.
-          # If it fails, it sleeps for 1 second and repeats the curl request until it succeeds or the timeout is reached.
-          timeout 60 bash -c 'until curl -s http://127.0.0.1:8080 > /dev/null; do sleep 1; done' && echo "Jenkins has started" || exit 1
-          echo "Services have started"
+      - *wait-to-be-ready
+      
+      - *test-the-stack
 
-      - name: Waiting for services to be ready
-        run: |
-          # After the curl request, the output is piped to the awk command. It is used to search for the message
-          # "Please wait while Jenkins is getting ready to work" in the curl output.
-          # If the message is found, awk exits with a non-zero status (1), and the loop continues.
-          # If the message is not found, the loop exits, and the "Jenkins is running" message is displayed.
-          timeout 60 bash -c 'until curl -s -f http://127.0.0.1:8080/login > /dev/null; do sleep 5; done' && echo "Jenkins is running" || echo "Jenkins is not running"
-          echo "Jenkins is ready"
-
-      - name: Run curl command to test the stack
-        run: |
-          set -x
-          # Installing dependencies 
-          # To check the version of Jenkins, load the top page or any .../api/* page and check for the X-Jenkins response header. This contains the version number of Jenkins, like "1.404" This is also a good way to check if an URL is a Jenkins URL.
-          JENKINS_VERSION=$(curl -s -I -k http://admin:admin@127.0.0.1:8080 | grep -i '^X-Jenkins:' | awk '{print $2}')
-          echo "Jenkins version is: $JENKINS_VERSION"
-          # Before launching a job, we need to create a token for the admin user
-          CRUMB=$(curl -s -k http://admin:admin@127.0.0.1:8080/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\) -c cookies.txt)
-          echo "CRUMB was found."
-          TOKEN=$(curl -s -k 'http://admin:admin@127.0.0.1:8080/user/admin/descriptorByName/jenkins.security.ApiTokenProperty/generateNewToken' --data 'newTokenName=kb-token' -b cookies.txt -H $CRUMB | jq -r '.data.tokenValue')
-          echo "TOKEN was found."
-          # Let's launch a job. The token has been generated in the previous steps.
-          echo "Launching a job"
-          # Define the job name with parentheses
-          JOB_NAME="%28simple%29%20demo%20job"
-          # Encode the job name to handle special characters
-          JOB_NAME_ENCODED=$(echo "$JOB_NAME" | awk '{ gsub(/ /, "%20"); gsub(/\(/, "%28"); gsub(/\)/, "%29"); print }')
-          echo "JOB_NAME_ENCODED is $JOB_NAME_ENCODED"
-          # Starting the job 
-          curl -X POST -u admin:$TOKEN 127.0.0.1:8080/job/$JOB_NAME/build
-          # Wait for the job to start running
-          echo "Waiting for the job to start running..."
-          sleep 10
-          # Initialize the build number
-          BUILD_NUMBER=""
-          # Loop until the build number is retrieved
-          while [[ -z $BUILD_NUMBER ]]; do
-            # Retrieve build information for the job
-            BUILD_INFO=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/api/json)
-            echo "Retrieved build info: $BUILD_INFO"
-            # Extract the build number and check if the job is in progress
-            BUILD_NUMBER=$(echo $BUILD_INFO | jq -r '.lastBuild.number')
-            BUILD_IN_PROGRESS=$(echo $BUILD_INFO | jq -r '.lastBuild.building')
-            echo "Build number: $BUILD_NUMBER"
-            echo "Build in progress: $BUILD_IN_PROGRESS"
-            # Break the loop if the build number is retrieved and the job is in progress
-            if [[ -n $BUILD_NUMBER && $BUILD_IN_PROGRESS == "true" ]]; then
-              break
-            fi
-            sleep 5  # Adjust the sleep duration as needed
-          done
-          echo "This is BUILD__NUMBER $BUILD_NUMBER"
-          # Delay before retrieving build information
-          sleep 5
-  
-          if [[ -z $BUILD_NUMBER ]]; then
-            echo "Job has never run"
-          else
-            echo "Job started. Build number: $BUILD_NUMBER"
-            # Display the message indicating that the job has started along with the build number
-            # Wait for the job to complete
-            echo "Waiting for the job to complete..."
-            # Start an infinite loop to continuously check the job status
-            while true; do
-              # Retrieve the build status and job progress using API calls
-              BUILD_STATUS=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.result')
-              BUILD_IN_PROGRESS=$(curl -s -k http://admin:$TOKEN@127.0.0.1:8080/job/$JOB_NAME_ENCODED/$BUILD_NUMBER/api/json | jq -r '.building')
-              # Display the build status and progress
-              echo "Build status: $BUILD_STATUS"
-              echo "Build in progress: $BUILD_IN_PROGRESS"
-              # Break the loop if the build status is not available (null)
-              if [[ $BUILD_STATUS != "null" ]]; then
-                break
-              fi
-              sleep 5  # Adjust the sleep duration as needed
-            done
-
-            if [[ $BUILD_STATUS == "SUCCESS" ]]; then
-              echo "Job succeeded"
-            else
-              echo "Job failed"
-            fi
-          fi
       - name: Teardown
         run: |
           docker compose down
