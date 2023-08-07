@@ -1,5 +1,6 @@
 FROM jenkins/jenkins:2.401.3-lts
 USER root
+# Adding jobs directory, with demo job 
 COPY jobs /var/jenkins_home/jobs
 RUN chown -R jenkins:jenkins /var/jenkins_home/jobs
 USER jenkins

@@ -3,7 +3,7 @@ FROM jenkins/ssh-agent:5.7.0-jdk17 as ssh-agent
 RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl && apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-# Installing curl 
+# Installing curl
 RUN apt-get update && apt-get install -y curl
 
 # Installing nodejs
