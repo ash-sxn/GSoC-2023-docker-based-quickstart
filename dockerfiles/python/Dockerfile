@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Create an alias for python3 as python
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
-# Install required python packages
+# Install required Python packages
 RUN pip install docker-py feedparser nosexcover prometheus_client pycobertura pylint pytest pytest-cov requests setuptools sphinx pyinstaller
 
 # Add the Jenkins agent user to the environment

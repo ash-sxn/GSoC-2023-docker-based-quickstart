@@ -1,3 +1,4 @@
+# This Dockerfile uses keygen.sh
 FROM debian:bookworm as prepare-stage
 
 COPY *sh /usr/local/bin/

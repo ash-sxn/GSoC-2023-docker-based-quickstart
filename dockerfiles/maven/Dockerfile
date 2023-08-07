@@ -4,7 +4,7 @@ FROM jenkins/ssh-agent:5.7.0-jdk17 as ssh-agent
 RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl && apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-# Now time to install Maven
+# Now time to install maven
 ARG MAVEN_VERSION=3.9.2
 
 # Set SHELL flags for RUN commands to allow -e and pipefail
