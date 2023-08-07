@@ -1,4 +1,3 @@
-# This Dockerfile uses keygen.sh
 FROM debian:bookworm as prepare-stage
 
 COPY *sh /usr/local/bin/
@@ -19,4 +18,4 @@ RUN apt update && apt install -y --no-install-recommends \
 
 RUN /usr/local/bin/keygen.sh /ssh-dir
 
-CMD ["sh", "-c", "echo 'Export stage is ready'; ls -l /ssh-dir/"] 
+CMD ["sh", "-c", "echo 'Export stage is ready'; ls -l /ssh-dir/"]
