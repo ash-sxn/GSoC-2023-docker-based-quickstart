@@ -3,9 +3,6 @@ name: Plugins Update file test
 on:
   schedule:
     - cron: '0 0 * * *' # run daily at midnight
-  push:
-    branches:
-      - "*"
 
 jobs:
   check-plugins:
