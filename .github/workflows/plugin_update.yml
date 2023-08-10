@@ -3,6 +3,9 @@ name: Plugins Update file test
 on:
   schedule:
     - cron: '0 0 * * *' # run daily at midnight
+  push:
+    branches:
+      - "*"
 
 jobs:
   check-plugins:
@@ -19,10 +22,6 @@ jobs:
 
       - name: Check plugins
         run: |
-
-          JENKINS_URL = 'http://127.0.0.1:8080'
-          JENKINS_USER = 'admin'
-          JENKINS_PASSWORD = 'admin'
           # Set the name of the branch to create the pull request from
           BRANCH_NAME="update-plugins"
 
