@@ -15,11 +15,8 @@ jobs:
         uses: actions/checkout@v2
       
       - name: Installing gh
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          echo "this is github_token secret $GITHUB_TOKEN"
-          echo "this is the secret ${{ secrets.GH_TOKEN }}"
+          
           echo ${{ secrets.GH_TOKEN }} | gh auth login --with-token
           gh auth status
 
