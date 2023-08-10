@@ -8,8 +8,8 @@ build-timeout:1.31
 caffeine-api:3.1.6-115.vb_8b_b_328e59d8
 checks-api:2.0.0
 cloudbees-folder:6.815.v0dd5a_cb_40e0e
-commons-lang3-api:3.12.0-36.vd97de6465d5b_
-commons-text-api:1.10.0-36.vc008c8fcda_7b_
+commons-lang3-api:3.13.0-62.v7d18e55f51e2
+commons-text-api:1.10.0-68.v0d0b_c439292b_
 configuration-as-code:1670.v564dc8b_982d0
 credentials-binding:631.v861c06d062b_4
 credentials:1271.v54b_1c2c6388a_
@@ -20,7 +20,7 @@ font-awesome-api:6.4.0-2
 git-client:4.4.0
 git:5.2.0
 github-api:1.314-431.v78d72a_3fe4c3
-github-branch-source:1730.vff97c8a_1f804
+github-branch-source:1732.v3f1889a_c475b_
 github:1.37.2
 gradle:2.8.2
 instance-identity:173.va_37c494ec4e5
@@ -40,7 +40,7 @@ matrix-project:802.v8013b_40c7edc
 metrics:4.2.18-442.v02e107157925
 mina-sshd-api-common:2.10.0-69.v28e3e36d18eb_
 mina-sshd-api-core:2.10.0-69.v28e3e36d18eb_
-okhttp-api:4.11.0-145.vcb_8de402ef81
+okhttp-api:4.11.0-157.v6852a_a_fa_ec11
 pipeline-build-step:505.v5f0844d8d126
 pipeline-graph-analysis:202.va_d268e64deb_3
 pipeline-graph-view:191.vc6da_9d3eb_70a
@@ -65,7 +65,7 @@ ssh-slaves:2.916.vd17b_43357ce4
 sshd:3.312.v1c601b_c83b_0e
 structs:324.va_f5d6774f3a_d
 timestamper:1.26
-token-macro:359.vb_cde11682e0c
+token-macro:383.v36161104b_002
 trilead-api:2.84.v72119de229b_7
 variant:59.vf075fe829ccb
 workflow-aggregator:596.v8c21c963d92d
