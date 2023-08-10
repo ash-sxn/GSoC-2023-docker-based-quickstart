@@ -21,6 +21,9 @@ jobs:
           gh auth status
           git config --global user.email "ash.191245141@gmail.com"
           git config --global user.name "ash-sxn"
+          git config --global credential.helper store
+          git config --global credential.https://github.com.username ${{ github.actor }}
+          echo "protocol=https\nhost=github.com\nusername=${{ github.actor }}\npassword=${{ secrets.GH_TOKEN }}" | git credential approve
 
       - name: Check plugins
         run: |
