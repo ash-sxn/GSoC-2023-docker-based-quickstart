@@ -14,11 +14,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       
-      - name: Installing gh
+      - name: Configure git & gh
         run: |
           
           echo ${{ secrets.GH_TOKEN }} | gh auth login --with-token
           gh auth status
+          git config --global user.email "ash.191245141@gmail.com"
+          git config --global user.name "ash-sxn"
 
       - name: Check plugins
         run: |
