@@ -1,0 +1,56 @@
+name: Plugins Update file test
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # run daily at midnight
+
+jobs:
+  check-plugins:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Installing gh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          echo "$GITHUB_TOKEN" | gh auth login --with-token
+
+      - name: Check plugins
+        run: |
+
+          JENKINS_URL = 'http://127.0.0.1:8080'
+          JENKINS_USER = 'admin'
+          JENKINS_PASSWORD = 'admin'
+          # Set the name of the branch to create the pull request from
+          BRANCH_NAME="update-plugins"
+
+          # Set the name of the branch to create the pull request to
+          BASE_BRANCH="main"
+          
+          # Start the docker containers
+          docker compose up -d 
+          # Uses jenkins-plugin-cli to update the plugin.txt and update it in root
+          docker ps | grep controller | awk '{print $1}' | xargs -I {} docker exec -u root {} jenkins-plugin-cli --plugin-file /usr/share/jenkins/ref/plugins.txt --no-download --available-updates --output txt > dockerfiles/plugins.txt
+          # Check if the plugins.txt file has been modified
+          if git diff --quiet -- dockerfiles/plugins.txt; then
+              # No changes
+              echo "No plugins need to be updated"
+          else
+              # Changes detected
+              echo "Plugins have been updated, creating a pull request"
+
+              # Create and checkout new branch
+              git checkout -b "$BRANCH_NAME"
+
+              # Add and commit changes
+              git add dockerfiles/plugins.txt
+              git commit -m "Update Jenkins plugins"
+
+              # Push changes to GitHub
+              git push origin "$BRANCH_NAME"
+
+              # Create pull request using gh command
+              gh pr create --title "Update Jenkins plugins" --body "This pull request updates the Jenkins plugins listed in `plugins.txt`." --base "$BASE_BRANCH" --head "$BRANCH_NAME"
+          fi
