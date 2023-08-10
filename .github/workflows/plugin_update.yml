@@ -18,7 +18,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          echo "$GITHUB_TOKEN""
+          echo "this is github_token secret $GITHUB_TOKEN""
+          echo "this is the secret ${{ secrets.GH_TOKEN }}"
           echo "$GITHUB_TOKEN" | gh auth login --with-token
           gh auth status
 
