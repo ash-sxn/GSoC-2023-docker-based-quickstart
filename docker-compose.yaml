@@ -1,7 +1,7 @@
 services:
   sidekick_service:
     # Configuration for the sidekick service
-    image: ash191245141/jenkinsci-tutorials:sidekick_
+    image: ${DOCKERHUB_USERNAME}/jenkinsci-tutorials:sidekick_
     stdin_open: true
     tty: true
     entrypoint: sh -c "/usr/local/bin/keygen.sh /ssh-dir"  # Runs the keygen.sh script and specifies the output directory
@@ -14,7 +14,7 @@ services:
       retries: 5
 
   jenkins_controller:
-    image: ash191245141/jenkinsci-tutorials:simple_controller_
+    image: ${DOCKERHUB_USERNAME}/jenkinsci-tutorials:simple_controller_
     restart: on-failure
     ports:
       - "8080:8080"
@@ -47,7 +47,7 @@ services:
       - agent-ssh-dir:/home/jenkins/.ssh:ro  # Mounts the agent-ssh-dir volume to the /home/jenkins/.ssh path inside the container as read-only
 
   maven:
-    image: ash191245141/jenkinsci-tutorials:maven_agent_
+    image: ${DOCKERHUB_USERNAME}/jenkinsci-tutorials:maven_agent_
     container_name: desktop-jenkins_agent-1
     profiles:
       - maven
@@ -65,7 +65,7 @@ services:
       - agent-ssh-dir:/home/jenkins/.ssh:ro  # Mounts the agent-ssh-dir volume to the /home/jenkins/.ssh path inside the container as read-only
 
   python:
-    image: ash191245141/jenkinsci-tutorials:python_agent_
+    image: ${DOCKERHUB_USERNAME}/jenkinsci-tutorials:python_agent_
     container_name: desktop-jenkins_agent-1
     profiles:
       - python
@@ -83,7 +83,7 @@ services:
       - agent-ssh-dir:/home/jenkins/.ssh:ro  # Mounts the agent-ssh-dir volume to the /home/jenkins/.ssh path inside the container as read-only
 
   node:
-    image: ash191245141/jenkinsci-tutorials:node_agent_
+    image: ${DOCKERHUB_USERNAME}/jenkinsci-tutorials:node_agent_
     environment:
       - GITPOD_WORKSPACE_URL=${GITPOD_WORKSPACE_URL}    
     container_name: desktop-jenkins_agent-1
