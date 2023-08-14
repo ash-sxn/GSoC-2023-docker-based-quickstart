@@ -8,5 +8,5 @@ ports:
   - name: Jenkins controller
     port: 8080
     protocol: http
-    onOpen: open-browser
+    onOpen: open-preview
     description: The Jenkins Controller to use for the tutorials
