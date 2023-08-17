@@ -31,9 +31,6 @@ jobs:
           # Set the name of the branch to create the pull request to
           echo "BASE_BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
 
-          # Print the values of the environment variables
-          echo "This is the BASE_BRANCH $BASE_BRANCH & this is the BRANCH_NAME $BRANCH_NAME"
-
           # Start the docker containers
           docker compose up -d
 
@@ -62,7 +59,7 @@ jobs:
               echo "Plugins have been updated, creating a pull request"
 
               # Create and checkout new branch
-              git checkout -b "$BRANCH_NAME" origin/main
+              git checkout -b "$BRANCH_NAME" 
 
               # Add and commit changes
               git add dockerfiles/plugins.txt
