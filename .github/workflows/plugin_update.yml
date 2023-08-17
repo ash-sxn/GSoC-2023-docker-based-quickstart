@@ -37,7 +37,9 @@ jobs:
           # Start the docker containers
           docker compose up -d
 
-
+      - name: print GITHUB_ENV file
+        run: cat $GITHUB_ENV
+        
       - name: Waiting for service to be ready
         run: |
           # Check If Jenkins is running or not
