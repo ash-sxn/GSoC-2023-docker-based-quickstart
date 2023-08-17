@@ -27,11 +27,11 @@ jobs:
         run: |
           # Set the name of the branch to create the pull request from
           echo "BRANCH_NAME=update-plugins-$(date +'%Y/%m/%d/%H/%M/%S')" >> $GITHUB_ENV
-
+          
 
           # Set the name of the branch to create the pull request to
           echo "BASE_BRANCH="${GITHUB_REF#refs/heads/}"" >> $GITHUB_ENV
-          
+          echo "This is the BASE_BRANCH "$BASE_BRANCH" & this is the BRANCH_NAME "$BRANCH_NAME""
           # Start the docker containers
           docker compose up -d 
 
