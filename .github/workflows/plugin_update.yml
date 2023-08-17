@@ -1,9 +1,12 @@
 name: Plugins Update file test
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 0 * * *' # run daily at midnight
-  workflow_dispatch:
+  push:
+    branches:
+      - '*'
     
 jobs:
   check-plugins:
