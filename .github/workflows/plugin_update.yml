@@ -2,11 +2,10 @@ name: Plugins Update file test
 
 on:
   workflow_dispatch:
+    
   schedule:
     - cron: '0 0 * * *' # run daily at midnight
-  push:
-    branches:
-      - '*'
+
     
 jobs:
   check-plugins:
@@ -69,5 +68,5 @@ jobs:
               git push -u origin "$BRANCH_NAME"
 
               # Create pull request using gh command
-              gh pr create --title "chore(jenkins): Updates Jenkins plugins" --body "This pull request updates the Jenkins plugins listed in `plugins.txt`." --base "$BASE_BRANCH" --head "$BRANCH_NAME"
+              gh pr create --title "chore(jenkins): Updates Jenkins plugins" --body "This pull request updates the Jenkins plugins listed in \`plugins.txt\`." --base "$BASE_BRANCH" --head "$BRANCH_NAME"
           fi
