@@ -36,6 +36,9 @@ It can be found [here](https://chrome.google.com/webstore/detail/gitpod-online-i
     * `python` - 04_python-tutorial => `docker compose up -d python`
     * `node` - 05_nodejs => `docker compose up -d node`
 * If no argument is used i.e. `docker compose up -d`, it runs the latest default example.
+* The above command utilizes prebuilt images, which you might want to be cautious about as their source is not currently known or part of the Jenkins CI organization.
+* So If you want to build images yourself add `-f build-docker-compose.yaml` after `docker compose`
+* Eventually, the command should resemble something like this: `docker compose -f build-docker-compose.yaml up -d node` to build the Node Tutorial.
 
 ### How to Verify Jenkins Installation
 * You can check the status of the container with the `docker ps` command or the `docker compose ps` one.
