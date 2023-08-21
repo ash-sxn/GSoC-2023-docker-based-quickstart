@@ -91,3 +91,31 @@ updates:
     open-pull-requests-limit: 10
     ignore:
       - dependency-name: "jenkins/jenkins"
+  - package-ecosystem: docker
+    directory: "./dockerfiles/maven"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "jenkins/jenkins"
+  - package-ecosystem: docker
+    directory: "./dockerfiles/node"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "jenkins/jenkins"
+  - package-ecosystem: docker
+    directory: "./dockerfiles/python"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "jenkins/jenkins"
+  - package-ecosystem: docker
+    directory: "./dockerfiles/sidekick"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "jenkins/jenkins"    
