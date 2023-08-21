@@ -7,7 +7,7 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: weekly
     ignore:
       # Ignore updates for dependencies with names containing "github-script"
       - dependency-name: "*github-script*"
