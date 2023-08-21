@@ -78,13 +78,6 @@ updates:
       interval: weekly
     open-pull-requests-limit: 10
   - package-ecosystem: docker
-    directory: "./dockerfiles"
-    schedule:
-      interval: weekly
-    open-pull-requests-limit: 10
-    ignore:
-      - dependency-name: "jenkins/jenkins"
-  - package-ecosystem: docker
     directory: "./dockerfiles/maven"
     schedule:
       interval: weekly
