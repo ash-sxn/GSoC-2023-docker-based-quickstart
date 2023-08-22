@@ -79,4 +79,4 @@ workflow-scm-step:415.v434365564324
 workflow-step-api:639.v6eca_cd8c04a_a_
 workflow-support:848.v5a_383b_d14921
 ws-cleanup:0.45
-blueocean:1.27.5
+blueocean:1.27.6
