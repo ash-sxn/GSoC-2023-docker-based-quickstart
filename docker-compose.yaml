@@ -106,10 +106,10 @@ services:
 
 
   multi_jenkins_controller:
-    image: ${DOCKERHUB_USERNAME}/jenkinsci-tutorials:multi_controller_
+    image: ${DOCKERHUB_USERNAME}/jenkinsci-tutorials:multi_controller_end-to-end-multibranch
     restart: on-failure
     ports:
-      - "8080:8080"
+      - "8080:8080
     volumes:
       - jenkins_home:/var/jenkins_home  # Mounts the jenkins_home volume to the /var/jenkins_home path inside the container
       - agent-ssh-dir:/ssh-dir  # Mounts the agent-ssh-dir volume to the /app path inside the container
