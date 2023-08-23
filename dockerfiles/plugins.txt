@@ -35,7 +35,7 @@ jjwt-api:0.11.5-77.v646c772fddb_0
 jquery3-api:3.7.0-1
 junit:1217.v4297208a_a_b_ce
 mailer:463.vedf8358e006b_
-matrix-auth:3.1.10
+matrix-auth:3.2
 matrix-project:808.v5a_b_5f56d6966
 metrics:4.2.18-442.v02e107157925
 mina-sshd-api-common:2.10.0-69.v28e3e36d18eb_
