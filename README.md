@@ -48,6 +48,8 @@ If it doesn't come up, you can see the running service from the `PORTS` section 
 
 ### Clean Up Instructions
 * To stop and remove the running containers `docker compose down` is used.
+* If you get `Resource is still in use` warning `--remove-orphans` option can be used to solve this.
+* you can also add `-v` option for removing the created volumes.
 
 ### Suppressing Jenkins Warning using JCASC
 
