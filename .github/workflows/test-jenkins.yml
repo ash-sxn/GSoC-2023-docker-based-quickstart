@@ -87,6 +87,8 @@ jobs:
           echo "pwd is $(pwd)"
           echo "$XML_CONTENT" > ./dockerfiles/jobs/${{ matrix.dir }}/config.xml
           echo "list jobs $(ls -l ./dockerfiles/jobs/*)"
+          echo "output from new config file"
+          cat ./dockerfiles/jobs/${{ matrix.dir }}/config.xml
 
         # Check if any files in the specified directory have changed and run docker-compose up with the directory as an argument if there are changes
       - name: checking files & running the docker compose up with ${{ matrix.dir }} argument
