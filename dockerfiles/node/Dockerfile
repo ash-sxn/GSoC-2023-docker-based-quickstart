@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y curl
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && apt-get install -y nodejs
 
 # Set SHELL flags for RUN commands to allow -e and pipefail
-# Rationale: https://github.com/hadolint/hadolint/wiki/DL4006
+# Rationale:https://github.com/hadolint/hadolint/wiki/DL4006
 SHELL ["/bin/bash", "-eo", "pipefail", "-c"]
 
 RUN echo "PATH=${PATH}" >> /etc/environment && chown -R jenkins:jenkins "${JENKINS_AGENT_HOME}"
