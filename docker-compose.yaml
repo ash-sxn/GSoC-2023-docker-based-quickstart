@@ -106,7 +106,7 @@ services:
 
 
   multi_jenkins_controller:
-    image: ${DOCKERHUB_USERNAME}/jenkinsci-tutorials:multi_controller_end-to-end-multibranch
+    image: ${DOCKERHUB_USERNAME}/jenkinsci-tutorials:multi_controller_
     restart: on-failure
     ports:
       - "8080:8080"
