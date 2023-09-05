@@ -29,12 +29,14 @@ It can be found [here](https://chrome.google.com/webstore/detail/gitpod-online-i
       * 03_maven_tutorial 
       * 04_python_tutorial
       * 05_nodejs 
+      * 06_multibranch_pipeline
 * These examples have `README` file in it to run them manually
 
 * To run the different examples with `docker compose up -d` add these arguments to the command:
     * `maven` - 03_maven_tutorial => `docker compose up -d maven`
     * `python` - 04_python-tutorial => `docker compose up -d python`
     * `node` - 05_nodejs => `docker compose up -d node`
+    * `multi` - 06_multibranch_pipeline => `docker compose up -d multi`
 * If no argument is used i.e. `docker compose up -d`, it runs the latest default example.
 * The above command utilizes prebuilt images, which you might want to be cautious about as their source is not currently known or part of the Jenkins CI organization.
 * So If you want to build images yourself add `-f build-docker-compose.yaml` after `docker compose`
@@ -48,6 +50,8 @@ If it doesn't come up, you can see the running service from the `PORTS` section 
 
 ### Clean Up Instructions
 * To stop and remove the running containers `docker compose down` is used.
+* If you get `Resource is still in use` warning `--remove-orphans` option can be used to solve this.
+* you can also add `-v` option for removing the created volumes.
 
 ### Suppressing Jenkins Warning using JCASC
 

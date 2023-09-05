@@ -83,10 +83,10 @@ jobs:
           EOL
           )
 
-          mkdir ./dockerfiles/jobs/${{ matrix.dir }}
           echo "pwd is $(pwd)"
-          echo "$XML_CONTENT" > ./dockerfiles/jobs/${{ matrix.dir }}/config.xml
-          echo "list jobs $(ls -l ./dockerfiles/jobs/*)"
+          echo "$XML_CONTENT" > ./config.xml
+          echo "checking files below"
+          ls
 
         # Check if any files in the specified directory have changed and run docker-compose up with the directory as an argument if there are changes
       - name: checking files & running the docker compose up with ${{ matrix.dir }} argument
@@ -127,6 +127,9 @@ jobs:
           echo "CRUMB was found."
           TOKEN=$(curl -s -k 'http://admin:admin@127.0.0.1:8080/user/admin/descriptorByName/jenkins.security.ApiTokenProperty/generateNewToken' --data 'newTokenName=kb-token' -b cookies.txt -H $CRUMB | jq -r '.data.tokenValue')
           echo "TOKEN was found."
+          
+          # Creating the Job from the config.xml file 
+          curl -X POST -H "Content-Type: text/xml" --user admin:$TOKEN --data-binary @config.xml http://127.0.0.1:8080/createItem?name=${{ matrix.dir }}
           
           # Let's set the JOB_NAME it's same as the running tutorial (i.e. maven, python, node)
           echo "Launching a job"
@@ -237,7 +240,7 @@ jobs:
           echo "Docker Compose started"
 
       - name: Waiting for services to be ready
-        if: env.NO_CHANGES != 'true'
+
         run: |
           # After the curl request, the output is piped to the awk command. It is used to search for the message
           # "Please wait while Jenkins is getting ready to work" in the curl output.
@@ -249,7 +252,7 @@ jobs:
           echo "Jenkins version is: $JENKINS_VERSION"
       
       - name: Run curl command to test the stack
-        if: env.NO_CHANGES != 'true'
+
         run: |         
           set -x
           # Installing dependencies 

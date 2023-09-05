@@ -1,7 +1,7 @@
 # Use the base image
 FROM jenkins/ssh-agent:5.12.0-jdk17 as ssh-agent
 
-# Install necessary dependencies
+# Install necessary Dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     binutils ca-certificates curl git python3 python3-pip python3-setuptools python3-wheel python3-dev wget
 

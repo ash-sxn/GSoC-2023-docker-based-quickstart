@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
 ARG MAVEN_VERSION=3.9.2
 
 # Set SHELL flags for RUN commands to allow -e and pipefail
-# Rationale: https://github.com/hadolint/hadolint/wiki/DL4006
+# Rationale:https://github.com/hadolint/hadolint/wiki/DL4006
 SHELL ["/bin/bash", "-eo", "pipefail", "-c"]
 
 # Add a checksum for the maven binary
