@@ -17,7 +17,7 @@ display-url-api:2.3.9
 durable-task:523.va_a_22cf15d5e0
 echarts-api:5.4.0-5
 font-awesome-api:6.4.0-2
-git-client:4.4.0
+git-client:4.5.0
 git:5.2.0
 github-api:1.314-431.v78d72a_3fe4c3
 github-branch-source:1734.v8a_ed3a_653490
@@ -44,7 +44,7 @@ okhttp-api:4.11.0-157.v6852a_a_fa_ec11
 pipeline-build-step:505.v5f0844d8d126
 pipeline-graph-analysis:202.va_d268e64deb_3
 pipeline-graph-view:198.v0844db_6ca_554
-pipeline-groovy-lib:685.v8ee9ed91d574
+pipeline-groovy-lib:687.v62591d623759
 pipeline-input-step:477.v339683a_8d55e
 pipeline-milestone-step:111.v449306f708b_7
 pipeline-model-api:2.2144.v077a_d1928a_40
@@ -69,7 +69,7 @@ token-macro:384.vf35b_f26814ec
 trilead-api:2.84.v72119de229b_7
 variant:60.v7290fc0eb_b_cd
 workflow-aggregator:596.v8c21c963d92d
-workflow-api:1275.veb_e0969ddf9e
+workflow-api:1281.vca_5fddb_3fceb_
 workflow-basic-steps:1042.ve7b_140c4a_e0c
 workflow-cps:3787.v8f5dcd14a_fa_c
 workflow-durable-task-step:1289.v4d3e7b_01546b_
