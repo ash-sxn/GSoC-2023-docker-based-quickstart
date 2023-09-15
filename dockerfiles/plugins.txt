@@ -44,7 +44,7 @@ okhttp-api:4.11.0-157.v6852a_a_fa_ec11
 pipeline-build-step:505.v5f0844d8d126
 pipeline-graph-analysis:202.va_d268e64deb_3
 pipeline-graph-view:198.v0844db_6ca_554
-pipeline-groovy-lib:687.v62591d623759
+pipeline-groovy-lib:689.veec561a_dee13
 pipeline-input-step:477.v339683a_8d55e
 pipeline-milestone-step:111.v449306f708b_7
 pipeline-model-api:2.2144.v077a_d1928a_40
