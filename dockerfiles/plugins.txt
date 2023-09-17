@@ -11,7 +11,7 @@ cloudbees-folder:6.848.ve3b_fd7839a_81
 commons-lang3-api:3.13.0-62.v7d18e55f51e2
 commons-text-api:1.10.0-78.v3e7b_ea_d5a_fe1
 configuration-as-code:1700.v6f448841296e
-credentials-binding:631.v861c06d062b_4
+credentials-binding:636.v55f1275c7b_27
 credentials:1271.v54b_1c2c6388a_
 display-url-api:2.3.9
 durable-task:523.va_a_22cf15d5e0
@@ -20,7 +20,7 @@ font-awesome-api:6.4.0-2
 git-client:4.5.0
 git:5.2.0
 github-api:1.314-431.v78d72a_3fe4c3
-github-branch-source:1734.v8a_ed3a_653490
+github-branch-source:1740.v51d5810e9e8c
 github:1.37.3
 gradle:2.8.2
 instance-identity:173.va_37c494ec4e5
