@@ -6,7 +6,7 @@ bouncycastle-api:2.29
 branch-api:2.1128.v717130d4f816
 build-timeout:1.31
 caffeine-api:3.1.8-133.v17b_1ff2e0599
-checks-api:2.0.1
+checks-api:2.0.2
 cloudbees-folder:6.848.ve3b_fd7839a_81
 commons-lang3-api:3.13.0-62.v7d18e55f51e2
 commons-text-api:1.10.0-78.v3e7b_ea_d5a_fe1
