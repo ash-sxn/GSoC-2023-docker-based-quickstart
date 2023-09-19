@@ -1,7 +1,7 @@
 ant:497.v94e7d9fffa_b_9
 antisamy-markup-formatter:162.v0e6ec0fcfcf6
 apache-httpcomponents-client-4-api:4.5.14-208.v438351942757
-bootstrap5-api:5.3.0-1
+bootstrap5-api:5.3.2-1
 bouncycastle-api:2.29
 branch-api:2.1128.v717130d4f816
 build-timeout:1.31
@@ -15,12 +15,12 @@ credentials-binding:636.v55f1275c7b_27
 credentials:1271.v54b_1c2c6388a_
 display-url-api:2.3.9
 durable-task:523.va_a_22cf15d5e0
-echarts-api:5.4.0-5
-font-awesome-api:6.4.0-2
+echarts-api:5.4.0-6
+font-awesome-api:6.4.2-1
 git-client:4.5.0
 git:5.2.0
 github-api:1.314-431.v78d72a_3fe4c3
-github-branch-source:1740.v51d5810e9e8c
+github-branch-source:1741.va_3028eb_9fd21
 github:1.37.3
 gradle:2.8.2
 instance-identity:173.va_37c494ec4e5
@@ -32,10 +32,10 @@ javax-activation-api:1.2.0-6
 javax-mail-api:1.6.2-9
 jaxb:2.3.8-1
 jjwt-api:0.11.5-77.v646c772fddb_0
-jquery3-api:3.7.0-1
+jquery3-api:3.7.1-1
 junit:1217.v4297208a_a_b_ce
 mailer:463.vedf8358e006b_
-matrix-auth:3.2
+matrix-auth:3.2.1
 matrix-project:808.v5a_b_5f56d6966
 metrics:4.2.18-442.v02e107157925
 mina-sshd-api-common:2.10.0-69.v28e3e36d18eb_
