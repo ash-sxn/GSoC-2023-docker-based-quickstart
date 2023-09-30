@@ -55,7 +55,7 @@ pipeline-stage-step:305.ve96d0205c1c6
 pipeline-stage-tags-metadata:2.2144.v077a_d1928a_40
 pipeline-stage-view:2.33
 plain-credentials:143.v1b_df8b_d3b_e48
-plugin-util-api:3.3.0
+plugin-util-api:3.4.0
 resource-disposer:0.23
 scm-api:676.v886669a_199a_a_
 script-security:1275.v23895f409fb_d
@@ -69,7 +69,7 @@ token-macro:384.vf35b_f26814ec
 trilead-api:2.84.v72119de229b_7
 variant:60.v7290fc0eb_b_cd
 workflow-aggregator:596.v8c21c963d92d
-workflow-api:1281.vca_5fddb_3fceb_
+workflow-api:1283.v99c10937efcb_
 workflow-basic-steps:1042.ve7b_140c4a_e0c
 workflow-cps:3793.v65dec41c3a_c3
 workflow-durable-task-step:1289.v4d3e7b_01546b_
