@@ -1,7 +1,7 @@
 ant:497.v94e7d9fffa_b_9
 antisamy-markup-formatter:162.v0e6ec0fcfcf6
 apache-httpcomponents-client-4-api:4.5.14-208.v438351942757
-bootstrap5-api:5.3.2-1
+bootstrap5-api:5.3.2-2
 bouncycastle-api:2.29
 branch-api:2.1128.v717130d4f816
 build-timeout:1.31
@@ -15,7 +15,7 @@ credentials-binding:636.v55f1275c7b_27
 credentials:1293.vff276f713473
 display-url-api:2.200.vb_9327d658781
 durable-task:523.va_a_22cf15d5e0
-echarts-api:5.4.0-6
+echarts-api:5.4.0-7
 font-awesome-api:6.4.2-1
 git-client:4.5.0
 git:5.2.0
