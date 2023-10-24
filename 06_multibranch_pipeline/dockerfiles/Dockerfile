@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.414.2-lts
+FROM jenkins/jenkins:2.414.3-lts
 USER root
 COPY jobs /var/jenkins_home/jobs
 RUN chown -R jenkins:jenkins /var/jenkins_home/jobs
