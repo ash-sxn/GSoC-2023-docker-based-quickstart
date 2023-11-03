@@ -50,10 +50,10 @@ pipeline-milestone-step:111.v449306f708b_7
 pipeline-model-api:2.2150.v4cfd8916915c
 pipeline-model-definition:2.2150.v4cfd8916915c
 pipeline-model-extensions:2.2150.v4cfd8916915c
-pipeline-rest-api:2.33
+pipeline-rest-api:2.34
 pipeline-stage-step:305.ve96d0205c1c6
 pipeline-stage-tags-metadata:2.2150.v4cfd8916915c
-pipeline-stage-view:2.33
+pipeline-stage-view:2.34
 plain-credentials:143.v1b_df8b_d3b_e48
 plugin-util-api:3.6.0
 resource-disposer:0.23
