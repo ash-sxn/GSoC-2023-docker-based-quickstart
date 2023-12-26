@@ -1,5 +1,5 @@
 # Use a base image
-FROM debian:bookworm-20231120 as cloning-stage
+FROM debian:bookworm-20231218 as cloning-stage
 
 # Set ARGs for the GitHub credentials and repository
 ARG GITHUB_USERNAME
