@@ -1,4 +1,4 @@
-FROM jenkins/ssh-agent:5.12.0-jdk17 as ssh-agent
+FROM jenkins/ssh-agent:5.30.0-jdk17 as ssh-agent
 ARG NODE_MAJOR=18
 
 # ca-certificates because curl will need it later on for the node installation
