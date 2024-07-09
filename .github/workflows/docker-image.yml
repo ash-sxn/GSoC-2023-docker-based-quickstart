@@ -68,7 +68,7 @@ jobs:
       -
         name: Build and push a simple bundled instance
         if: contains(steps.changes.outputs.files, '00_old_one_from_proposal/Dockerfile')
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./00_old_one_from_proposal
           platforms: linux/amd64, linux/aarch64
@@ -77,7 +77,7 @@ jobs:
       -
         name: Build and push a simple jenkins controller
         if: contains(steps.changes.outputs.files, 'dockerfiles/Dockerfile')
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./dockerfiles
           platforms: linux/amd64, linux/aarch64
@@ -87,7 +87,7 @@ jobs:
 
         name: Build and push the jenkins agent for maven tutorial
         if: contains(steps.changes.outputs.files, 'dockerfiles/maven/Dockerfile')
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./dockerfiles/maven
           platforms: linux/amd64, linux/aarch64
@@ -96,7 +96,7 @@ jobs:
       -
         name: Build and push the jenkins agent for python tutorial
         if: contains(steps.changes.outputs.files, 'dockerfiles/python/Dockerfile')
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./dockerfiles/python
           platforms: linux/amd64, linux/aarch64
@@ -105,7 +105,7 @@ jobs:
       -
         name: Build and push the jenkins agent for node tutorial
         if: contains(steps.changes.outputs.files, 'dockerfiles/node/Dockerfile')
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./dockerfiles/node
           platforms: linux/amd64, linux/aarch64
@@ -115,7 +115,7 @@ jobs:
       -
         name: Build and push the jenkins agent for sidekick tutorial
         if: contains(steps.changes.outputs.files, 'dockerfiles/sidekick/Dockerfile')
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
             context: ./dockerfiles/sidekick
             platforms: linux/amd64, linux/aarch64
@@ -125,7 +125,7 @@ jobs:
       -
         name: Build and push the jenkins agent for multi-branch controller
         if: contains(steps.changes.outputs.files, '06_multibranch_pipeline/dockerfiles')
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
             context: ./06_multibranch_pipeline/dockerfiles/
             platforms: linux/amd64, linux/aarch64
