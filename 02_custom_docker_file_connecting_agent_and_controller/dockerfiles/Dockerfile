@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.467-jdk17
+FROM jenkins/jenkins:2.469-jdk17
 USER root
 COPY jobs /var/jenkins_home/jobs
 RUN chown -R jenkins:jenkins /var/jenkins_home/jobs
