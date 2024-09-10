@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.462.1-lts
+FROM jenkins/jenkins:2.462.2-lts
 USER root
 # Adding jobs directory, with demo job 
 COPY jobs /var/jenkins_home/jobs
