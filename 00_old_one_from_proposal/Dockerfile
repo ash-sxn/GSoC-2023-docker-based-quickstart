@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.462.3-lts
+FROM jenkins/jenkins:2.479.1-lts
 USER root
 RUN apt-get update && apt-get install -y lsb-release
 RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \
